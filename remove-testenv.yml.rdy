@@ -1,0 +1,16 @@
+---
+  - name:
+    hosts: localhost
+    connection: local
+    gather_facts: False
+    vars_files:
+    - group_vars/all.yml
+    tasks:
+      - name: cloudformation stack down
+        cloudformation:
+          stack_name: "{{ stack_name }}"
+          state: "absent"
+          region: "{{ region_name }}"
+          disable_rollback: true
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"

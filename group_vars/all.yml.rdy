@@ -1,0 +1,17 @@
+---
+region_name: "eu-central-1"
+stack_name: "dos-stack"
+instancekeypair: "dosnew"
+instancetype: "t2.micro"
+sleeptime: 180
+emailnotifications: bokarev_dos@mail.ru
+studentname: "indianman"
+studentpwd: "JHGJHGFJKHGpassword"
+disksize: "2"
+aws_access_key: sagrthertherthrethretherth
+aws_secret_key: dsaggewrgwergewrgwergwergewrg
+#image-id: ami-003fd56f
+#secure-group-id: sg-0b03eba2ce2e43f11
+#subnet-id: subnet-198ea162
+#subnet-zone: "eu-central-1"
+#subnet-public-zone: "eu-central-1"
