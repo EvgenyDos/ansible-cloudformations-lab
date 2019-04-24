@@ -6,6 +6,7 @@
     vars_files:
     - group_vars/all.yml
     tasks:
+
       - name: send email that service is ordered
         mail:
          subject: "Deploy of test environment has been ordered"
@@ -15,6 +16,7 @@
           Li9 Demo system will be deployed
           It will take ~ 10 mins
           Enjoy your demo environment
+
       - name: Deploy Dos ansible cloudformation stack
         cloudformation:
           stack_name: "{{ stack_name }}"
@@ -28,6 +30,7 @@
             User: "{{ studentname }}"
             Password: "{{ studentpwd }}"
             VolumeSize: "{{ disksize }}"
+
       - cloudformation_facts:
           stack_name: "{{ stack_name }}"
           region: "{{ region_name }}"
@@ -63,6 +66,16 @@
           description: test host for invent
           name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
           inventory: "{{ playbookvminventoryname }}"
+
+      - name: we will creaate tower_credential for new user
+        tower_credential:
+          name: "{{ playbookvmcredentialsname }}"
+          organization: Default
+          kind: Mashine
+          username: "{{ studentname }}"
+          password: "{{ studentpwd }}"
+          become_method: "su"
+          become_password: "{{ studentpwd }}"
 
       - name: send an email that cloudformation is done
         mail:
