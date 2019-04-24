@@ -55,17 +55,6 @@
         wait_for: timeout="{{ sleeptime }}"
         delegate_to: localhost
 
-      - name: we will creaate tower_credential for new user
-        tower_credential:
-          name: "{{ playbookvmcredentialsname }}"
-          organization: "Default"
-          tower_verify_ssl: no
-          kind: "ssh"
-          username: "{{ studentname }}"
-          password: "{{ studentpwd }}"
-          become_method: "su"
-          become_password: "{{ studentpwd }}"
-
       - name: adding tower_inventory with VM ip
         tower_inventory:
           description: "test invent"
