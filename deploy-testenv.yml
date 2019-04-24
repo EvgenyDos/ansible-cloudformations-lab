@@ -35,8 +35,8 @@
             Password: "{{ studentpwd }}"
             VolumeSize: "{{ disksize }}"
       - cloudformation_facts:
-          aws_access_key: "{{ aws_access_key }}"
-          aws_secret_key: "{{ aws_secret_key }}"
+#          aws_access_key: "{{ aws_access_key }}"
+#          aws_secret_key: "{{ aws_secret_key }}"
           stack_name: "{{ stack_name }}"
           region: "{{ region_name }}"
           all_facts: true
