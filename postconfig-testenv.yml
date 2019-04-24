@@ -24,7 +24,7 @@
           state: restarted
 
       - name: list of commands for prepare tests
-      - file:
+        file:
           state: directory
           path: /data
           owner: root

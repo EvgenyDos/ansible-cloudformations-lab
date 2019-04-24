@@ -1,0 +1,12 @@
+---
+  - name:
+    hosts: localhost
+    connection: local
+#    gather_facts: False
+#    vars_files:
+#    - group_vars/all.yml
+    tasks:
+
+      - name: sleep for "{{ waittime }}" seconds and continue with play
+        wait_for: timeout="{{ waittime }}"
+        delegate_to: localhost
