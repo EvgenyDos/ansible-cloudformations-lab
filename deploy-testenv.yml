@@ -10,15 +10,15 @@
         copy:
           src: ./hosts.orig
           dest: hosts
-#      - name: send email that service is ordered
-#        mail:
-#         subject: "Deploy of test environment has been ordered"
-#         to: "{{ adminemailnotifications }}"
-#         from: Li9 Demo <do-not-reply@demo.li9.com>
-#         body: |
-#          Li9 Demo system will be deployed
-#          It will take ~ 10 mins
-#          Enjoy your demo environment
+      - name: send email that service is ordered
+        mail:
+         subject: "Deploy of test environment has been ordered"
+         to: "{{ adminemailnotifications }}"
+         from: Li9 Demo <do-not-reply@demo.li9.com>
+         body: |
+          Li9 Demo system will be deployed
+          It will take ~ 10 mins
+          Enjoy your demo environment
       - name: Deploy Dos ansible cloudformation stack
         cloudformation:
           stack_name: "{{ stack_name }}"
