@@ -59,7 +59,7 @@
         tower_credential:
           name: "{{ playbookvmcredentialsname }}"
           organization: "Default"
-          kind: "Mashine"
+          kind: "ssh"
           username: "{{ studentname }}"
           password: "{{ studentpwd }}"
           become_method: "su"
@@ -70,7 +70,7 @@
           description: "test invent"
           name: "{{ playbookvminventoryname }}"
           organization: "Default"
-          tower_verify_ssl: false
+          tower_verify_ssl: no
           state: present
 #          tower_host: "{{ towerhost }}"
 #          tower_password: "{{ towerpassword }}"
