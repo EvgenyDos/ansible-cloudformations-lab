@@ -78,16 +78,16 @@
         wait_for: timeout="{{ sleeptime }}"
         delegate_to: localhost
 
-#      - name: send an email that cloudformation is done
-#        mail:
-#          subject: "Test environment is almost ready"
-#          to: "{{ useremailnotifications }}"
-#          from: Li9 Demo <do-not-reply@demo.li9.com>
-#          body: 'System has been successfully provisioned.'
+      - name: send an email that cloudformation is done
+        mail:
+          subject: "Test environment is almost ready"
+          to: "{{ useremailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: 'System has been successfully provisioned.'
 #            Once it's ready you will receive a new email
 #            The following information is important to connect to the service:
 #            *) Hosts is accessible via ssh
 #            *) SSH username: "{{ studentname }}"
 #            *) SSH password: "{{ studentpwd }}"
 #            *) ROOT access via "su -" with your password
-#            Thank you
+#          Thank you
