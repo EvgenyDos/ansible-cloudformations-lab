@@ -24,22 +24,32 @@
           state: restarted
 
       - name: list of commands for prepare tests
-        command: "mkdir -p /data"
-      - command: "touch /data/removeme"
-      - command: "chattr +i /data/removeme"
-      - command: "echo 1"
-      - command: "echo 2"
+      - file:
+          state: directory
+          path: /data
+          owner: root
+          group: root
 
-#      - name: send an email with results
-#        mail:
-#          subject: "Test results"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Demo <do-not-reply@demo.li9.com>
-#          body: 'System has been successfully provisioned.'
-#            Once it's ready you will receive a new email
-#            The following information is important to connect to the service:
-#            *) Hosts is accessible via ssh
-#            *) SSH username: "{{ studentname }}"
-#            *) SSH password: "{{ studentpwd }}"
-#            Thank you
+#        command: "mkdir -p /data"
+      - file:
+          path: /data/removeme
+          attributes: "+i"
+          state: touch
+          owner: root
+          group: root
+  
+#      - command: "touch /data/removeme"
+#      - command: "chattr +i /data/removeme"
 
+      - name: send an email with results
+        mail:
+          subject: "Test results"
+          to: "{{ adminemailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: 'System has been successfully provisioned.'
+            Once it's ready you will receive a new email
+            The following information is important to connect to the service:
+            *) Hosts is accessible via ssh
+            *) SSH username: "{{ studentname }}"
+            *) SSH password: "{{ studentpwd }}"
+            Thank you
