@@ -1,0 +1,35 @@
+---
+  - name:
+    hosts: "vm"
+    gather_facts: False
+    become_method: su
+    become_user: root
+    vars_files:
+    - group_vars/all.yml
+    tasks:
+
+      - name: lets check results and drop user from system
+        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
+      - command: ""
+      - command: "git clone https://github.com/aelsabbahy/goss.git"
+      - name: copy main config file
+        copy:
+          dest: /etc/issue.net
+          src: "files/issue.net"
+
+      - command: "echo 2"
+
+
+#      - name: send an email with results
+#        mail:
+#          subject: "Test results"
+#          to: "{{ adminemailnotifications }}"
+#          from: Li9 Demo <do-not-reply@demo.li9.com>
+#          body: 'System has been successfully provisioned.'
+#            Once it's ready you will receive a new email
+#            The following information is important to connect to the service:
+#            *) Hosts is accessible via ssh
+#            *) SSH username: "{{ studentname }}"
+#            *) SSH password: "{{ studentpwd }}"
+#            Thank you
+

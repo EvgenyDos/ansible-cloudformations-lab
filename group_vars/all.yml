@@ -3,13 +3,15 @@ region_name: "eu-central-1"
 stack_name: "dos-stack"
 instancekeypair: "dosnew"
 instancetype: "t2.micro"
-sleeptime: 180
-emailnotifications: bokarev_dos@mail.ru
+sleeptime: 111
+useremailnotifications: bokarev_dos@mail.ru
+adminemailnotifications: bokarev_dos@mail.ru
 studentname: "indianman"
 studentpwd: "JHGJHGFJKHGpassword"
+postcheckpwd: "JIKYGKujhjkghKGHKJ"
 disksize: "2"
-aws_access_key: KLUGFIHGTNM:LIH"<{"L
-aws_secret_key: :HMKNJK<>L<NH"JL>KH"<>>IKL:?"KL
+aws_access_key: AKIAQGSSLZ6T54QIAZL3
+aws_secret_key: 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
 
 #image-id: ami-003fd56f
 #secure-group-id: sg-0b03eba2ce2e43f11

@@ -2,7 +2,7 @@
 localhost ansible_connection=local ansible_pyhton_interpreter=/usr/bin/python
 
 [vm]
-35.159.33.174 ansible_ssh_port=22
+18.185.127.210 ansible_ssh_port=22
 
 [vm:vars]
 ansible_become=true
