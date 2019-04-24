@@ -6,7 +6,7 @@
     vars_files:
     - group_vars/all.yml
     tasks:
-      - name: Copy a new "ntp.conf file into place, backing up the original if it differs from the copied version
+      - name: Copy a hosts.orig as a hosts file
         copy:
           src: ./hosts.orig
           dest: hosts
