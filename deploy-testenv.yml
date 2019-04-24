@@ -6,10 +6,6 @@
     vars_files:
     - group_vars/all.yml
     tasks:
-      - name: Copy a hosts.orig as a hosts file
-        copy:
-          src: ./hosts.orig
-          dest: hosts
       - name: send email that service is ordered
         mail:
          subject: "Deploy of test environment has been ordered"
@@ -25,8 +21,6 @@
           state: "present"
           region: "{{ region_name }}"
           disable_rollback: true
-#          aws_access_key: "{{ aws_access_key }}"
-#          aws_secret_key: "{{ aws_secret_key }}"
           template: "files/li9-tests.template"
           template_parameters:
             KeyName: "{{ instancekeypair }}"
@@ -35,8 +29,6 @@
             Password: "{{ studentpwd }}"
             VolumeSize: "{{ disksize }}"
       - cloudformation_facts:
-#          aws_access_key: "{{ aws_access_key }}"
-#          aws_secret_key: "{{ aws_secret_key }}"
           stack_name: "{{ stack_name }}"
           region: "{{ region_name }}"
           all_facts: true
@@ -56,27 +48,21 @@
           regexp: '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} ansible_ssh_port=22'
           replace: '{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }} ansible_ssh_port=22'
 
-      - name: new login of user for HOSTS file
-        replace:
-          path: hosts
-          regexp: 'ansible_user=root'
-          replace: 'ansible_user={{ studentname }}'
-
-      - name: new password of user for HOSTS file
-        replace:
-          path: hosts
-          regexp: 'ansible_ssh_pass=dos'
-          replace: 'ansible_ssh_pass={{ studentpwd }}'
-
-      - name: new password of user for HOSTS file
-        replace:
-          path: hosts
-          regexp: 'ansible_become_pass=dos'
-          replace: 'ansible_become_pass={{ studentpwd }}'
-
       - name: sleep for "{{ sleeptime }}" seconds and continue with play
         wait_for: timeout="{{ sleeptime }}"
         delegate_to: localhost
+
+      - name: adding tower_inventory with VM ip
+        tower_inventory:
+          description: test invent
+          name: "{{ playbook-vm-inventoryname }}"
+          organization: Default
+
+      - name: adding tower_host to our VM inventory
+        tower_host:
+          description: test host for invent
+          name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
+          inventory: "{{ playbook-vm-inventoryname }}"
 
       - name: send an email that cloudformation is done
         mail:
