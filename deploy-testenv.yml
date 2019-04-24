@@ -55,6 +55,16 @@
         wait_for: timeout="{{ sleeptime }}"
         delegate_to: localhost
 
+      - name: we will creaate tower_credential for new user
+        tower_credential:
+          name: "{{ playbookvmcredentialsname }}"
+          organization: "Default"
+          kind: "Mashine"
+          username: "{{ studentname }}"
+          password: "{{ studentpwd }}"
+          become_method: "su"
+          become_password: "{{ studentpwd }}"
+
       - name: adding tower_inventory with VM ip
         tower_inventory:
           description: "test invent"
@@ -72,16 +82,20 @@
           description: "test host for invent"
           name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
           inventory: "{{ playbookvminventoryname }}"
+#         variables:
+#           vm_uuid: "{{facts.instance.hw_product_uuid}}"
+#         connection: local
+          state: present
 
-      - name: we will creaate tower_credential for new user
-        tower_credential:
-          name: "{{ playbookvmcredentialsname }}"
-          organization: "Default"
-          kind: "Mashine"
-          username: "{{ studentname }}"
-          password: "{{ studentpwd }}"
-          become_method: "su"
-          become_password: "{{ studentpwd }}"
+#      - name: we will creaate tower_credential for new user
+#        tower_credential:
+#          name: "{{ playbookvmcredentialsname }}"
+#          organization: "Default"
+#          kind: "Mashine"
+#          username: "{{ studentname }}"
+#          password: "{{ studentpwd }}"
+#          become_method: "su"
+#          become_password: "{{ studentpwd }}"
 
       - name: send an email that cloudformation is done
         mail:
