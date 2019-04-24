@@ -59,7 +59,6 @@
         tower_inventory:
           description: "test invent"
           name: "{{ playbookvminventoryname }}"
-#          name: aaaaaaaaa
           organization: "Default"
           tower_verify_ssl: no
           state: present
@@ -71,11 +70,13 @@
       - name: adding tower_host to our VM inventory
         tower_host:
           description: "test host for invent"
-          name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
+#          name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
+          name: 127.0.0.1
           inventory: "{{ playbookvminventoryname }}"
 #         variables:
 #           vm_uuid: "{{facts.instance.hw_product_uuid}}"
 #         connection: local
+          tower_verify_ssl: no
           state: present
           tower_host: "{{ towerhost }}"
           tower_password: "{{ towerpassword }}"
