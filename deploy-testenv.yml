@@ -60,6 +60,8 @@
           description: test invent
           name: "{{ playbookvminventoryname }}"
           organization: Default
+          tower_verify_ssl: false
+          state: present
 
       - name: adding tower_host to our VM inventory
         tower_host:
