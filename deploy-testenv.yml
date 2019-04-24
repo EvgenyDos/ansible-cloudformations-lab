@@ -58,8 +58,8 @@
       - name: adding tower_inventory with VM ip
         tower_inventory:
           description: "test invent"
-#          name: "{{ playbookvminventoryname }}"
-          name: aaaaaaaaa
+          name: "{{ playbookvminventoryname }}"
+#          name: aaaaaaaaa
           organization: "Default"
           tower_verify_ssl: no
           state: present
