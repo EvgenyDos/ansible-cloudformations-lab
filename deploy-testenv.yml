@@ -62,9 +62,9 @@
           organization: "Default"
           tower_verify_ssl: no
           state: present
-          tower_host: "{{ towerhost }}"
-          tower_password: "{{ towerpassword }}"
-          tower_username: "{{ towerusername }}"
+#          tower_host: "{{ towerhost }}"
+#          tower_password: "{{ towerpassword }}"
+#          tower_username: "{{ towerusername }}"
 
 
       - name: adding tower_host to our VM inventory
@@ -77,9 +77,9 @@
 #         connection: local
           tower_verify_ssl: no
           state: present
-          tower_host: "{{ towerhost }}"
-          tower_password: "{{ towerpassword }}"
-          tower_username: "{{ towerusername }}"
+#          tower_host: "{{ towerhost }}"
+#          tower_password: "{{ towerpassword }}"
+#          tower_username: "{{ towerusername }}"
 
       - name: we will creaate tower_credential for new user
         tower_credential:
@@ -91,9 +91,9 @@
           password: "{{ studentpwd }}"
           become_method: "su"
           become_password: "{{ studentpwd }}"
-          tower_host: "{{ towerhost }}"
-          tower_password: "{{ towerpassword }}"
-          tower_username: "{{ towerusername }}"
+#          tower_host: "{{ towerhost }}"
+#          tower_password: "{{ towerpassword }}"
+#          tower_username: "{{ towerusername }}"
 
       - name: send an email that cloudformation is done
         mail:
