@@ -12,5 +12,5 @@
           state: "absent"
           region: "{{ region_name }}"
           disable_rollback: true
-          aws_access_key: "{{ aws_access_key }}"
-          aws_secret_key: "{{ aws_secret_key }}"
+#          aws_access_key: "{{ aws_access_key }}"
+#          aws_secret_key: "{{ aws_secret_key }}"
