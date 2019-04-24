@@ -55,14 +55,14 @@
       - name: adding tower_inventory with VM ip
         tower_inventory:
           description: test invent
-          name: "{{ playbook-vm-inventoryname }}"
+          name: "{{ playbookvminventoryname }}"
           organization: Default
 
       - name: adding tower_host to our VM inventory
         tower_host:
           description: test host for invent
           name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
-          inventory: "{{ playbook-vm-inventoryname }}"
+          inventory: "{{ playbookvminventoryname }}"
 
       - name: send an email that cloudformation is done
         mail:
