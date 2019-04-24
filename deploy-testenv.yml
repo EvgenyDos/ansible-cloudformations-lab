@@ -63,9 +63,9 @@
           organization: "Default"
           tower_verify_ssl: no
           state: present
-#          tower_host: "{{ towerhost }}"
-#          tower_password: "{{ towerpassword }}"
-#          tower_username: "{{ towerusername }}"
+          tower_host: "{{ towerhost }}"
+          tower_password: "{{ towerpassword }}"
+          tower_username: "{{ towerusername }}"
 
 
       - name: adding tower_host to our VM inventory
