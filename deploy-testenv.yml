@@ -57,23 +57,27 @@
 
       - name: adding tower_inventory with VM ip
         tower_inventory:
-          description: test invent
+          description: "test invent"
           name: "{{ playbookvminventoryname }}"
-          organization: Default
+          organization: "Default"
           tower_verify_ssl: false
           state: present
+#          tower_host: "{{ towerhost }}"
+#          tower_password: "{{ towerpassword }}"
+#          tower_username: "{{ towerusername }}"
+
 
       - name: adding tower_host to our VM inventory
         tower_host:
-          description: test host for invent
+          description: "test host for invent"
           name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
           inventory: "{{ playbookvminventoryname }}"
 
       - name: we will creaate tower_credential for new user
         tower_credential:
           name: "{{ playbookvmcredentialsname }}"
-          organization: Default
-          kind: Mashine
+          organization: "Default"
+          kind: "Mashine"
           username: "{{ studentname }}"
           password: "{{ studentpwd }}"
           become_method: "su"
