@@ -2,9 +2,9 @@
   - name:
     hosts: localhost
     connection: local
-    gather_facts: False
-    vars_files:
-    - group_vars/all.yml
+#    gather_facts: False
+#    vars_files:
+#    - group_vars/all.yml
     tasks:
 
       - name: send email that service is ordered
@@ -59,6 +59,7 @@
         tower_credential:
           name: "{{ playbookvmcredentialsname }}"
           organization: "Default"
+          tower_verify_ssl: no
           kind: "ssh"
           username: "{{ studentname }}"
           password: "{{ studentpwd }}"
