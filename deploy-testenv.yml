@@ -77,6 +77,9 @@
 #           vm_uuid: "{{facts.instance.hw_product_uuid}}"
 #         connection: local
           state: present
+          tower_host: "{{ towerhost }}"
+          tower_password: "{{ towerpassword }}"
+          tower_username: "{{ towerusername }}"
 
       - name: we will creaate tower_credential for new user
         tower_credential:
