@@ -69,7 +69,8 @@
       - name: adding tower_inventory with VM ip
         tower_inventory:
           description: "test invent"
-          name: "{{ playbookvminventoryname }}"
+#          name: "{{ playbookvminventoryname }}"
+          name: aaaaaaaaa
           organization: "Default"
           tower_verify_ssl: no
           state: present
@@ -88,15 +89,16 @@
 #         connection: local
           state: present
 
-#      - name: we will creaate tower_credential for new user
-#        tower_credential:
-#          name: "{{ playbookvmcredentialsname }}"
-#          organization: "Default"
-#          kind: "Mashine"
-#          username: "{{ studentname }}"
-#          password: "{{ studentpwd }}"
-#          become_method: "su"
-#          become_password: "{{ studentpwd }}"
+      - name: we will creaate tower_credential for new user
+        tower_credential:
+          name: "{{ playbookvmcredentialsname }}"
+          organization: "Default"
+          tower_verify_ssl: no
+          kind: "ssh"
+          username: "{{ studentname }}"
+          password: "{{ studentpwd }}"
+          become_method: "su"
+          become_password: "{{ studentpwd }}"
 
       - name: send an email that cloudformation is done
         mail:
