@@ -92,6 +92,9 @@
           password: "{{ studentpwd }}"
           become_method: "su"
           become_password: "{{ studentpwd }}"
+          tower_host: "{{ towerhost }}"
+          tower_password: "{{ towerpassword }}"
+          tower_username: "{{ towerusername }}"
 
       - name: send an email that cloudformation is done
         mail:
