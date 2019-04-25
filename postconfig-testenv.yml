@@ -46,20 +46,20 @@
   
 #      - command: "touch /data/removeme"
 #      - command: "chattr +i /data/removeme"
-      - name: enable remi-php71
-         shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      - name: enable additional repo for docker
+        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
 
       - name: Install a list of packages
-          yum:
-            name: "{{ packages }}"
-          vars:
-           packages:
+        yum:
+          name: "{{ packages }}"
+        vars:
+          packages:
              - yum-utils
              - device-mapper-persistent-data
              - lvm2
 
       - name: send an email with results
-        mail:
+        mail: 
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
