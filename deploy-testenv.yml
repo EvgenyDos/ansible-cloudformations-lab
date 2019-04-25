@@ -124,3 +124,9 @@
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
+
+  - name:
+    hosts: "{{ vmhostip }}"
+    tasks:
+
+      - debug: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
