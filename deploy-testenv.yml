@@ -121,3 +121,6 @@
             *) SSH password: "{{ studentpwd }}"
             *) ROOT access via "su -" with your password
             Thank you
+
+      - debug:
+          msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
