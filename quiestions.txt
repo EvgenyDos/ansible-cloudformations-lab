@@ -23,3 +23,5 @@ goss -g goss.yaml validate --format documentation
 goss add service jenkins
 goss add package redis
 goss add mount /mnt/nfs
+goss --vars vars.yaml validate
+goss serve --format json && curl localhost:8080/healthz
