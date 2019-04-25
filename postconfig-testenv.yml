@@ -1,15 +1,15 @@
 ---
-#  - name:
+  - name:
 #    hosts: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
 #    hosts: "{{ vmhostip }}"
 #    connection: local
-#    hosts: all
+    hosts: all
 #     gather_facts: False
 #    become_method: su
 #    become_user: root
 #    vars_files:
 #    - group_vars/all.yml
-#    tasks:
+    tasks:
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
