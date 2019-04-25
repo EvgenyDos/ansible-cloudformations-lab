@@ -10,7 +10,6 @@
     tasks:
       - name: lets check results and drop user from system
         command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
-#      - command: "curl -L https://github.com/aelsabbahy/goss/releases/download/_VERSION_/goss-linux-amd64 -o /usr/local/bin/goss"
       - command: "curl -fsSL https://goss.rocks/install -o /root/install"
       - command: "chmod +rx /root/install"
       - command: "/root/install"
@@ -21,17 +20,16 @@
 
       - command: "cd /root && goss validate"
 
-
-#      - name: send an email with results
-#        mail:
-#          subject: "Test results"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Demo <do-not-reply@demo.li9.com>
-#          body: 'System has been successfully provisioned.'
-#            Once it's ready you will receive a new email
-#            The following information is important to connect to the service:
-#            *) Hosts is accessible via ssh
-#            *) SSH username: "{{ studentname }}"
-#            *) SSH password: "{{ studentpwd }}"
-#            Thank you
+      - name: send an email with results
+        mail:
+          subject: "Test results"
+          to: "{{ adminemailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: 'System has been successfully provisioned.'
+            Once it's ready you will receive a new email
+            The following information is important to connect to the service:
+            *) Hosts is accessible via ssh
+            *) SSH username: "{{ studentname }}"
+            *) SSH password: "{{ studentpwd }}"
+            Thank you
 

@@ -1,3 +1,26 @@
+file:
+  /data/removeme:
+    exists: false
+    filetype: file
+    contains: []
+  /dev/mapper/student-vol1:
+    exists: true
+    mode: "0777"
+    size: 7
+    owner: root
+    group: root
+    linked-to: ../dm-0
+    filetype: symlink
+    contains: []
+  /dev/mapper/student-vol2:
+    exists: true
+    mode: "0777"
+    size: 7
+    owner: root
+    group: root
+    linked-to: ../dm-1
+    filetype: symlink
+    contains: []
 port:
   tcp:22:
     listening: true
@@ -11,10 +34,15 @@ service:
   sshd:
     enabled: true
     running: true
-  httpd:
-    enabled: false
-    running: false
 user:
+  newuser:
+    exists: true
+    uid: 3434
+    gid: 0
+    groups:
+    - root
+    home: /home/newuser
+    shell: /bin/bash
   sshd:
     exists: true
     uid: 74
@@ -27,13 +55,20 @@ group:
   sshd:
     exists: true
     gid: 74
-process:
-  sshd:
-    running: true
-file:
-  /data/removeme:
+mount:
+  /data/lv1:
     exists: true
-    filetype: file
-    owner: root
-    group: root
-    filetype: file
+    opts:
+    - rw
+    - relatime
+    source: /dev/mapper/student-vol2
+    filesystem: xfs
+  /data/lv2:
+    exists: true
+    opts:
+    - rw
+    - relatime
+    source: /dev/mapper/student-vol1
+    filesystem: ext2
+  /mnt/nfs:
+    exists: false

@@ -1,26 +1,26 @@
-access to ROOT on server via "su -" with user password
-
-
 you have to remove file /data/removeme
 
-the file /data/permission should be part of group newgrp. Owner newuser. File shoud has special bit "setgid"
-(chmod 2775 test)
+the file /data/permission
+	should be part of group newgrp
+	Owner newuser
+	File shoud has special bit "setgid"
+	main permissions 644
+(secondary group of newuser is root, UUID 3434)
 
 create lvm volumegroup "student" with size 1Gb. You have to use /dev/xvdh disk.
-
 create lvm logical volume vol1 with size 512Mb
-
 create lvm logical volume vol2 with size 512Mb
-
 create ext2 filesystem on logical volume vol1. Mount it to /data/lv2 directory. It should be available after reboot.
-
 "Reserved block count" for lv1 filesystem should be 0
-
 create xfs filesystem on logical volume vol2. Mount it to /data/lv1 directory. It should be available after reboot.
 
 Docker container "web" should be started. It is based on httpd (The Apache HTTP Server Project) image. It should be available after reboot.
 filesytem /data/docker should be mounted into web container as a /sdfsdfsdfsdf/ mountpoint
 (disabled docker service)
 
-ansible eazy
-
+goss validate
+goss validate --format documentation
+goss -g goss.yaml validate --format documentation
+goss add service jenkins
+goss add package redis
+goss add mount /mnt/nfs
