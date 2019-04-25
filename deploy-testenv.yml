@@ -94,15 +94,16 @@
 #          tower_host: "{{ towerhost }}"
 #          tower_password: "{{ towerpassword }}"
 #          tower_username: "{{ towerusername }}"
+      - name: we will creaate tower_group for hosts
+          tower_group:
+            inventory: "{{ playbookvminventoryname }}"
+            name: "{{ playbookgroupname }}"
+            state: present
 
       - name: "we will save VM server ip as a setstats param for the next staps"
         set_stats: 
           data:
             vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-
-      - name: "Output test results"
-        debug:
-          msg: serverip = "{{ vmhostip}}"
 
       - name: send an email that cloudformation is done
         mail:
