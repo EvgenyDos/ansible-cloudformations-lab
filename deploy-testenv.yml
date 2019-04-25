@@ -1,11 +1,11 @@
 ---
-  - name:
-    hosts: localhost
-    connection: local
+##  - name:
+##    hosts: localhost
+##    connection: local
 #    gather_facts: False
 #    vars_files:
 #    - group_vars/all.yml
-    tasks:
+##    tasks:
 
       - name: send email that service is ordered
         mail:

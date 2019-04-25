@@ -9,7 +9,7 @@
 #    become_user: root
 #    vars_files:
 #    - group_vars/all.yml
-    tasks:
+#    tasks:
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
