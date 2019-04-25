@@ -1,7 +1,8 @@
 ---
   - name:
 #    hosts: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-    hosts: "{{ vmhostip }}"
+#    hosts: "{{ vmhostip }}"
+    hosts: all
 #     gather_facts: False
 #    become_method: su
 #    become_user: root
