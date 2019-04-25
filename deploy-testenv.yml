@@ -71,7 +71,8 @@
         tower_host:
           description: "test host for invent"
           name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
-          inventory: "{{ playbookvminventoryname }}"
+###          inventory: "{{ playbookvminventoryname }}"
+          inventory: dos-testenv-invent
 #         variables:
 #           vm_uuid: "{{facts.instance.hw_product_uuid}}"
 #         connection: local
@@ -124,9 +125,3 @@
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
-
-  - name:
-    hosts: "{{ vmhostip }}"
-    tasks:
-
-      - debug: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
