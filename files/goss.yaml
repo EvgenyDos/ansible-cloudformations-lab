@@ -93,3 +93,9 @@ mount:
     filesystem: ext2
   /mnt/nfs:
     exists: false
+
+#command:
+#  sysctl -q -n vm.swappiness:
+#    exit-status: 0
+#    stdout:
+#    - "60"
