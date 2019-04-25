@@ -102,12 +102,11 @@
           from: Li9 Demo <do-not-reply@demo.li9.com>
 #          body: 'System has been successfully provisioned.'
           body: |
-          System has been successfully provisioned.
-          Li9 Demo system will be deployed
+            Li9 Demo System has been successfully provisioned.
             Once it's ready you will receive a new email
             The following information is important to connect to the service:
             *) Hosts is accessible via ssh
             *) SSH username: "{{ studentname }}"
             *) SSH password: "{{ studentpwd }}"
             *) ROOT access via "su -" with your password
-           Thank you
+            Thank you
