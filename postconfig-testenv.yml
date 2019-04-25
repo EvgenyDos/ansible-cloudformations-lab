@@ -9,6 +9,10 @@
 #    vars_files:
 #    - group_vars/all.yml
     tasks:
+
+      - debug:
+          msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
+
       - name: Ensure SSH warning banner is configured
         copy:
           dest: /etc/issue.net
