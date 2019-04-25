@@ -94,11 +94,12 @@
 #          tower_host: "{{ towerhost }}"
 #          tower_password: "{{ towerpassword }}"
 #          tower_username: "{{ towerusername }}"
+
       - name: we will creaate tower_group for hosts
-          tower_group:
-            inventory: "{{ playbookvminventoryname }}"
-            name: "{{ playbookgroupname }}"
-            state: present
+        tower_group:
+          inventory: "{{ playbookvminventoryname }}"
+          name: "{{ playbookgroupname }}"
+          state: present
 
       - name: "we will save VM server ip as a setstats param for the next staps"
         set_stats: 
