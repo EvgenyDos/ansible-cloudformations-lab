@@ -3,8 +3,9 @@ region_name: "eu-central-1"
 stack_name: "dos-stack"
 instancekeypair: "dosnew"
 instancetype: "t2.micro"
-sleeptime: 180
-emailnotifications: bokarev_dos@mail.ru
+sleeptime: 111
+useremailnotifications: bokarev_dos@mail.ru
+adminemailnotifications: bokarev_dos@mail.ru
 studentname: "indianman"
 studentpwd: "JHGJHGFJKHGpassword"
 postcheckpwd: "JIKYGKujhjkghKGHKJ"

@@ -10,6 +10,9 @@ studentname: "indianman"
 studentpwd: "JHGJHGFJKHGpassword"
 postcheckpwd: "JIKYGKujhjkghKGHKJ"
 disksize: "2"
+playbookvmcredentialsname: testusernamecredentials
+playbookvminventoryname: testinventfromplaybook
+waittime: 11
 
 #image-id: ami-003fd56f
 #secure-group-id: sg-0b03eba2ce2e43f11
