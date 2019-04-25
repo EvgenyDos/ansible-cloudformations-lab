@@ -2,11 +2,11 @@
 
   - name:
     hosts: all
-    gather_facts: False
-    become_method: su
-    become_user: root
-    vars_files:
-    - group_vars/all.yml
+#    gather_facts: False
+#    become_method: su
+#    become_user: root
+#    vars_files:
+#    - group_vars/all.yml
     tasks:
       - name: Ensure SSH warning banner is configured
         copy:
