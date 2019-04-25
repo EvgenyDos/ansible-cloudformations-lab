@@ -51,10 +51,6 @@
           regexp: '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} ansible_ssh_port=22'
           replace: '{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }} ansible_ssh_port=22'
 
-      - name: sleep for "{{ sleeptime }}" seconds and continue with play
-        wait_for: timeout="{{ sleeptime }}"
-        delegate_to: localhost
-
       - name: adding tower_inventory with VM ip
         tower_inventory:
           description: "test invent"
@@ -125,3 +121,7 @@
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
+
+      - name: sleep for "{{ sleeptime }}" seconds and continue with play
+        wait_for: timeout="{{ sleeptime }}"
+        delegate_to: localhost
