@@ -95,6 +95,11 @@
 #          tower_password: "{{ towerpassword }}"
 #          tower_username: "{{ towerusername }}"
 
+      - name: "Artifact URL of test results to Tower Workflows"
+        set_stats: 
+          data:
+            vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+
       - name: send an email that cloudformation is done
         mail:
           subject: "Test environment is almost ready"
