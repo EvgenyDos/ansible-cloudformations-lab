@@ -1,7 +1,7 @@
 ---
 
   - name:
-    hosts: "{{ playbookvmcredentialsname }}"
+    hosts: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
 #    gather_facts: False
 #    become_method: su
 #    become_user: root
