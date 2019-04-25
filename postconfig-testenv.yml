@@ -57,6 +57,14 @@
              - yum-utils
              - device-mapper-persistent-data
              - lvm2
+             - docker-ce
+             - docker-ce-cli
+             - containerd.io
+
+      - name: restart sshd
+        service:
+          name: docker
+          state: restarted
 
       - name: send an email with results
         mail: 
