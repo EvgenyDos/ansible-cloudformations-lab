@@ -103,9 +103,9 @@
 #          body: 'System has been successfully provisioned.'
           body: |
             Li9 Demo System has been successfully provisioned.
-            Once it's ready you will receive a new email
-            The following information is important to connect to the service:
+            The following information is important to connect to the Test-Server:
             *) Hosts is accessible via ssh
+            *) Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
             *) SSH username: "{{ studentname }}"
             *) SSH password: "{{ studentpwd }}"
             *) ROOT access via "su -" with your password
