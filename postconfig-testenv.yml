@@ -1,7 +1,7 @@
 ---
 
   - name:
-    hosts: {{ playbookvmcredentialsname }}"
+    hosts: "{{ playbookvmcredentialsname }}"
 #    gather_facts: False
 #    become_method: su
 #    become_user: root
