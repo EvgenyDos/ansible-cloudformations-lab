@@ -3,7 +3,6 @@
     hosts: "{{ vmhostip }}"
     gather_facts: true
     tasks:
-      - name: lets check results and drop user from system
 #        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
 #      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
 #      - command: "chmod +rx /root/install"
