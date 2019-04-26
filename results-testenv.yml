@@ -4,11 +4,15 @@
     gather_facts: true
     tasks:
       - name: lets check results and drop user from system
-        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
+#        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
 #      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
-      - shell: curl -fsSL https://goss.rocks/install | sh
+       - name: Download installer of goss
+         get_url:
+          url: https://goss.rocks/install
+          dest: /root/install
+      - shell: /root/install
       - name: copy main config file
         copy:
           dest: /root/goss.yaml
