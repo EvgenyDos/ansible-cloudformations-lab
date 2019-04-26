@@ -39,15 +39,7 @@
         shell: touch /data/removeme
 
       - name: create file with chattr +i
-        file:
-          path: /data/removeme
-          attributes: "+i"
-          state: file
-          owner: root
-          group: root
-          modification_time: now
-          access_time: now
-          force: true
+        shell: chattr +i /data/removeme
   
       - name: enable additional repo for docker
         shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
