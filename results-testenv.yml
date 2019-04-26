@@ -8,8 +8,8 @@
 #      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
-       - name: Download installer of goss
-         get_url:
+      - name: Download installer of goss
+        get_url:
           url: https://goss.rocks/install
           dest: /root/install
       - shell: /root/install

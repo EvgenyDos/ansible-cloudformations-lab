@@ -122,6 +122,15 @@
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
 
+      - name: Wait until SSH is available
+        local_action: 
+          module: wait_for 
+          host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+          port: 22 
+          delay: 30 
+          timeout: 320 
+          state: started
+
       - name: sleep for "{{ sleeptime }}" seconds and continue with play
         wait_for: timeout="{{ sleeptime }}"
         delegate_to: localhost
