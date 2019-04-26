@@ -13,20 +13,20 @@
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
 
-      - name: Ensure SSH warning banner is configured
-        copy:
-          dest: "/etc/issue.net"
-          src: "files/issue.net"
+#      - name: Ensure SSH warning banner is configured
+#        copy:
+#          dest: "/etc/issue.net"
+#          src: "files/issue.net"
 
-      - name: add lines
-        lineinfile:
-          dest: /etc/ssh/sshd_config
-          line: 'Banner /etc/issue.net'
+#     - name: add lines
+#        lineinfile:
+#          dest: /etc/ssh/sshd_config
+#          line: 'Banner /etc/issue.net'
 
-      - name: restart sshd
-        service:
-          name: sshd
-          state: restarted
+#      - name: restart sshd
+#        service:
+#          name: sshd
+#          state: restarted
 
       - name: list of commands for prepare tests
         file:
