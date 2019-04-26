@@ -13,20 +13,20 @@
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
 
-#      - name: Ensure SSH warning banner is configured
-#        copy:
-#          dest: "/etc/issue.net"
-#          src: "files/issue.net"
+      - name: Ensure SSH warning banner is configured
+        copy:
+          dest: "/etc/issue.net"
+          src: "files/issue.net"
 
-#     - name: add lines
-#        lineinfile:
-#          dest: /etc/ssh/sshd_config
-#          line: 'Banner /etc/issue.net'
+     - name: add lines
+        lineinfile:
+          dest: /etc/ssh/sshd_config
+          line: 'Banner /etc/issue.net'
 
-#      - name: restart sshd
-#        service:
-#          name: sshd
-#          state: restarted
+      - name: restart sshd
+        service:
+          name: sshd
+          state: restarted
 
       - name: list of commands for prepare tests
         file:
@@ -35,16 +35,14 @@
           owner: root
           group: root
 
-#        command: "mkdir -p /data"
-      - file:
+      - name: create file with chattr +i
+        file:
           path: /data/removeme
           attributes: "+i"
           state: touch
           owner: root
           group: root
   
-#      - command: "touch /data/removeme"
-#      - command: "chattr +i /data/removeme"
       - name: enable additional repo for docker
         shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
 

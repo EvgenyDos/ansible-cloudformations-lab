@@ -78,16 +78,16 @@
 #          tower_password: "{{ towerpassword }}"
 #          tower_username: "{{ towerusername }}"
 
-      - name: we will creaate tower_credential for new user
-        tower_credential:
-          name: "{{ playbookvmcredentialsname }}"
-          organization: "Default"
-          tower_verify_ssl: no
-          kind: "ssh"
-          username: "{{ studentname }}"
-          password: "{{ studentpwd }}"
-          become_method: "su"
-          become_password: "{{ studentpwd }}"
+##      - name: we will creaate tower_credential for new user
+##        tower_credential:
+##          name: "{{ playbookvmcredentialsname }}"
+##          organization: "Default"
+##          tower_verify_ssl: no
+##          kind: "ssh"
+##          username: "{{ studentname }}"
+##          password: "{{ studentpwd }}"
+##          become_method: "su"
+##          become_password: "{{ studentpwd }}"
 #          tower_host: "{{ towerhost }}"
 #          tower_password: "{{ towerpassword }}"
 #          tower_username: "{{ towerusername }}"
