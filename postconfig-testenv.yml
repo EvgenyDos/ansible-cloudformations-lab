@@ -77,3 +77,4 @@
             *) ROOT access via "su -" with your password
             *) Your system will be auto-destroyed in "{{ examtime }}" mins !!!
             Thank you
+
