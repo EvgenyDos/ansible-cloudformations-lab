@@ -16,7 +16,8 @@
           dest: "/root/install"
           force: yes
 
-      - shell: /root/install
+      - shell: "chmod +x /root/install"
+      - shell: "/root/install"
 
       - name: copy main config file
         copy:
