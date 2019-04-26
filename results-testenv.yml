@@ -24,3 +24,11 @@
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
           body: "{{ resultsoutput.stdout }}"
+
+      - name: adding tower_host to our VM inventory
+        tower_host:
+          description: "test host for invent"
+          name:  "{{ vmhostip }}"
+          inventory: "{{ playbookvminventoryname }}"
+          tower_verify_ssl: no
+          state: absent
