@@ -75,6 +75,4 @@
             *) SSH username: "{{ studentname }}"
             *) SSH password: "{{ studentpwd }}"
             *) ROOT access via "su -" with your password
-            *) Your system will be auto-destroyed in "{{ examtime }}" mins !!!
-            Thank you
-
+            *) Your system will be auto-destroyed in "{{ examtime }}" mins
