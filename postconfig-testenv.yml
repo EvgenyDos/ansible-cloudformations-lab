@@ -56,7 +56,7 @@
 
       - name: send an email with results
         mail: 
-          subject: "Test results"
+          subject: "Postconfigurations has been done"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
-          body: 'System has been successfully provisioned.'
+          body: 'Postconfigurations of Test-VM has been successfully done.'

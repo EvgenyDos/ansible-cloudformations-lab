@@ -2,9 +2,6 @@
   - name:
     hosts: localhost
     connection: local
-#    gather_facts: False
-#    vars_files:
-#    - group_vars/all.yml
     tasks:
 
       - name: send email that service is ordered
@@ -31,7 +28,8 @@
             Password: "{{ studentpwd }}"
             VolumeSize: "{{ disksize }}"
 
-      - cloudformation_facts:
+      - name: we have to collect some facts from cloudformations stack
+        cloudformation_facts:
           stack_name: "{{ stack_name }}"
           region: "{{ region_name }}"
           all_facts: true
@@ -58,15 +56,12 @@
 ##          organization: "Default"
 ##          tower_verify_ssl: no
 ##          state: present
-#          tower_host: "{{ towerhost }}"
-#          tower_password: "{{ towerpassword }}"
-#          tower_username: "{{ towerusername }}"
 
 
       - name: adding tower_host to our VM inventory
         tower_host:
           description: "test host for invent"
-          name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}" 
+          name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
           inventory: "{{ playbookvminventoryname }}"
 #          inventory: dos-testenv-invent
 #         variables:
@@ -74,9 +69,6 @@
 #         connection: local
           tower_verify_ssl: no
           state: present
-#          tower_host: "{{ towerhost }}"
-#          tower_password: "{{ towerpassword }}"
-#          tower_username: "{{ towerusername }}"
 
 ##      - name: we will creaate tower_credential for new user
 ##        tower_credential:
@@ -88,9 +80,6 @@
 ##          password: "{{ studentpwd }}"
 ##          become_method: "su"
 ##          become_password: "{{ studentpwd }}"
-#          tower_host: "{{ towerhost }}"
-#          tower_password: "{{ towerpassword }}"
-#          tower_username: "{{ towerusername }}"
 
 #      - name: we will creaate tower_group for hosts
 #        tower_group:
@@ -99,7 +88,7 @@
 #          state: present
 
       - name: "we will save VM server ip as a setstats param for the next staps"
-        set_stats: 
+        set_stats:
           data:
             vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
 
@@ -123,13 +112,15 @@
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
 
       - name: Wait until SSH is available
-        local_action: 
-          module: wait_for 
+#        local_action:
+#          module: wait_for
+        wait_for:
           host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-          port: 22 
-          delay: 30 
-          timeout: 320 
+          port: 22
+          delay: 30
+          timeout: 320
           state: started
+        delegate_to: localhost
 
 #      - name: sleep for "{{ sleeptime }}" seconds and continue with play
 #        wait_for: timeout="{{ sleeptime }}"
