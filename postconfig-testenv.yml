@@ -42,6 +42,9 @@
           state: file
           owner: root
           group: root
+          modification_time: now
+          access_time: now
+         force: true
   
       - name: enable additional repo for docker
         shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"

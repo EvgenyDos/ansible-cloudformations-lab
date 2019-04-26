@@ -13,11 +13,14 @@
           dest: /root/goss.yaml
           src: "files/goss.yaml"
 
-      - command: "cd /root && goss validate"
+      - command: "goss validate --format documentation"
+        args:
+          chdir: /root
+        register: resultsoutput
 
       - name: send an email with results
         mail:
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
-          body: 'System has been successfully provisioned.'
+          body: "{{ resultsoutput.stdout }}"
