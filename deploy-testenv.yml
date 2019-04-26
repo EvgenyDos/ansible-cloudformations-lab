@@ -131,6 +131,6 @@
           timeout: 320 
           state: started
 
-      - name: sleep for "{{ sleeptime }}" seconds and continue with play
-        wait_for: timeout="{{ sleeptime }}"
-        delegate_to: localhost
+#      - name: sleep for "{{ sleeptime }}" seconds and continue with play
+#        wait_for: timeout="{{ sleeptime }}"
+#        delegate_to: localhost
