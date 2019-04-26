@@ -18,8 +18,8 @@
           dest: "/etc/issue.net"
           src: "files/issue.net"
 
-     - name: add lines
-       lineinfile:
+      - name: add lines
+        lineinfile:
          dest: /etc/ssh/sshd_config
          line: 'Banner /etc/issue.net'
 
