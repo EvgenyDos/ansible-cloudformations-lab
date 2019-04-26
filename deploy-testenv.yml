@@ -93,7 +93,7 @@
             vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
 
       - debug:
-          msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
+          msg: "our inventnmame {{ playbookvminventoryname }}"
 
       - name: Wait until SSH is available
 #        local_action:

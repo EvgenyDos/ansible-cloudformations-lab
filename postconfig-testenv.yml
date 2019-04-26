@@ -4,8 +4,8 @@
     gather_facts: true
     tasks:
 
-#      - debug:
-#          msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
+      - debug:
+          msg: "our inventnmame {{ playbookvminventoryname }}"
 
       - name: Ensure SSH warning banner is configured
         copy:
@@ -75,4 +75,6 @@
             *) SSH username: "{{ studentname }}"
             *) SSH password: "{{ studentpwd }}"
             *) ROOT access via "su -" with your password
-            *) Your system will be auto-destroyed in "{{ examtime }}" mins
+            *) Your system will be auto-destroyed in "{{ examtime }}" mins.
+
+            Thank you and good luck ....

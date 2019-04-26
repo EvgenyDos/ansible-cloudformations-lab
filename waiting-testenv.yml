@@ -4,6 +4,6 @@
     connection: local
     tasks:
 
-      - name: sleep for "{{ waittime }}" seconds and continue with play
-        wait_for: timeout="{{ waittime }}"
+      - name: sleep for "{{ examtime }}" seconds and continue with play
+        wait_for: timeout="{{ examtime }}"
         delegate_to: localhost
