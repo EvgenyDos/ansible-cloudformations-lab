@@ -35,7 +35,7 @@
           from: Li9 Demo <do-not-reply@demo.li9.com>
           body: "{{ resultsoutput.stdout }}"
 
-      - name: adding tower_host to our VM inventory
+      - name: remove tower_host from our VM inventory
         tower_host:
           description: "remove VM ip from inventory"
           name:  "{{ vmhostip }}"
