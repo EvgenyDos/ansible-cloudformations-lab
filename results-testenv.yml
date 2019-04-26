@@ -7,11 +7,17 @@
 #      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
+
+      - shell: w
+
       - name: Download installer of goss
         get_url:
-          url: https://goss.rocks/install
-          dest: /tmp/install
-      - shell: /tmp/install
+          url: "https://goss.rocks/install"
+          dest: "/root/install"
+          force: yes
+
+      - shell: /root/install
+
       - name: copy main config file
         copy:
           dest: /root/goss.yaml
