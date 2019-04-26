@@ -4,7 +4,7 @@
     hosts: "{{ vmhostip }}"
 #    connection: local
 #    hosts: all
-#     gather_facts: False
+    gather_facts: true
 #    become_method: su
 #    become_user: root
 #    vars_files:
