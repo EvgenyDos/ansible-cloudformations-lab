@@ -5,9 +5,10 @@
     tasks:
       - name: lets check results and drop user from system
         command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
-      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
-      - command: "chmod +rx /root/install"
-      - command: "/root/install"
+#      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
+#      - command: "chmod +rx /root/install"
+#      - command: "/root/install"
+      - shell: curl -fsSL https://goss.rocks/install | sh
       - name: copy main config file
         copy:
           dest: /root/goss.yaml
