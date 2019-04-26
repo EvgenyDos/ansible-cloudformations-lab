@@ -37,7 +37,7 @@
 
       - name: adding tower_host to our VM inventory
         tower_host:
-          description: "test host for invent"
+          description: "remove VM ip from inventory"
           name:  "{{ vmhostip }}"
           inventory: "{{ playbookvminventoryname }}"
           tower_verify_ssl: no
