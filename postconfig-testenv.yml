@@ -35,6 +35,9 @@
           owner: root
           group: root
 
+      - name: just create a file
+        shell: touch /data/removeme
+
       - name: create file with chattr +i
         file:
           path: /data/removeme
