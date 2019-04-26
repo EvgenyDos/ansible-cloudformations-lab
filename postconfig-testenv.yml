@@ -39,7 +39,7 @@
         file:
           path: /data/removeme
           attributes: "+i"
-          state: touch
+          state: file
           owner: root
           group: root
   
