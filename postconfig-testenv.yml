@@ -3,8 +3,9 @@
     hosts: "{{ vmhostip }}"
     gather_facts: true
     tasks:
-      - debug:
-          msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
+
+#      - debug:
+#          msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
 
       - name: Ensure SSH warning banner is configured
         copy:
@@ -59,4 +60,20 @@
           subject: "Postconfigurations has been done"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
-          body: 'Postconfigurations of Test-VM has been successfully done.'
+          body: 'Test-VM is redy for exam.'
+
+      - name: send an email  to user that cloudformation is done
+        mail:
+          subject: "Your Test environment is ready"
+          to: "{{ useremailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: |
+            Li9 Demo System has been successfully provisioned.
+            The following information is important to connect to the Test-Server:
+            *) Hosts is accessible via ssh
+            *) Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+            *) SSH username: "{{ studentname }}"
+            *) SSH password: "{{ studentpwd }}"
+            *) ROOT access via "su -" with your password
+            *) Your system will be auto-destroyed in "{{ examtime }}" mins !!!
+            Thank you

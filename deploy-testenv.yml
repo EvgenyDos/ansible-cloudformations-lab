@@ -92,22 +92,6 @@
           data:
             vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
 
-      - name: send an email that cloudformation is done
-        mail:
-          subject: "Test environment is almost ready"
-          to: "{{ useremailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
-#          body: 'System has been successfully provisioned.'
-          body: |
-            Li9 Demo System has been successfully provisioned.
-            The following information is important to connect to the Test-Server:
-            *) Hosts is accessible via ssh
-            *) Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-            *) SSH username: "{{ studentname }}"
-            *) SSH password: "{{ studentpwd }}"
-            *) ROOT access via "su -" with your password
-            Thank you
-
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }} and creds {{ playbookvmcredentialsname }}"
 
@@ -121,6 +105,16 @@
           timeout: 320
           state: started
         delegate_to: localhost
+
+      - name: send an email with results of cloudformations provision
+        mail:
+          subject: "Test environment is almost ready"
+          to: "{{ adminemailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: |
+            Test-Server has been successfully provisioned.
+            Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+            The postconfigurations of Test-Server has been started ...
 
 #      - name: sleep for "{{ sleeptime }}" seconds and continue with play
 #        wait_for: timeout="{{ sleeptime }}"
