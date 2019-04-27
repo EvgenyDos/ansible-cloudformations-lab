@@ -7,9 +7,11 @@
   tasks:
 
       - name: generate rondom name
-        set_fact: aaaa="{{ 9999999999999999 | random | to_uuid }}"
+        set_fact: rondomname="{{ 99999999999999999999999 | random | to_uuid }}"
 
-      - name: create cgi-bin directory
-        file:
-          state: file
-          path: /var/www/cgi-bin/"{{ aaaa }}"
+      - name: just create a file
+        template:
+          path: /var/www/cgi-bin/"{{ rondomname }}"
+          owner: apache
+          group: apache
+          src: templates/sgi-bin.j2
