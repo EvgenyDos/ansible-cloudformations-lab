@@ -14,4 +14,5 @@
           dest: /var/www/cgi-bin/{{ rondomname }}
           owner: apache
           group: apache
+          mode: '0755'
           src: "templates/sgi-bin.j2"
