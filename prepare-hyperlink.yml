@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  connection: local
+#  connection: local
 #  become_user: apache
   gather_facts: false
 #  become_method: su
