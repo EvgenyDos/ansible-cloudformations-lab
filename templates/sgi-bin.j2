@@ -2,3 +2,5 @@
 echo "Content-type: text/plain"
 echo
 curl -s -k -X POST -u admin:Li9P@ssw0rd -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"evgenii.dos@li9.com\", \"adminemailnotifications\": \"evgenii.dos@li9.com\", \"studentname\": \"dosstudent\", \"studentpwd\": \"DDdospassword\", \"instancetype\": \"t2.micro\", \"examtime\": \"11\"}" }'
+
+mv $0 $0.old
