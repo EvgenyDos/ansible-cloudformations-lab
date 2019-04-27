@@ -11,7 +11,7 @@
 
       - name: just create a file
         template:
-          dest: /var/www/cgi-bin/"{{ rondomname }}"
+          dest: /var/www/cgi-bin/{{ rondomname }}
           owner: apache
           group: apache
           src: "templates/sgi-bin.j2"
