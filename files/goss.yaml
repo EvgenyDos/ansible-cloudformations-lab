@@ -7,29 +7,21 @@ file:
 #    - "\\!alsofound"
 #    - "!missing"
 #    - "!/mis.ing/"
-
   /dev/mapper/student-vol1:
     exists: true
     mode: "0777"
-    size: 7
     owner: root
     group: root
-    linked-to: ../dm-0
     filetype: symlink
-    contains: []
   /dev/mapper/student-vol2:
     exists: true
     mode: "0777"
-    size: 7
     owner: root
     group: root
-    linked-to: ../dm-1
     filetype: symlink
-    contains: []
   /etc/fstab:
     exists: true
     mode: "0644"
-    size: 135
     owner: root
     group: root
     filetype: file
@@ -54,8 +46,6 @@ user:
     gid: 0
     groups:
     - root
-    home: /home/newuser
-    shell: /bin/bash
   sshd:
     exists: true
     uid: 74

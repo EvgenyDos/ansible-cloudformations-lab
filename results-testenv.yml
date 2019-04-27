@@ -24,7 +24,7 @@
           dest: /root/goss.yaml
           src: "files/goss.yaml"
 
-      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format documentation"
+      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
         ignore_errors: True
         register: resultsoutput
 
