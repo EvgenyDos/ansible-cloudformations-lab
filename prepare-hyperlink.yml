@@ -1,8 +1,10 @@
 ---
-  - name:
-    hosts: localhost
-    connection: local
-    tasks:
+- hosts: localhost
+  connection: local
+  become_user: apache
+  gather_facts: false
+  become_method: su
+  tasks:
 
       - name: generate rondom name
         command: "uuidgen"
