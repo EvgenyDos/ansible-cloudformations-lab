@@ -1,0 +1,14 @@
+---
+  - name:
+    hosts: localhost
+    connection: local
+    tasks:
+
+      - name: generate rondom name
+        command: "uuidgen"
+        register: newuuidgen
+
+      - name: create cgi-bin directory
+        file:
+          state: file
+          path: /var/www/cgi-bin/"{{ newuuidgen.stdout }}"
