@@ -1,9 +1,9 @@
 ---
 - hosts: localhost
   connection: local
-  become_user: apache
+#  become_user: apache
   gather_facts: false
-  become_method: su
+#  become_method: su
   tasks:
 
       - name: generate rondom name
