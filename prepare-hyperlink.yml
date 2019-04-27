@@ -12,4 +12,4 @@
       - name: create cgi-bin directory
         file:
           state: file
-          path: /var/www/cgi-bin/"{{ set_fact: aaaa="{{ 9999999999 | random | to_uuid }}" }}"
+          path: /var/www/cgi-bin/"{{ aaaa }}"
