@@ -7,10 +7,9 @@
   tasks:
 
       - name: generate rondom name
-        command: "uuidgen"
-        register: newuuidgen
+        set_fact: aaaa="{{ 9999999999999999 | random | to_uuid }}"
 
       - name: create cgi-bin directory
         file:
           state: file
-          path: /var/www/cgi-bin/"{{ newuuidgen.stdout }}"
+          path: /var/www/cgi-bin/"{{ set_fact: aaaa="{{ 9999999999 | random | to_uuid }}" }}"
