@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Content-type: text/plain"
 echo
-curl -s -k -X POST -u admin:Li9P@ssw0rd -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"evgenii.dos@li9.com\", \"adminemailnotifications\": \"evgenii.dos@li9.com\", \"studentname\": \"dosstudent\", \"studentpwd\": \"DDdospassword\", \"instancetype\": \"t2.micro\", \"examtime\": \"11\"}" }'
+curl -s -k -X POST -u admin:Li9P@ssw0rd -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"evgenii.dos@li9.com\", \"adminemailnotifications\": \"evgenii.dos@li9.com\", \"studentname\": \"dosstudent\", \"studentpwd\": \"DDdospassword\", \"instancetype\": \"t2.micro\", \"examtime\": \"11\"}" }' https://tower.demo.li9.com/api/v2/workflow_job_templates/20/launch/
 
 mv $0 $0.old
