@@ -5,6 +5,10 @@
   gather_facts: false
 #  become_method: su
   tasks:
+      - debug:
+          msg: "rondname = {{ rondomname }}"
+
+      - shell: "whoami && w"
 
       - name: generate rondom name
         set_fact: rondomname="{{ 99999999999999999999999 | random | to_uuid }}"
