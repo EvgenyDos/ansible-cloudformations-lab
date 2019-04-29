@@ -16,7 +16,7 @@
 
       - name: remove hyperlink of exam (it has been expired after "{{ timetolivehyperlink }}")
         file:
-          path: "/var/www/cgi-bin/"{{ removehyperlinkfromtower }}""
+          path: /var/www/cgi-bin/{{ removehyperlinkfromtower }}
           state: absent
         ignore_errors: yes
 
