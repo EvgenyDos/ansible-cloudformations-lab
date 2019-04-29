@@ -19,10 +19,10 @@
       - debug:
           msg: "studentpwd = {{ studentpwd }}"
 
-     - debug:
+      - debug:
           msg: "studentpwd = {{ instancetype }}"
 
-     - debug:
+      - debug:
           msg: "studentpwd = {{ examtime }}"
 
       - name: just show hyperlink name
@@ -30,7 +30,7 @@
           msg: "it is hyperlink name = {{ removehyperlinkfromtower }}"
 
       - name: sleep for "{{ timetolivehyperlink }}" seconds and remove hyperlink
-        wait_for: 
+        wait_for:
           timeout: "{{ timetolivehyperlink }}"
           state: started
           msg: "sleeeeping :)"
