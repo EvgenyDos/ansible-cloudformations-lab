@@ -11,7 +11,8 @@
           msg: "it is hyperlink name = {{ removehyperlinkfromtower }}"
 
       - name: sleep for "{{ timetolivehyperlink }}" seconds and remove hyperlink
-        wait_for: timeout="{{ timetolivehyperlink }}"
+        wait_for: 
+          timeout: "{{ timetolivehyperlink }}"
           state: started
           msg: "WebServer PORT is not Listening"
 
