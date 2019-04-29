@@ -14,6 +14,8 @@
         wait_for: timeout="{{ timetolivehyperlink }}"
         delegate_to: localhost
 
+      - shell: whoami
+
       - name: remove hyperlink of exam (it has been expired after "{{ timetolivehyperlink }}")
         file:
           path: /var/www/cgi-bin/{{ removehyperlinkfromtower }}
