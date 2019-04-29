@@ -1,9 +1,6 @@
 ---
 - hosts: localhost
-#  connection: local
-#  become_user: apache
   gather_facts: false
-#  become_method: su
   tasks:
 
       - name: just show hyperlink name
@@ -14,7 +11,7 @@
         wait_for: 
           timeout: "{{ timetolivehyperlink }}"
           state: started
-          msg: "WebServer PORT is not Listening"
+          msg: "sleeeeping :)"
 
       - shell: whoami
 
