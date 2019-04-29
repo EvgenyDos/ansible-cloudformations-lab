@@ -3,6 +3,28 @@
   gather_facts: false
   tasks:
 
+      - name: It is output informations to be sure regarding correct variables
+        debug:
+          msg: "useremailnotifications = "{{ useremailnotifications }}""
+          
+      - debug: 
+          msg: "adminemailnotifications = "{{ adminemailnotifications }}""
+
+      - debug:
+          msg: "adminemailnotifications = "{{ adminemailnotifications }}""
+
+      - debug:
+          msg: "studentname = "{{ studentname }}""
+
+      - debug:
+          msg: "studentpwd = "{{ studentpwd }}""
+
+     - debug:
+          msg: "studentpwd = "{{ instancetype }}""
+
+     - debug:
+          msg: "studentpwd = "{{ examtime }}""
+
       - name: just show hyperlink name
         debug:
           msg: "it is hyperlink name = {{ removehyperlinkfromtower }}"
