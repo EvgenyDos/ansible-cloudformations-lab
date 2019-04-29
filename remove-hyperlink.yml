@@ -13,7 +13,7 @@
       - name: sleep for "{{ timetolivehyperlink }}" seconds and remove hyperlink
         wait_for: timeout="{{ timetolivehyperlink }}"
           state: started
-           msg: "WebServer PORT is not Listening"
+          msg: "WebServer PORT is not Listening"
 
       - shell: whoami
 
