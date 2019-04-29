@@ -11,12 +11,12 @@
           msg: "it is hyperlink name = {{ removehyperlinkfromtower }}"
 
       - name: sleep for "{{ timetolivehyperlink }}" seconds and remove hyperlink
-        wait_for: timeeout="{{ timetolivehyperlink }}"
+        wait_for: timeout="{{ timetolivehyperlink }}"
         delegate_to: localhost
 
       - name: remove hyperlink of exam (it has been expired after "{{ timetolivehyperlink }}")
         file:
-          path: /var/www/cgi-bin/"{{ removehyperlinkfromtower }}""
+          path: "/var/www/cgi-bin/"{{ removehyperlinkfromtower }}""
           state: absent
         ignore_errors: yes
 
