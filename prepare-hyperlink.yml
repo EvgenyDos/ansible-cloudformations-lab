@@ -18,3 +18,8 @@
           group: apache
           mode: '0755'
           src: "templates/sgi-bin.j2"
+
+      - name: "save hyperlinkname for remove later"
+        set_stats:
+          data:
+            removehyperlinkfromtower: "{{ rondomname }}"

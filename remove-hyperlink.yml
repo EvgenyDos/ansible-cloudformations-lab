@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+#  connection: local
+#  become_user: apache
+  gather_facts: false
+#  become_method: su
+  tasks:
+
+      - name: remove hyperlink of exam (it has been expired after "{{ timetolivehyperlink }}")
+        file:
+          path: /var/www/cgi-bin/"{{ removehyperlinkfromtower }}"
+          state: absent
+          force: yes
+        ignore_errors: yes
+
+
+      - name: remove hyperlink of exam (it has been expired after "{{ timetolivehyperlink }}")
+        file:
+          path: /var/www/cgi-bin/"{{ removehyperlinkfromtower }}".old
+          state: absent
+          force: yes
+        ignore_errors: yes
