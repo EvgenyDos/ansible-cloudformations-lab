@@ -23,7 +23,7 @@
           msg: "studentpwd = {{ instancetype }}"
 
      - debug:
-          msg: "studentpwd = "{{ examtime }}"
+          msg: "studentpwd = {{ examtime }}"
 
       - name: just show hyperlink name
         debug:
