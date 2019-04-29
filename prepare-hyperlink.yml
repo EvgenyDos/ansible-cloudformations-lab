@@ -19,6 +19,9 @@
           mode: '0755'
           src: "templates/sgi-bin.j2"
 
+      - debug:
+          msg: "useremailnotifications={{  useremailnotifications  }}"
+
       - name: "save hyperlinkname for remove later"
         set_stats:
           data:
