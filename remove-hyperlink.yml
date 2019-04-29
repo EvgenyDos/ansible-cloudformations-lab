@@ -5,25 +5,25 @@
 
       - name: It is output informations to be sure regarding correct variables
         debug:
-          msg: "useremailnotifications = "{{ useremailnotifications }}""
-          
+          msg: "useremailnotifications = {{ useremailnotifications }}"
+
       - debug: 
-          msg: "adminemailnotifications = "{{ adminemailnotifications }}""
+          msg: "adminemailnotifications = {{ adminemailnotifications }}"
 
       - debug:
-          msg: "adminemailnotifications = "{{ adminemailnotifications }}""
+          msg: "adminemailnotifications = {{ adminemailnotifications }}"
 
       - debug:
-          msg: "studentname = "{{ studentname }}""
+          msg: "studentname = {{ studentname }}"
 
       - debug:
-          msg: "studentpwd = "{{ studentpwd }}""
+          msg: "studentpwd = {{ studentpwd }}"
 
      - debug:
-          msg: "studentpwd = "{{ instancetype }}""
+          msg: "studentpwd = {{ instancetype }}"
 
      - debug:
-          msg: "studentpwd = "{{ examtime }}""
+          msg: "studentpwd = "{{ examtime }}"
 
       - name: just show hyperlink name
         debug:

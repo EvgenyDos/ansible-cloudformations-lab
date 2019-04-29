@@ -26,3 +26,13 @@
         set_stats:
           data:
             removehyperlinkfromtower: "{{ rondomname }}"
+
+      - name: press to link for exam start
+        mail:
+          subject: "youre exam is ready"
+          to: "{{ useremailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: |
+            you have to press that link to exam start
+            Your exam environment link will be auto-destroyed in "{{ timetolivehyperlink }}" mins.
+            Your system will be auto-destroyed in "{{ examtime }}" mins after start (press link).
