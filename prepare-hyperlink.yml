@@ -51,7 +51,7 @@ You need to be aware of the following rules:
 All task results will be validates after system reboot
 
 <h1>Task 1 - delete /data/deleteme</h1>
-There is a simple file located at /data/deleteme. This file should be deleted
+There is a simple file located at <b>/data/deleteme</b>. This file should be deleted
 
 <h1>Task 2 - users and groups</h1>
 You should configure the system as follows:
