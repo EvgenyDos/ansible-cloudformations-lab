@@ -44,4 +44,4 @@
           to: "{{ useremailnotifications }}"
           from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
-          body: "{{ lookup('file', 'files/main.html') }}"
+          body: "{{ lookup('template', 'files/main.html') }}"
