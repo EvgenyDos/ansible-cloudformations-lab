@@ -53,7 +53,7 @@ All task results will be validates after system reboot
 <h1>Task 1 - delete /data/deleteme</h1>
 There is a simple file located at /data/deleteme. This file should be deleted
 
-<h1>Task 2 - users and groups<h1>
+<h1>Task 2 - users and groups</h1>
 You should configure the system as follows:
 File /data/permissions exists
 /data/permissions is owned by “examuser” user
@@ -62,7 +62,7 @@ User “examuser” is a member of “examgroup”
 Only examuser has read write access to /data/permissions
 No any other users are able to read or write to /data/permissions
 
-<h1>Task 3 - LVM and filesystems<h1>
+<h1>Task 3 - LVM and filesystems</h1>
 You should configure the system as follows:
 Volume group named “examvg” exists
 Volume group extent size is 2M
@@ -77,14 +77,14 @@ Size is 300M
 
 Note! This task may require to look for a free block device which is already attached to the exam  system.
 
-<h1>Task 4 - Web server<h1>
+<h1>Task 4 - Web server</h1>
 Configure the exam system as an HTTP  web server as follows:
 Service listens on 80 and 8080 ports
 Commands “curl localhost”  and “curl localhost:8080” return “Li9 exam task 3”.
 
 Note! You are allowed to use any web server software
 
-<h1>Task 5 - NFS server<h1>
+<h1>Task 5 - NFS server</h1>
 Configure your system as NFS server as follows:
 NFS service exports /nfs_export  for anyone
 /nfs_export is exported in RW mode
@@ -93,7 +93,7 @@ Any NFS user should have RW access to the share
 Note! You are allowed to use any web server software
 
 
-<h1>Task 6 - Script<h1>
+<h1>Task 6 - Script</h1>
 Create a script with the following requirements:
 It returns “Hello world” if no arguments passed
 It returns “CentOS system” if the first argument is “centos”
@@ -102,11 +102,11 @@ It should be executable for anyone
 
 Note! You are allowed to use any programming language
 
-<h1>Task 7 - Text<h1>
+<h1>Task 7 - Text</h1>
 Create a new file named /etc/task7. The file should contain all lines with “abc” string  from /etc/services
 
 
-<h1>Task 8 - Passwordless ssh access<h1>
+<h1>Task 8 - Passwordless ssh access</h1>
 Configure your system to allow passwordless access from a new user named “sshuser” to “examuser”.
 Note! The following command under user “sshuser” should work fine “ssh examuser@examuser id”
           '
