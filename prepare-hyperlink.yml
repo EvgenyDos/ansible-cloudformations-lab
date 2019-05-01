@@ -55,39 +55,39 @@ There is a simple file located at <b>/data/deleteme</b>. This file should be del
 
 <h1>Task 2 - users and groups</h1>
 You should configure the system as follows:
-File /data/permissions exists
-/data/permissions is owned by “examuser” user
-/data/permissions is owned by “examgroup” group
-User “examuser” is a member of “examgroup”
-Only examuser has read write access to /data/permissions
-No any other users are able to read or write to /data/permissions
+File <b>"/data/permissions"</b> exists
+<b>"/data/permissions"</b> is owned by <b>“examuser”</b> user
+<b>"/data/permissions"</b> is owned by <b>“examgroup”</b> group
+User <b>“examuser”</b> is a member of <b>“examgroup”</b>
+Only <b>"examuser"</b> has read write access to <b>"/data/permissions"</b>
+No any other users are able to read or write to <b>"/data/permissions"</b>
 
 <h1>Task 3 - LVM and filesystems</h1>
 You should configure the system as follows:
-Volume group named “examvg” exists
-Volume group extent size is 2M
-Logical volume named “vol1” exists
-“vol1” belongs to the “examvg” volume group
-Size is 200M
+Volume group named <b>“examvg”</b> exists
+Volume group extent size is <b>2M</b>
+Logical volume named <b>“vol1”</b> exists
+“vol1” belongs to the <b>“examvg”<b> volume group
+Size is <b>200M</b>
 “vol1” is mounted at boot to /data/fs1 as EXT4 filesystem
 Logical volume named “vol2” exists
-“vol2” belongs to the “examvg” volume group
-Size is 300M
-“vol2” is mounted at boot to /data/fs1 as XFS filesystem
+“vol2” belongs to the <b>“examvg”</b> volume group
+Size is <b>300M</b>
+“vol2” is mounted at boot to <b>/data/fs1</b> as XFS filesystem
 
 Note! This task may require to look for a free block device which is already attached to the exam  system.
 
 <h1>Task 4 - Web server</h1>
 Configure the exam system as an HTTP  web server as follows:
-Service listens on 80 and 8080 ports
-Commands “curl localhost”  and “curl localhost:8080” return “Li9 exam task 3”.
+Service listens on <b>80</b> and <b>8080</b> ports
+Commands “curl localhost”  and “curl localhost:8080” return <b>“Li9 exam task 3”</b>.
 
 Note! You are allowed to use any web server software
 
 <h1>Task 5 - NFS server</h1>
 Configure your system as NFS server as follows:
-NFS service exports /nfs_export  for anyone
-/nfs_export is exported in RW mode
+NFS service exports <b>"/nfs_export"</b>  for anyone
+<b>"/nfs_export"</b> is exported in RW mode
 Any NFS user should have RW access to the share
 
 Note! You are allowed to use any web server software
@@ -95,18 +95,18 @@ Note! You are allowed to use any web server software
 
 <h1>Task 6 - Script</h1>
 Create a script with the following requirements:
-It returns “Hello world” if no arguments passed
-It returns “CentOS system” if the first argument is “centos”
-It returns “Not a CentOS system” for any other options in the first argument
+It returns <b>“Hello world”</b> if no arguments passed
+It returns <b>“CentOS system”</b> if the first argument is <b>“centos”<b/>
+It returns <b>“Not a CentOS system”</b> for any other options in the first argument
 It should be executable for anyone
 
 Note! You are allowed to use any programming language
 
 <h1>Task 7 - Text</h1>
-Create a new file named /etc/task7. The file should contain all lines with “abc” string  from /etc/services
+Create a new file named <b>/etc/task7</b>. The file should contain all lines with <b>“abc”</b> string  from <b>/etc/services</b>
 
 
 <h1>Task 8 - Passwordless ssh access</h1>
-Configure your system to allow passwordless access from a new user named “sshuser” to “examuser”.
-Note! The following command under user “sshuser” should work fine “ssh examuser@examuser id”
+Configure your system to allow passwordless access from a new user named <b>“sshuser”</b> to <b>“examuser”</b>.
+Note! The following command under user “sshuser” should work fine <b>“ssh examuser@examuser id”</b>
           '
