@@ -67,7 +67,7 @@ You should configure the system as follows:
 Volume group named <b>“examvg”</b> exists
 Volume group extent size is <b>2M</b>
 Logical volume named <b>“vol1”</b> exists
-“vol1” belongs to the <b>“examvg”<b> volume group
+“vol1” belongs to the <b>“examvg”</b> volume group
 Size is <b>200M</b>
 “vol1” is mounted at boot to /data/fs1 as EXT4 filesystem
 Logical volume named “vol2” exists
