@@ -31,7 +31,7 @@
         mail:
           subject: "youre exam is ready"
           to: "{{ useremailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Exam <do-not-reply@li9.com>
           body: |
             you have to press that link to exam start
             Your exam environment link will be auto-destroyed in "{{ timetolivehyperlink }}" mins.
@@ -45,7 +45,7 @@
           from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
           body: '
-<h1 color="red">Before you begin</h1>
+<font color="red"><h1>Before you begin</h1></font>
 
 You need to be aware of the following rules:
 All task results will be validates after system reboot
@@ -96,7 +96,7 @@ Note! You are allowed to use any web server software
 <h1>Task 6 - Script</h1>
 Create a script with the following requirements:
 It returns <b>“Hello world”</b> if no arguments passed
-It returns <b>“CentOS system”</b> if the first argument is <b>“centos”<b/>
+It returns <b>“CentOS system”</b> if the first argument is <b>“centos”</b>
 It returns <b>“Not a CentOS system”</b> for any other options in the first argument
 It should be executable for anyone
 
