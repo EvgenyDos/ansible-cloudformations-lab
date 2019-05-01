@@ -40,9 +40,9 @@
 
       - name: send an email  to user that cloudformation is done
         mail:
-          subject: "Your Test environment is ready"
+          subject: "Your Li9 Exam system is ready"
           to: "{{ useremailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
           body: '
 <h1>Before you begin</h1>
