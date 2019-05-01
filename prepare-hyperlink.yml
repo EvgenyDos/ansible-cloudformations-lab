@@ -17,7 +17,7 @@
           owner: apache
           group: apache
           mode: '0755'
-          src: "templates/sgi-bin.j2"
+          src: "templates/cgi-bin.j2"
 
       - debug:
           msg: "useremailnotifications={{  useremailnotifications  }}"
@@ -32,4 +32,5 @@
           subject: "youre exam is ready"
           to: "{{ useremailnotifications }}"
           from: Li9 Exam <do-not-reply@li9.com>
+          subtype: html
           body: "{{ lookup('template', 'templates/mailhyperlink.html.j2') }}"

@@ -1,6 +1,12 @@
 file:
   /data/removeme:
     exists: false
+#    contains:
+#    - found
+#    - /fou.d/
+#    - "\\!alsofound"
+#    - "!missing"
+#    - "!/mis.ing/"
   /dev/mapper/student-vol1:
     exists: true
     mode: "0777"
@@ -44,6 +50,10 @@ user:
     exists: true
     uid: 74
     gid: 74
+# Validate that UID is between 50 and 100
+#      and:
+#        gt: 50
+#        lt: 100
     groups:
     - sshd
     home: /var/empty/sshd
@@ -59,6 +69,10 @@ mount:
     - rw
     - relatime
     source: /dev/mapper/student-vol2
+# path can be any of the following
+#      or:
+#      - /dev/mapper/student-vol2
+#      - /dev/student/vol2
     filesystem: xfs
   /data/lv2:
     exists: true
@@ -69,3 +83,9 @@ mount:
     filesystem: ext2
   /mnt/nfs:
     exists: false
+
+#command:
+#  sysctl -q -n vm.swappiness:
+#    exit-status: 0
+#    stdout:
+#    - "60"
