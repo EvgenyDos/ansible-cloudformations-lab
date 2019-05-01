@@ -1,10 +1,12 @@
-you have to remove file /data/removeme
+List of tasks:
+1)	You have to remove file /data/removeme
+2)	You have to 
 
 the file /data/permission
 	should be part of group newgrp
 	Owner newuser
 	File shoud has special bit "setgid"
-	main permissions 644
+	permissions 
 (secondary group of newuser is root, UUID 3434)
 
 create lvm volumegroup "student" with size 1Gb. You have to use /dev/xvdh disk.
