@@ -37,3 +37,29 @@
             Your exam environment link will be auto-destroyed in "{{ timetolivehyperlink }}" mins.
             Your system will be auto-destroyed in "{{ examtime }}" mins after start (press link).
             Psease press link to start ===> http://tower.demo.li9.com:8080/cgi-bin/{{ rondomname }}
+
+      - name: send an email  to user that cloudformation is done
+        mail:
+          subject: "Your Test environment is ready"
+          to: "{{ useremailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          subtype: html
+          body: '
+<h1>
+
+Change log
+
+</h1>
+          '
+#          body: |
+#            Li9 Demo System has been successfully provisioned.
+#            The following information is important to connect to the Test-Server:
+#
+#            *) Hosts is accessible via ssh
+#            *) Test-Server IP is "{{ vmhostip }}"
+#            *) SSH username: "{{ studentname }}"
+#            *) SSH password: "{{ studentpwd }}"
+#            *) ROOT access via "su -" with your password
+#            *) Your system will be auto-destroyed in "{{ examtime }}" mins.
+#
+#            Thank you and good luck ....
