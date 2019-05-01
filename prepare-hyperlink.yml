@@ -45,7 +45,7 @@
           from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
           body: '
-<h1>Before you begin</h1>
+<h1 color="red">Before you begin</h1>
 
 You need to be aware of the following rules:
 All task results will be validates after system reboot
