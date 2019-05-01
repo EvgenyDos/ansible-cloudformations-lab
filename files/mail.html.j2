@@ -1,7 +1,14 @@
 <font color="red"><h1>Before you begin</h1></font>
 
 You need to be aware of the following rules:
-All task results will be validates after system reboot
+<ul>
+    
+        <li>All task results will be validates after system reboot</li>
+        <li>All tasks will be validated using SSH via centos user. Do not make any changes in /home/centos/.ssh/ authorized_key file</li>
+        <li>You are not allowed to change any network settings like routes, ip addresses, firewall settings</li>
+        <li>You are not allowed to change SELinux state from “enforcing”</li>
+
+</ul>
 
 <font color="green"><h1>Task 1 - delete /data/deleteme</h1></font>
 There is a simple file located at <b>/data/deleteme</b>. This file should be deleted
