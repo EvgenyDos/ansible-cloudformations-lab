@@ -37,11 +37,3 @@
             Your exam environment link will be auto-destroyed in "{{ timetolivehyperlink }}" mins.
             Your system will be auto-destroyed in "{{ examtime }}" mins after start (press link).
             Psease press link to start ===> http://tower.demo.li9.com:8080/cgi-bin/{{ rondomname }}
-
-      - name: send an email  to user that cloudformation is done
-        mail:
-          subject: "Your Li9 Exam system is ready"
-          to: "{{ useremailnotifications }}"
-          from: Li9 Exam <do-not-reply@li9.com>
-          subtype: html
-          body: "{{ lookup('template', 'templates/mail.html.j2') }}"

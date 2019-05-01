@@ -68,17 +68,4 @@
           to: "{{ useremailnotifications }}"
           from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
-          body: "{{ lookup('template', 'files/mail.html.j2') }}"
-
-#          body: |
-#            Li9 Demo System has been successfully provisioned.
-#            The following information is important to connect to the Test-Server:
-#
-#            *) Hosts is accessible via ssh
-#            *) Test-Server IP is "{{ vmhostip }}"
-#            *) SSH username: "{{ studentname }}"
-#            *) SSH password: "{{ studentpwd }}"
-#            *) ROOT access via "su -" with your password
-#            *) Your system will be auto-destroyed in "{{ examtime }}" mins.
-#
-#            Thank you and good luck ....
+          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
