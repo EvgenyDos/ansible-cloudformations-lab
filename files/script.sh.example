@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+   echo "Hello world"
+   exit
+fi
+
+
+case "$1" in
+  centos)
+    echo -n "CentOS system"
+    ;;
+  *)
+    echo -n "Not a CentOS system"
+    ;;
+esac

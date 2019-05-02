@@ -10,6 +10,12 @@ file:
     exists: true
   /dev/mapper/examvg-vol2:
     exists: true
+  /etc/task7:
+    exists: true
+    contains:
+    - abcvoice-port
+    - abcsoftware
+    - omabcastltkm
 command:
   lvs -o vg_extent_size,vg_name|grep examvg|awk '{print $1}'|uniq:
     exit-status: 0
@@ -35,9 +41,9 @@ command:
     exit-status: 0
     stdout:
     - "/nfs_export <world>"
-  rm -rf /nfs_export/testroot && mount localhost:/nfs_export /mnt && sleep 2 && touch /mnt/testroot && umount /mnt/ && sleep 2:
+  rm -rf /nfs_export/testroot && mount localhost:/nfs_export /mnt && touch /mnt/testroot && umount /mnt/:
     exit-status: 0
-  rm -rf /nfs_export/testcentos && mount localhost:/nfs_export /mnt1 && sleep 2 && su -c 'touch /mnt1/testcentos' centos && umount /mnt1/ && sleep 2:
+  rm -rf /nfs_export/testcentos && mount localhost:/nfs_export /mnt && su -c 'touch /mnt/testcentos' centos && umount /mnt/:
     exit-status: 0
   /data/script.sh:
     exit-status: 0
@@ -51,6 +57,12 @@ command:
     exit-status: 0
     stdout:
     - "Not a CentOS system"
+  ssh sshuser@localhost id:
+    exit-status: 0
+    stdout:
+    - groups
+    - uid
+    - gid
 user:
   examuser:
     exists: true

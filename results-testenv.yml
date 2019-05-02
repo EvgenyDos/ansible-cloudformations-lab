@@ -29,6 +29,14 @@
         ignore_errors: True
         register: resultsoutput
 
+      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
+        ignore_errors: True
+
+      - lineinfile:
+          path: /etc/selinux/config
+          regexp: '^ok'
+          line: '<font color="green"> ok'
+
       - name: send an email with results
         mail:
           subject: "Test results"
