@@ -1,71 +1,71 @@
 file:
-  /data/removeme:
+  data/removeme:
     exists: false
-  /dev/mapper/student-vol1:
+  /data/permissions:
     exists: true
-    mode: "0777"
-    owner: root
-    group: root
-    filetype: symlink
-  /dev/mapper/student-vol2:
+    owner: examuser
+    group: examgroup
+    mode: "0600"
+  /dev/mapper/examvg-vol1:
     exists: true
-    mode: "0777"
-    owner: root
-    group: root
-    filetype: symlink
-  /etc/fstab:
+  /dev/mapper/examvg-vol2:
     exists: true
-    mode: "0644"
-    owner: root
-    group: root
-    filetype: file
-    contains: [ /data/lv1, /data/lv2, student ]
-port:
-  tcp:22:
-    listening: true
-    ip:
-    - 0.0.0.0
-  tcp6:22:
-    listening: true
-    ip:
-    - '::'
-service:
-  sshd:
-    enabled: true
-    running: true
+command:
+  lvs -o vg_extent_size,vg_name|grep examvg|awk '{print $1}'|uniq:
+    exit-status: 0
+    stdout:
+    - "2.00m"
+  lvs -o lv_size /dev/mapper/examvg-vol1 --noheadings|awk '{print $1}':
+    exit-status: 0
+    stdout:
+    - "200.00m"
+  lvs -o lv_size /dev/mapper/examvg-vol2 --noheadings|awk '{print $1}':
+    exit-status: 0
+    stdout:
+    - "300.00m"
+  curl localhost:80:
+    exit-status: 0
+    stdout:
+    - "Li9 exam task 3"
+  curl localhost:8080:
+    exit-status: 0
+    stdout:
+    - "Li9 exam task 3"
+  exportfs -v|cut -d "(" -f 1|awk '{print $1,$2}':
+    exit-status: 0
+    stdout:
+    - "/nfs_export <world>"
+  rm -rf /nfs_export/testroot && mount localhost:/nfs_export /mnt && sleep 2 && touch /mnt/testroot && umount /mnt/ && sleep 2:
+    exit-status: 0
+  rm -rf /nfs_export/testcentos && mount localhost:/nfs_export /mnt1 && sleep 2 && su -c 'touch /mnt1/testcentos' centos && umount /mnt1/ && sleep 2:
+    exit-status: 0
+  /data/script.sh:
+    exit-status: 0
+    stdout:
+    - "Hello world"
+  /data/script.sh centos:
+    exit-status: 0
+    stdout:
+    - "CentOS system"
+  /data/script.sh test:
+    exit-status: 0
+    stdout:
+    - "Not a CentOS system"
 user:
-  newuser:
+  examuser:
     exists: true
-    uid: 3434
-    gid: 0
+    uid: 1800
     groups:
-    - root
-  sshd:
-    exists: true
-    uid: 74
-    gid: 74
-    groups:
-    - sshd
-    home: /var/empty/sshd
-    shell: /sbin/nologin
+    - examgroup
 group:
-  sshd:
+  examgroup:
     exists: true
-    gid: 74
 mount:
-  /data/lv1:
+  /data/fs1:
     exists: true
-    opts:
-    - rw
-    - relatime
-    source: /dev/mapper/student-vol2
+    source:  /dev/mapper/examvg-vol1
+    filesystem: ext4
+  /data/fs2:
+    exists: true
+    source: /dev/mapper/examvg-vol2
     filesystem: xfs
-  /data/lv2:
-    exists: true
-    opts:
-    - rw
-    - relatime
-    source: /dev/mapper/student-vol1
-    filesystem: ext2
-  /mnt/nfs:
-    exists: false

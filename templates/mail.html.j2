@@ -34,6 +34,7 @@ You should configure the system as follows:
     <li><b>file "/data/permissions"</b> is owned by <b>“examuser”</b> user</li>
     <li><b>file "/data/permissions"</b> is owned by <b>“examgroup”</b> group</li>
     <li>User <b>“examuser”</b> is a member of <b>“examgroup”</b></li>
+    <li>User <b>“examuser”</b> has UID <b>“1800”</b></li>
     <li>Only <b>"examuser"</b> has read write access to <b>"/data/permissions"</b></li>
     <li>No any other users are able to read or write to <b>"/data/permissions"</b></li>
 </ul>
@@ -50,11 +51,11 @@ You should configure the system as follows:
                 <li>Size is <b>200M</b>
                 <li>“vol1” is mounted at boot to /data/fs1 as EXT4 filesystem
         </ul>
-    <li>Logical volume named “vol2” exists
+    <li>Logical volume named <b>“vol2”</b> exists
         <ul>
                 <li>“vol2” belongs to the <b>“examvg”</b> volume group
                 <li>Size is <b>300M</b>
-                <li>“vol2” is mounted at boot to <b>/data/fs1</b> as XFS filesystem
+                <li>“vol2” is mounted at boot to <b>/data/fs2</b> as XFS filesystem
         </ul>
 </ul>
 
@@ -81,8 +82,6 @@ Configure your system as NFS server as follows:
 
 </ul>
 
-Note! You are allowed to use any web server software
-
 
 <font color="green"><h1>Task 6 - Script</h1></font>
 
@@ -90,6 +89,7 @@ Create a script with the following requirements:
 
 <ul>
 
+    <li>Script should be placed as /data/script.sh</li>
     <li>It returns <b>“Hello world”</b> if no arguments passed</li>
     <li>It returns <b>“CentOS system”</b> if the first argument is <b>“centos”</b></li>
     <li>It returns <b>“Not a CentOS system”</b> for any other options in the first argument</li>

@@ -18,6 +18,7 @@
 
       - shell: "chmod +x /root/install"
       - shell: "/root/install"
+      - shell: "mkdir -p /mnt1/"
 
       - name: copy main config file
         copy:
