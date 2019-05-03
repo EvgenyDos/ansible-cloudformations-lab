@@ -29,13 +29,14 @@
         ignore_errors: True
         register: resultsoutput
 
-      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
-        ignore_errors: True
+      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
 
       - lineinfile:
-          path: /etc/selinux/config
+          path: /root/results.yml
           regexp: '^ok'
           line: '<font color="green"> ok'
+
+
 
       - name: send an email with results
         mail:
