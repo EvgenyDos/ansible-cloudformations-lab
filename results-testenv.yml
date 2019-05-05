@@ -31,12 +31,12 @@
 
       - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
 
+      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
+
       - lineinfile:
-          path: /root/results.yml
+          path: /root/results-for-mail.yml
           regexp: '^ok'
           line: '<font color="green"> ok'
-
-
 
       - name: send an email with results
         mail:
