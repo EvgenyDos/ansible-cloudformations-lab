@@ -8,8 +8,6 @@
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
 
-      - shell: w
-
       - name: Download installer of goss
         get_url:
           url: "https://goss.rocks/install"
@@ -18,20 +16,21 @@
 
       - shell: "chmod +x /root/install"
       - shell: "/root/install"
-      - shell: "mkdir -p /mnt1/"
+#      - shell: "mkdir -p /mnt1/"
 
       - name: copy main config file
         copy:
           dest: /root/goss.yaml
           src: "files/goss.yaml"
 
-      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
+      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
         ignore_errors: True
         register: resultsoutput
 
-      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
-
-      - command: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
+      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
+        ignore_errors: True
+      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
+        ignore_errors: True
 
       - lineinfile:
           path: /root/results-for-mail.yml

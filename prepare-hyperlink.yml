@@ -34,14 +34,3 @@
           from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
           body: "{{ lookup('template', 'templates/mailhyperlink.html.j2') }}"
-
-
-
-
-      - name: press to link for exam start
-        mail:
-          subject: "youre exam is ready"
-          to: "{{ useremailnotifications }}"
-          from: Li9 Exam <do-not-reply@li9.com>
-          subtype: html
-          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
