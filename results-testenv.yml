@@ -44,9 +44,9 @@
       - shell: /root/goss-results.sh
         ignore_errors: True
 
-      - shell: cat /root/results-for-mail.yml
-        ignore_errors: True
-        register: res
+#      - shell: cat /root/results-for-mail.yml
+#        ignore_errors: True
+#        register: res
 
       - lineinfile:
           path: /root/results-for-mail.yml
