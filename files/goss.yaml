@@ -59,6 +59,7 @@ command:
     - "Not a CentOS system"
   ssh sshuser@localhost id:
     exit-status: 0
+    timeout: 20000
     stdout:
     - groups
     - uid
