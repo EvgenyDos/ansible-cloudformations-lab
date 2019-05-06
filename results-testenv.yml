@@ -45,6 +45,7 @@
         ignore_errors: True
 
       - shell: cat /root/results-for-mail.yml
+        ignore_errors: True
         register: res
 
       - lineinfile:
