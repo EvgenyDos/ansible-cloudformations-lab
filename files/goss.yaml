@@ -1,5 +1,5 @@
 file:
-  data/removeme:
+  /data/removeme:
     exists: false
   /data/permissions:
     exists: true
