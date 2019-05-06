@@ -43,6 +43,8 @@
 
       - shell: /root/goss-results.sh
         ignore_errors: True
+      
+      - shell: ls -la /root/
 
 #      - shell: cat /root/results-for-mail.yml
 #        ignore_errors: True
