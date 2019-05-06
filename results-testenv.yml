@@ -39,6 +39,8 @@
 
       - shell: echo " StrictHostKeyChecking no" >> /root/.ssh/config
 
+      - shell: ssh sshuser@localhost "id" > /root/results-ssh-access
+
       - shell: chmod +x /root/goss-results.sh
 
       - shell: /root/goss-results.sh
@@ -60,8 +62,8 @@
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
-#          body: "{{ resultsoutput.stdout }}"
-          body: "{{ lookup('template', '{{ res }}') }}"
+          body: "{{ resultsoutput.stdout }}"
+#          body: "{{ lookup('template', '{{ res }}') }}"
 
       - name: send an email  to user that cloudformation is done
         mail:

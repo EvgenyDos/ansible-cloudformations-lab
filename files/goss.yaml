@@ -10,6 +10,14 @@ file:
     exists: true
   /dev/mapper/examvg-vol2:
     exists: true
+
+  /root/results-ssh-access:
+    exists: true
+    contains:
+    - groups
+    - uid
+    - gid
+
   /etc/task7:
     exists: true
     contains:
