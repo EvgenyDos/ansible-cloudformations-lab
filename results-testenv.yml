@@ -37,7 +37,7 @@
 #      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
 #        ignore_errors: True
 
-      - shell: echo " StrictHostKeyChecking no" >> ~/.ssh/config
+      - shell: echo " StrictHostKeyChecking no" >> /root/.ssh/config
 
       - shell: chmod +x /root/goss-results.sh
 
