@@ -23,13 +23,23 @@
           dest: /root/goss.yaml
           src: "files/goss.yaml"
 
-      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
-        ignore_errors: True
-        register: resultsoutput
+      - name: copy main config file
+        copy:
+          dest: /root/goss-results.sh
+          src: "files/goss-results.sh"
 
-      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
-        ignore_errors: True
-      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
+#     - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
+#        ignore_errors: True
+#        register: resultsoutput
+
+#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
+#        ignore_errors: True
+#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
+#        ignore_errors: True
+
+      - shell: echo " StrictHostKeyChecking no" >> ~/.ssh/config
+      - shell: chmod +x /root/goss-results.sh
+      - shell: /root/goss-results.sh
         ignore_errors: True
 
       - lineinfile:
