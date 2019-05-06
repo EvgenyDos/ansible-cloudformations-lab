@@ -28,6 +28,11 @@
           dest: /root/goss-results.sh
           src: "files/goss-results.sh"
 
+      - name: copy main config file
+        copy:
+          dest: /root/goss-ssh-results.sh
+          src: "files/goss-ssh-results.sh"
+
 #     - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap"
 #        ignore_errors: True
 #        register: resultsoutput
@@ -37,11 +42,18 @@
 #      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
 #        ignore_errors: True
 
-      - shell: echo " StrictHostKeyChecking no" >> /root/.ssh/config
+#      - shell: echo " StrictHostKeyChecking no" >> /root/.ssh/config
 
-      - shell: ssh sshuser@localhost "id" > /root/results-ssh-access
+#      - shell: /root/goss-ssh-results.sh
+
+#      - shell: ssh sshuser@localhost "id" > /root/results-ssh-access
 
       - shell: chmod +x /root/goss-results.sh
+
+      - shell: chmod +x /root/goss-ssh-results.sh
+
+      - shell: /root/goss-ssh-results.sh
+        ignore_errors: True
 
       - shell: /root/goss-results.sh
         ignore_errors: True
