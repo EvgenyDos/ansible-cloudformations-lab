@@ -38,9 +38,14 @@
 #        ignore_errors: True
 
       - shell: echo " StrictHostKeyChecking no" >> ~/.ssh/config
+
       - shell: chmod +x /root/goss-results.sh
+
       - shell: /root/goss-results.sh
         ignore_errors: True
+
+      - shell: cat /root/results-for-mail.yml
+        register: res
 
       - lineinfile:
           path: /root/results-for-mail.yml
@@ -52,7 +57,8 @@
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
-          body: "{{ resultsoutput.stdout }}"
+#          body: "{{ resultsoutput.stdout }}"
+          body: "{{ lookup('template', '{{ res }}') }}"
 
       - name: send an email  to user that cloudformation is done
         mail:
