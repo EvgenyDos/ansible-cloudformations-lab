@@ -53,7 +53,7 @@
       - shell: chmod +x /root/goss-ssh-results.sh
 
 #      - shell: /root/goss-ssh-results.sh
-        ignore_errors: True
+#        ignore_errors: True
 
       - shell: /root/goss-results.sh
         ignore_errors: True
