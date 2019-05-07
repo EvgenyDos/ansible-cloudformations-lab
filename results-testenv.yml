@@ -73,10 +73,10 @@
         
       - name: send an email with results
         mail:
-        subject: "Test results"
-        to: "{{ adminemailnotifications }}"
-        from: Li9 Demo <do-not-reply@demo.li9.com>
-        body: "{{ resultsoutput.stdout }}"
+          subject: "Test results"
+          to: "{{ adminemailnotifications }}"
+          from: Li9 Demo <do-not-reply@demo.li9.com>
+          body: "{{ resultsoutput.stdout }}"
 #          body: "{{ lookup('template', '{{ res }}') }}"
       
 
