@@ -48,7 +48,8 @@ command:
   exportfs -v|cut -d "(" -f 1|awk '{print $1,$2}':
     exit-status: 1
     stdout:
-    - "/nfs_export <world>"
+    - "world"
+    - "nfs_export"
   rm -rf /nfs_export/testroot && mount localhost:/nfs_export /mnt && touch /mnt/testroot && umount /mnt/:
     exit-status: 0
   rm -rf /nfs_export/testcentos && mount localhost:/nfs_export /mnt && su -c 'touch /mnt/testcentos' centos && umount /mnt/:

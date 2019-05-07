@@ -52,12 +52,10 @@
 
       - shell: chmod +x /root/goss-ssh-results.sh
 
-#      - shell: /root/goss-ssh-results.sh
-#        ignore_errors: True
+      - shell: /root/goss-ssh-results.sh
 
       - shell: /root/goss-results.sh
-        ignore_errors: True
-      
+
       - shell: ls -la /root/
 
 #      - shell: cat /root/results-for-mail.yml
@@ -65,9 +63,22 @@
 #        register: res
 
       - lineinfile:
-          path: /root/results-for-mail.yml
+          path: /root/results-for-mail.txt
           regexp: '^ok'
           line: '<font color="green"> ok'
+
+      - shell: cat /root/results-for-mail.txt
+        ignore_errors: True
+        register: bodymailreport
+        
+      - name: send an email with results
+        mail:
+        subject: "Test results"
+        to: "{{ adminemailnotifications }}"
+        from: Li9 Demo <do-not-reply@demo.li9.com>
+        body: "{{ resultsoutput.stdout }}"
+#          body: "{{ lookup('template', '{{ res }}') }}"
+      
 
       - name: send an email with results
         mail:
