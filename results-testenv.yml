@@ -8,10 +8,10 @@
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
 
-       - shell: usermod -s /sbin/nologin {{ studentname }}
+      - shell: usermod -s /sbin/nologin {{ studentname }}
 
-       - name: Reboot immediately.
-         shell: "reboot"
+      - name: Reboot immediately.
+        shell: "reboot"
 
       - name: Wait until SSH is available
         wait_for:
