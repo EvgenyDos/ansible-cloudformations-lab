@@ -19,6 +19,8 @@
           port: 22
           delay: 30
           timeout: 320
+        async: 0
+        poll: 0 
         connection: local
 
       - name: Download installer of goss
