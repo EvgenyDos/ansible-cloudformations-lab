@@ -30,7 +30,7 @@
           group: root
 
       - name: just create a file
-        shell: "touch /data/removeme"
+        shell: touch /data/removeme
 
       - name: create file with chattr +i
         shell: chattr +i /data/removeme
