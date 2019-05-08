@@ -15,7 +15,7 @@
 
       - name: Wait until SSH is available
         wait_for:
-#          host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+          host: "{{ vmhostip }}"
           port: 22
           delay: 30
           timeout: 320
