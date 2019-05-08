@@ -11,7 +11,7 @@
       - shell: usermod -s /sbin/nologin {{ studentname }}
 
       - name: Reboot immediately.
-        shell: "reboot"
+        shell: "sleep 10 && reboot"
 
       - name: Wait until SSH is available
         wait_for:
