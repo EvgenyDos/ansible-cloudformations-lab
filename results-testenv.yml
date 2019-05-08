@@ -8,13 +8,15 @@
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
 
+       - shell: usermod -s /sbin/nologin {{ studentname }}
+
        - name: Reboot immediately.
          shell: "sleep 5 && reboot"
          async: 1
          poll: 0
 
       - name: Wait for the reboot to complete if there was a change.
-          wait_for_connection:
+        wait_for_connection:
           connect_timeout: 20
           sleep: 5
           delay: 5
