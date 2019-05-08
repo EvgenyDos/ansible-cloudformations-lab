@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Content-type: text/plain"
 echo
-curl -s -k -X POST -u admin:Li9P@ssw0rd -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"{{ useremailnotifications }}\", \"adminemailnotifications\": \"{{ adminemailnotifications }}\", \"studentname\": \"{{ studentname }}\", \"studentpwd\": \"{{ studentpwd }}\", \"instancetype\": \"{{ instancetype }}\", \"examtime\": \"{{ examtime }}\"}" }' 'https://tower.demo.li9.com/api/v2/workflow_job_templates/26/launch/' > /dev/null 2>&1
+curl -s -k -X POST -u admin:Li9P@ssw0rd -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"{{ useremailnotifications }}\", \"adminemailnotifications\": \"{{ adminemailnotifications }}\", \"studentname\": \"{{ studentname }}\", \"studentpwd\": \"{{ studentpwd }}\", \"instancetype\": \"{{ instancetype }}\", \"waittimebeforedestroy\": \"{{ waittimebeforedestroy }}\",  \"examtime\": \"{{ examtime }}\"}" }' 'https://tower.demo.li9.com/api/v2/workflow_job_templates/26/launch/' > /dev/null 2>&1
 
 echo "Your test environment has been started for provision"
 
