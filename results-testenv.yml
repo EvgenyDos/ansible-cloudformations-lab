@@ -10,16 +10,18 @@
 
       - shell: usermod -s /sbin/nologin {{ studentname }}
 
-      - name: Reboot immediately.
-        shell: "sleep 10 && reboot"
-        async: 1
-        poll: 0
+      - reboot:
 
-      - name: Wait for the server to finish rebooting
-        wait_for_connection:
-          delay: 15
-          sleep: 15
-          timeout: 300
+#      - name: Reboot immediately.
+#        shell: "sleep 10 && reboot"
+#        async: 1
+#        poll: 0
+
+#      - name: Wait for the server to finish rebooting
+#        wait_for_connection:
+#          delay: 15
+#          sleep: 15
+#          timeout: 300
 
 #      - name: Wait until SSH is available
 #        wait_for:
