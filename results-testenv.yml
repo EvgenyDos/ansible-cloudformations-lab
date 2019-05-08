@@ -20,7 +20,6 @@
           delay: 30
           timeout: 320
           state: started
-        delegate_to: localhost
 
       - name: Download installer of goss
         get_url:
