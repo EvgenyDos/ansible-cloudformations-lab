@@ -73,4 +73,3 @@
           from: Li9 Exam <do-not-reply@li9.com>
           subtype: html
           body: "{{ lookup('template', 'templates/mail.html.j2') }}"
-          
