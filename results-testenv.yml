@@ -71,7 +71,7 @@
         mail:
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Exam <do-not-reply@li9.com>
           body: "{{ resultsoutput.stdout }}"
 #          body: "{{ lookup('template', '{{ res }}') }}"
       
@@ -80,14 +80,14 @@
         mail:
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Exam <do-not-reply@li9.com>
           body: "{{ bodymailreport.stdout }}"
 
       - name: send an email  to user that cloudformation is done
         mail:
-          subject: "Your Test environment is ready"
+          subject: "Your exam-time has been ended."
           to: "{{ useremailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Test <do-not-reply@li9.com>
           body: |
             Your exam-time has been ended.
             We will check the results of exam and contact with you soon.

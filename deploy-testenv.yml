@@ -8,7 +8,7 @@
         mail:
          subject: "Deploy of test environment has been ordered"
          to: "{{ adminemailnotifications }}"
-         from: Li9 Demo <do-not-reply@demo.li9.com>
+         from: Li9 Exam <do-not-reply@li9.com>
          body: |
           Li9 Demo system will be deployed
           It will take ~ 10 mins
@@ -110,7 +110,7 @@
         mail:
           subject: "Test environment is almost ready"
           to: "{{ adminemailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Exam <do-not-reply@li9.com>
           body: |
             Test-Server has been successfully provisioned.
             Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"

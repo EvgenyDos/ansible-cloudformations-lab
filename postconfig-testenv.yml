@@ -63,7 +63,7 @@
         mail: 
           subject: "Postconfigurations has been done"
           to: "{{ adminemailnotifications }}"
-          from: Li9 Demo <do-not-reply@demo.li9.com>
+          from: Li9 Exam <do-not-reply@li9.com>
           body: 'Test-VM is redy for exam.'
 
       - name: press to link for exam start
