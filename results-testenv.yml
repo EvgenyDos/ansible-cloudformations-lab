@@ -11,15 +11,16 @@
        - shell: usermod -s /sbin/nologin {{ studentname }}
 
        - name: Reboot immediately.
-         shell: "sleep 5 && reboot"
-         async: 1
+         shell: "reboot"
 
-      - name: Wait for the reboot to complete if there was a change.
-        wait_for_connection:
-          connect_timeout: 20
-          sleep: 5
-          delay: 5
-          timeout: 300
+      - name: Wait until SSH is available
+        wait_for:
+#          host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+          port: 22
+          delay: 30
+          timeout: 320
+          state: started
+        delegate_to: localhost
 
       - name: Download installer of goss
         get_url:
