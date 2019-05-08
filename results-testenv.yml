@@ -15,15 +15,20 @@
         async: 1
         poll: 0
 
-      - name: Wait until SSH is available
-        wait_for:
-          host: '{{ vmhostip }}'
-          port: 22
-          delay: 30
-          state: started
-          timeout: 320
-        delegate_to: localhost
-#        connection: local
+      - name: Wait for the server to finish rebooting
+        wait_for_connection:
+          delay: 15
+          sleep: 15
+          timeout: 300
+
+#      - name: Wait until SSH is available
+#        wait_for:
+#          host: '{{ vmhostip }}'
+#          port: 22
+#          delay: 30
+#          state: started
+#          timeout: 320
+#        delegate_to: localhost
 
       - name: Download installer of goss
         get_url:
