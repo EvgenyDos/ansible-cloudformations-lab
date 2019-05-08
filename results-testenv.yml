@@ -12,6 +12,8 @@
 
       - name: Reboot immediately.
         shell: "sleep 10 && reboot"
+        async: 1
+        poll: 0
 
       - name: Wait until SSH is available
         wait_for:
@@ -19,8 +21,6 @@
           port: 22
           delay: 30
           timeout: 320
-        async: 0
-        poll: 0 
         connection: local
 
       - name: Download installer of goss
