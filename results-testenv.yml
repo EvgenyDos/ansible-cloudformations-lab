@@ -90,12 +90,12 @@
         ignore_errors: True
         register: bodymailreport
         
-      - name: send an email with results
-        mail:
-          subject: "Test results"
-          to: "{{ adminemailnotifications }}"
-          from: Li9 Exam <do-not-reply@li9.com>
-          body: "{{ resultsoutput.stdout }}"
+#      - name: send an email with results
+#        mail:
+#          subject: "Test results"
+#          to: "{{ adminemailnotifications }}"
+#          from: Li9 Exam <do-not-reply@li9.com>
+#          body: "{{ resultsoutput.stdout }}"
 #          body: "{{ lookup('template', '{{ res }}') }}"
       
 
