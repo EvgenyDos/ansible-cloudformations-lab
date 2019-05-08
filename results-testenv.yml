@@ -19,7 +19,6 @@
           port: 22
           delay: 30
           timeout: 320
-          state: started
 
       - name: Download installer of goss
         get_url:
