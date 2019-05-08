@@ -56,16 +56,12 @@
 
       - shell: /root/goss-results.sh
 
-      - shell: ls -la /root/
+#      - shell: ls -la /root/
 
-#      - shell: cat /root/results-for-mail.yml
-#        ignore_errors: True
-#        register: res
-
-      - lineinfile:
-          path: /root/results-for-mail.txt
-          regexp: '^ok'
-          line: '<font color="green"> ok'
+#      - lineinfile:
+#          path: /root/results-for-mail.txt
+#          regexp: '^ok'
+#          line: '<font color="green"> ok'
 
       - shell: cat /root/results-for-mail.txt
         ignore_errors: True
@@ -85,8 +81,7 @@
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
           from: Li9 Demo <do-not-reply@demo.li9.com>
-          body: "{{ resultsoutput.stdout }}"
-#          body: "{{ lookup('template', '{{ res }}') }}"
+          body: "{{ bodymailreport.stdout }}"
 
       - name: send an email  to user that cloudformation is done
         mail:
