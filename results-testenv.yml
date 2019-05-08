@@ -15,10 +15,11 @@
 
       - name: Wait until SSH is available
         wait_for:
-          host: "{{ vmhostip }}"
+          host: '{{ vmhostip }}'
           port: 22
           delay: 30
           timeout: 320
+        connection: local
 
       - name: Download installer of goss
         get_url:
