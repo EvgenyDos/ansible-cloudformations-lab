@@ -26,15 +26,15 @@ file:
     - omabcastltkm
 command:
   lvs -o vg_extent_size,vg_name|grep examvg|awk '{print $1}'|uniq:
-    exit-status: 1
+    exit-status: 0
     stdout:
     - "2.00m"
   lvs -o lv_size /dev/mapper/examvg-vol1 --noheadings|awk '{print $1}':
-    exit-status: 1
+    exit-status: 0
     stdout:
     - "200.00m"
   lvs -o lv_size /dev/mapper/examvg-vol2 --noheadings|awk '{print $1}':
-    exit-status: 1
+    exit-status: 0
     stdout:
     - "300.00m"
   curl localhost:80:
@@ -46,7 +46,7 @@ command:
     stdout:
     - "Li9 exam task 3"
   exportfs -v|cut -d "(" -f 1|awk '{print $1,$2}':
-    exit-status: 1
+    exit-status: 0
     stdout:
     - "world"
     - "nfs_export"
@@ -66,13 +66,6 @@ command:
     exit-status: 0
     stdout:
     - "Not a CentOS system"
-#  ssh sshuser@localhost id:
-#    exit-status: 0
-#    timeout: 20000
-#    stdout:
-#    - groups
-#    - uid
-#    - gid
 user:
   examuser:
     exists: true
