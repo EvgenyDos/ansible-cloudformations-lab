@@ -63,7 +63,7 @@
 #          regexp: '^ok'
 #          line: '<font color="green"> ok'
 
-      - shell: cat /root/results-for-mail.txt
+      - shell: cat /root/results.txt
         ignore_errors: True
         register: bodymailreport
         
