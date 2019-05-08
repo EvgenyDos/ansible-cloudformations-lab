@@ -12,3 +12,12 @@ studentname: indianman
 studentpwd: JHGJHGFJKHGpassword
 useremailnotifications: evgenii.dos@li9.com
 waittime: 11
+
+
+timetolivehyperlink: 604800
+adminemailnotifications: evgenii.dos@li9.com
+studentname: student
+studentpwd: KjjhVJHkKKggh76Jbv
+instancetype: t2.small
+examtime: 3600
+waittimebeforedestroy: 0
