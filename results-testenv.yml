@@ -20,8 +20,10 @@
           host: '{{ vmhostip }}'
           port: 22
           delay: 30
+          state: started
           timeout: 320
-        connection: local
+        delegate_to: localhost
+#        connection: local
 
       - name: Download installer of goss
         get_url:
