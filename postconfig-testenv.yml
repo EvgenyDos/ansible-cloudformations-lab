@@ -29,8 +29,12 @@
           owner: root
           group: root
 
-      - name: just create a file
-        shell: touch /data/removeme
+      - name: creating /data/removeme
+        file:
+          state: touch
+          path: /data/removeme
+          state: touch
+          mode: "u+rwx,g+rwx,o+rwx"
 
       - name: create file with chattr +i
         shell: chattr +i /data/removeme
