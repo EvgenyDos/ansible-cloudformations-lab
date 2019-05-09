@@ -72,13 +72,14 @@ You should configure the system as follows:
 </ul>
 
 Note! This task may require to look for a free block device which is already attached to the exam  system.
+Do not use any used block devices.
 
 <font color="green"><h1>Task 4 - Web server</h1></font>
-Configure the exam system as an HTTP  web server as follows:
+Configure on the exam system an HTTP service as follows:
 
 <ul>
         <li>Service listens on <b>80</b> and <b>8080</b> ports </li>
-        <li>Commands “curl localhost”  and “curl localhost:8080” return <b>“Li9 exam task 3”</b>.</li>
+        <li>Commands “curl localhost”  and “curl localhost:8080” return <b>“Li9 exam task 4”</b>.</li>
 </ul>
 
 Note! You are allowed to use any web server software
@@ -89,19 +90,18 @@ Configure your system as NFS server as follows:
 <ul>
 
     <li>NFS service exports <b>"/nfs_export"</b> for anyone</li>
-    <li><b>"/nfs_export"</b> is exported in RW mode</li>
-    <li>Any NFS user should have RW access to the share</li>
+    <li><b>"/nfs_export"</b> is exported in Read-Write mode</li>
+    <li>Any NFS user should have Read-Write access to the share</li>
 
 </ul>
 
 
 <font color="green"><h1>Task 6 - Script</h1></font>
 
-Create a script with the following requirements:
+Create a script /data/script.sh with the following requirements:
 
 <ul>
 
-    <li>Script should be placed as /data/script.sh</li>
     <li>It returns <b>“Hello world”</b> if no arguments passed</li>
     <li>It returns <b>“CentOS system”</b> if the first argument is <b>“centos”</b></li>
     <li>It returns <b>“Not a CentOS system”</b> for any other options in the first argument</li>
@@ -112,12 +112,12 @@ Create a script with the following requirements:
 Note! You are allowed to use any programming language
 
 <font color="green"><h1>Task 7 - Text</h1></font>
-Create a new file named <b>/etc/task7</b>. The file should contain all lines with <b>“abc”</b> string  from <b>/etc/services</b>
+Create a new file named <b>/etc/task7</b>. The file should contain all lines which contain the <b>“abc”</b> substring from <b>/etc/services</b>
 
 
 <font color="green"><h1>Task 8 - Passwordless ssh access</h1></font>
-Configure your system to allow passwordless access from a new user named <b>“sshuser”</b> to <b>“examuser”</b>.
-Note! The following command under user “root” should work fine <b>“ssh sshuser@localhost id” </b> without any password. You can create any password for sshuser.
+Configure your system to allow passwordless access for the local root user to do ssh as <b>“sshuser@localhost”</b>.
+Note! Use the following command for checking <b>“ssh sshuser@localhost id” </b>. You can use any password for sshuser.
 '
 
 </html>

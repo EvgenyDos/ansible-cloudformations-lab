@@ -40,11 +40,11 @@ command:
   curl localhost:80:
     exit-status: 0
     stdout:
-    - "Li9 exam task 3"
+    - "Li9 exam task 4"
   curl localhost:8080:
     exit-status: 0
     stdout:
-    - "Li9 exam task 3"
+    - "Li9 exam task 4"
   exportfs -v|cut -d "(" -f 1|awk '{print $1,$2}':
     exit-status: 0
     stdout:
