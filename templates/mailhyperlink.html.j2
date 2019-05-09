@@ -1,3 +1,30 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Li9 Test system environment</title>
+  <meta name="description" content="Li9 Test system">
+  <meta name="author" content="DOS EVGENII">
+
+</head>
+
+<font color="red"><h1>Before you begin</h1></font>
+
+You need to be aware of the following rules:
+<ul>
+    
+        <li>All task results will be validates after system reboot</li>
+        <li>All tasks will be validated using SSH via centos user. Do not make any changes in /home/centos/.ssh/ authorized_key file</li>
+        <li>You are not allowed to change any network settings like routes, ip addresses, firewall settings</li>
+        <li>You are not allowed to change SELinux state from “enforcing”</li>
+
+</ul>
+
+<font color="red"><h1>Your credentials to access the Test-Server you can see bellow:</h1></font>
+
+
 you have to press that link to exam start
 Your exam environment link will be auto-destroyed in "{{ timetolivehyperlink }}" seconds.
 Your system will be auto-destroyed in 1 hour after start (press link).
