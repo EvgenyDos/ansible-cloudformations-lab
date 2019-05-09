@@ -4,14 +4,14 @@
     connection: local
     tasks:
 
-      - name: send email that service is ordered
-        mail:
-         subject: "Deploy of test environment has been ordered by {{ studentname }}"
-         to: "{{ adminemailnotifications }}"
-         from: Li9 Exam <do-not-reply@li9.com>
-         body: |
-          Li9 Demo system will be deployed for "{{ studentname }}"
-          It will take ~ 10 mins
+#      - name: send email that service is ordered
+#        mail:
+#         subject: "Deploy of test environment has been ordered by {{ studentname }}"
+#         to: "{{ adminemailnotifications }}"
+#         from: Li9 Exam <do-not-reply@li9.com>
+#         body: |
+#          Li9 Demo system will be deployed for "{{ studentname }}"
+#          It will take ~ 10 mins
 
       - name: Deploy Dos ansible cloudformation stack
         cloudformation:
