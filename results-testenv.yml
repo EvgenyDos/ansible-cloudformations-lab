@@ -116,10 +116,10 @@
             We will check the results of exam and contact with you soon.
             Thanks for your time and have a nice day.
 
-      - name: remove tower_host from our VM inventory
-        tower_host:
-          description: "remove VM ip from inventory"
-          name:  "{{ vmhostip }}"
-          inventory: "{{ playbookvminventoryname }}"
-          tower_verify_ssl: no
-          state: absent
+#      - name: remove tower_host from our VM inventory
+#        tower_host:
+#          description: "remove VM ip from inventory"
+#          name:  "{{ vmhostip }}"
+#          inventory: "{{ playbookvminventoryname }}"
+#          tower_verify_ssl: no
+#          state: absent
