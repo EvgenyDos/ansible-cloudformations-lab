@@ -15,11 +15,10 @@
       - debug:
           msg: vmhostip is "{{ vmhostip }}" 
 
-      - name: remove tower_host from our VM inventory
-        tower_host:
-          description: "remove VM ip from inventory"
-          name:  "{{ vmhostip }}"
-#          name: localhost
-          inventory: "{{ playbookvminventoryname }}"
-          tower_verify_ssl: no
-          state: absent
+#      - name: remove tower_host from our VM inventory
+#        tower_host:
+#          description: "remove VM ip from inventory"
+#          name:  "{{ vmhostip }}"
+#          inventory: "{{ playbookvminventoryname }}"
+#          tower_verify_ssl: no
+#          state: absent
