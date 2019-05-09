@@ -59,12 +59,12 @@
           name: docker
           state: restarted
 
-      - name: send an email with results
-        mail: 
-          subject: "Postconfigurations has been done"
-          to: "{{ adminemailnotifications }}"
-          from: Li9 Exam <do-not-reply@li9.com>
-          body: 'Test-VM is redy for exam.'
+#      - name: send an email with results
+#        mail: 
+#          subject: "Postconfigurations has been done"
+#          to: "{{ adminemailnotifications }}"
+#          from: Li9 Exam <do-not-reply@li9.com>
+#          body: 'Test-VM is redy for exam.'
 
       - name: press to link for exam start
         mail:
