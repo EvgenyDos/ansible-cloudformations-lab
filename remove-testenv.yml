@@ -16,7 +16,8 @@
       - name: remove tower_host from our VM inventory
         tower_host:
           description: "remove VM ip from inventory"
-          name:  "{{ vmhostip }}"
+#          name:  "{{ vmhostip }}"
+          name: localhost
           inventory: "{{ playbookvminventoryname }}"
           tower_verify_ssl: no
           state: absent
