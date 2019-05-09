@@ -12,5 +12,11 @@
           state: "absent"
           region: "{{ region_name }}"
           disable_rollback: true
-#          aws_access_key: "{{ aws_access_key }}"
-#          aws_secret_key: "{{ aws_secret_key }}"
+
+      - name: remove tower_host from our VM inventory
+        tower_host:
+          description: "remove VM ip from inventory"
+          name:  "{{ vmhostip }}"
+          inventory: "{{ playbookvminventoryname }}"
+          tower_verify_ssl: no
+          state: absent
