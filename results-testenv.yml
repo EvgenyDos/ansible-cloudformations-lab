@@ -123,7 +123,3 @@
 #          inventory: "{{ playbookvminventoryname }}"
 #          tower_verify_ssl: no
 #          state: absent
-
-      - name: sleep for "{{ waittimebeforedestroy }}" seconds and continue with play
-        wait_for: timeout="{{ waittimebeforedestroy }}"
-        delegate_to: localhost
