@@ -12,12 +12,12 @@
         include_vars:
           file: "files/api"
 
-      - debug:
-          msg: login = {{ apilogin }}
-      - debug:
-          msg: password = {{ apipassword }}
-      - debug:
-          msg: link = {{ apilink }}
+#      - debug:
+#          msg: login = {{ apilogin }}
+#      - debug:
+#          msg: password = {{ apipassword }}
+#      - debug:
+#          msg: link = {{ apilink }}
 
       - name: just create a file
         template:
@@ -27,13 +27,13 @@
           mode: '0755'
           src: "templates/cgi-bin.j2"
 
-      - debug:
-          msg: "useremailnotifications={{  useremailnotifications  }}"
+#      - debug:
+#          msg: "useremailnotifications={{  useremailnotifications  }}"
 
-      - name: "save hyperlinkname for remove later"
-        set_stats:
-          data:
-            removehyperlinkfromtower: "{{ rondomname }}"
+#      - name: "save hyperlinkname for remove later"
+#        set_stats:
+#          data:
+#            removehyperlinkfromtower: "{{ rondomname }}"
 
       - name: press to link for exam start
         mail:
