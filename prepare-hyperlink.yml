@@ -17,7 +17,7 @@
       - debug:
           msg: password = {{ apipassword }}
       - debug:
-          msg: link {{ apilink }}
+          msg: link = {{ apilink }}
 
       - name: just create a file
         template:
