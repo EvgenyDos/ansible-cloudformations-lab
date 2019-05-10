@@ -29,9 +29,9 @@
           file: "files/api"
 
       - debug:
-          msg: apilogin
-          msg: apipassword
-          msg: apilink
+          msg: login = "{{ apilogin }}"
+          msg: password = "{{ apipassword }}"
+          msg: link "{{ apilink }}"
 
       - name: press to link for exam start
         mail:
