@@ -1,9 +1,6 @@
 ---
 - hosts: localhost
-#  connection: local
-#  become_user: apache
   gather_facts: false
-#  become_method: su
   tasks:
 
       - shell: "whoami && w"
@@ -26,6 +23,15 @@
         set_stats:
           data:
             removehyperlinkfromtower: "{{ rondomname }}"
+
+      - name: import login-password from vault file
+        include_vars:
+          file: "files/api"
+
+      - debug:
+          msg: apilogin
+          msg: apipassword
+          msg: apilink
 
       - name: press to link for exam start
         mail:
