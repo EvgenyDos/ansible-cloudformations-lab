@@ -124,6 +124,11 @@
 #          tower_verify_ssl: no
 #          state: absent
 
+  - name:
+    hosts: localhost
+    connection: local
+    tasks:
+
       - name: sleep for "{{ waittimebeforedestroy }}" seconds and continue with play
         wait_for: timeout="{{ waittimebeforedestroy }}"
         delegate_to: localhost
