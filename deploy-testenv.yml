@@ -105,15 +105,15 @@
           state: started
         delegate_to: localhost
 
-      - name: send an email with results of cloudformations provision
-        mail:
-          subject: "Test environment is almost ready"
-          to: "{{ adminemailnotifications }}"
-          from: Li9 Exam <do-not-reply@li9.com>
-          body: |
-            Test-Server has been successfully provisioned.
-            Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-            The postconfigurations of Test-Server has been started ...
+#      - name: send an email with results of cloudformations provision
+#        mail:
+#          subject: "Test environment is almost ready"
+#          to: "{{ adminemailnotifications }}"
+#          from: Li9 Exam <do-not-reply@li9.com>
+#          body: |
+#            Test-Server has been successfully provisioned.
+#            Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+#            The postconfigurations of Test-Server has been started ...
 
 #      - name: sleep for "{{ sleeptime }}" seconds and continue with play
 #        wait_for: timeout="{{ sleeptime }}"

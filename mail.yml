@@ -11,5 +11,5 @@
           port: 25
           subject: "Test environment is almost ready"
           to: "{{ emailnotifications }}"
-          from: Li9 Exam <do-not-reply@li9.com>
+#          from: Li9 Exam <do-not-reply@li9.com>
           body: 'System has been successfully provisioned.'
