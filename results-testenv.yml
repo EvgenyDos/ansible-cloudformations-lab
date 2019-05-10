@@ -56,9 +56,9 @@
           dest: /root/goss-ssh-results.sh
           src: "files/goss-ssh-results.sh"
 
-      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --max-concurrent 1 --format tap"
-        ignore_errors: True
-        register: resultsoutput
+#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --max-concurrent 1 --format tap"
+#        ignore_errors: True
+#        register: resultsoutput
 
 #      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
 #        ignore_errors: True
