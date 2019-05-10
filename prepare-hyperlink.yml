@@ -40,6 +40,7 @@
           subject: "youre exam environment almost ready"
           to: "{{ useremailnotifications }}"
 #          from: Li9 Exam <do-not-reply@li9.com>
+          from: "{{ adminemailnotifications }}"
           subtype: html
           body: "{{ lookup('template', 'templates/mailhyperlink.html.j2') }}"
 
