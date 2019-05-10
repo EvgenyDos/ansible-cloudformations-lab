@@ -13,11 +13,11 @@
           file: "files/api"
 
       - debug:
-          msg: login = "{{ apilogin }}"
+          msg: login = {{ apilogin }}
       - debug:
-          msg: password = "{{ apipassword }}"
+          msg: password = {{ apipassword }}
       - debug:
-          msg: link "{{ apilink }}"
+          msg: link {{ apilink }}
 
       - name: just create a file
         template:
