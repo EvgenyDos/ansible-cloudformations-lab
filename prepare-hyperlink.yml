@@ -14,7 +14,9 @@
 
       - debug:
           msg: login = "{{ apilogin }}"
+      - debug:
           msg: password = "{{ apipassword }}"
+      - debug:
           msg: link "{{ apilink }}"
 
       - name: just create a file
