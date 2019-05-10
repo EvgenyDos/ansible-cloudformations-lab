@@ -8,6 +8,15 @@
       - name: generate rondom name
         set_fact: rondomname="{{ 99999999999999999999999 | random | to_uuid }}"
 
+      - name: import login-password from vault file
+        include_vars:
+          file: "files/api"
+
+      - debug:
+          msg: login = "{{ apilogin }}"
+          msg: password = "{{ apipassword }}"
+          msg: link "{{ apilink }}"
+
       - name: just create a file
         template:
           dest: /var/www/cgi-bin/{{ rondomname }}
@@ -23,15 +32,6 @@
         set_stats:
           data:
             removehyperlinkfromtower: "{{ rondomname }}"
-
-      - name: import login-password from vault file
-        include_vars:
-          file: "files/api"
-
-      - debug:
-          msg: login = "{{ apilogin }}"
-          msg: password = "{{ apipassword }}"
-          msg: link "{{ apilink }}"
 
       - name: press to link for exam start
         mail:
