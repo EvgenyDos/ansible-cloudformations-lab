@@ -134,5 +134,5 @@
 #        wait_for: timeout="{{ waittimebeforedestroy }}"
 #        delegate_to: localhost
 
-      - name: Reboot immediately.
+      - name: Time for troubleshooting before full destroy
         shell: "sleep {{ waittimebeforedestroy }}"
