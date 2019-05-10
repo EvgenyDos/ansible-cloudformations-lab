@@ -131,6 +131,9 @@
     connection: local
     tasks:
 
-      - name: sleep for "{{ waittimebeforedestroy }}" seconds and continue with play
-        wait_for: timeout="{{ waittimebeforedestroy }}"
-        delegate_to: localhost
+#      - name: sleep for "{{ waittimebeforedestroy }}" seconds and continue with play
+#        wait_for: timeout="{{ waittimebeforedestroy }}"
+#        delegate_to: localhost
+
+      - name: Reboot immediately.
+        shell: "sleep {{ waittimebeforedestroy }}"
