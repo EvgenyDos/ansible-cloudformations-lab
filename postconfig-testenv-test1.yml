@@ -85,3 +85,17 @@
           subtype: html
           body: "{{ lookup('template', 'templates/mail.html.j2') }}"
         when: testname == "linux"
+
+#### install ang configure asciinema recorder
+
+      - name: Install a list of packages
+        yum:
+          packages:
+             - epel-release
+        when: testname == "linux"
+
+      - name: Install a list of packages
+        yum:
+          packages:
+             - asciinema
+        when: testname == "linux"
