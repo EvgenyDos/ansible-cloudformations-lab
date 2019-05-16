@@ -88,14 +88,14 @@
 
 #### install ang configure asciinema recorder
 
-      - name: Install a list of packages
+      - name: Install epel packag
         yum:
-          packages:
-             - epel-release
+          name: epel-release
+          state: latest
         when: testname == "linux"
 
-      - name: Install a list of packages
+      - name: Install a asciinema package
         yum:
-          packages:
-             - asciinema
+          name: asciinema
+          state: latest
         when: testname == "linux"
