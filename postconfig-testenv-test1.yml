@@ -100,11 +100,11 @@
           state: latest
         when: testname == "linux"
 
-      - name: copy main config file
-        copy:
-          dest: /root/.config/asciinema/config
-          src: "templates/asciinema.config"
-        when: testname == "linux"
+#      - name: copy main config file
+#        copy:
+#          dest: /root/.config/asciinema/config
+#          src: "templates/asciinema.config"
+#        when: testname == "linux"
 
 #      - name: add lines into bash_profile
 #        lineinfile:
