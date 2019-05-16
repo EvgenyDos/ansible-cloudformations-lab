@@ -106,8 +106,8 @@
           src: "templates/asciinema.config"
         when: testname == "linux"
 
-      - name: add lines into bash_profile
-        lineinfile:
-         dest: /root/.bash_profile
-         line: 'asciinema rec -y -q -t "emailofuser@com.com"'
-        when: testname == "linux"
+#      - name: add lines into bash_profile
+#        lineinfile:
+#         dest: /root/.bash_profile
+#         line: 'asciinema rec -y -q -t "emailofuser@com.com"'
+#        when: testname == "linux"
