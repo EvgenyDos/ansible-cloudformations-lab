@@ -6,21 +6,25 @@
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }}"
+        when: testname == "ansible"
 
       - name: Ensure SSH warning banner is configured
         copy:
           dest: "/etc/issue.net"
           src: "files/issue.net"
+        when: testname == "ansible"
 
       - name: add lines
         lineinfile:
          dest: /etc/ssh/sshd_config
          line: 'Banner /etc/issue.net'
+        when: testname == "ansible"
 
       - name: restart sshd
         service:
           name: sshd
           state: restarted
+        when: testname == "ansible"
 
       - name: list of commands for prepare tests
         file:
@@ -28,6 +32,7 @@
           path: /data
           owner: root
           group: root
+        when: testname == "ansible"
 
       - name: creating /data/removeme
         file:
@@ -35,12 +40,15 @@
           path: /data/removeme
           state: touch
           mode: "u+rwx,g+rwx,o+rwx"
+        when: testname == "ansible"
 
       - name: create file with chattr +i
         shell: chattr +i /data/removeme
+        when: testname == "ansible"
   
       - name: enable additional repo for docker
         shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+        when: testname == "ansible"
 
       - name: Install a list of packages
         yum:
@@ -53,11 +61,13 @@
 #             - docker-ce
 #             - docker-ce-cli
 #             - containerd.io
+        when: testname == "ansible"
 
       - name: restart sshd
         service:
           name: docker
           state: restarted
+        when: testname == "ansible"
 
 #      - name: send an email with results
 #        mail: 
@@ -74,5 +84,4 @@
           from: "{{ adminemailnotifications }}"
           subtype: html
           body: "{{ lookup('template', 'templates/mail.html.j2') }}"
-
-    when: testname == "ansible"
+        when: testname == "ansible"
