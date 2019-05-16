@@ -74,3 +74,6 @@
           from: "{{ adminemailnotifications }}"
           subtype: html
           body: "{{ lookup('template', 'templates/mail.html.j2') }}"
+
+
+    when: testname == "linux"
