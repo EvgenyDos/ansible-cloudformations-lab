@@ -1,7 +1,7 @@
 ---
   - name:
     hosts: "{{ vmhostip }}"
-    gather_facts: true
+    gather_facts: false
     tasks:
 #        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
 #      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
