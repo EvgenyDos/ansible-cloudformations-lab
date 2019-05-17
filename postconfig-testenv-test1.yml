@@ -122,8 +122,11 @@
           src: "templates/asciinema.config"
         when: testname == "linux"
 
-#      - name: add lines into bash_profile
-#        lineinfile:
-#         dest: /root/.bash_profile
-#         line: 'asciinema rec -y -q -t "emailofuser@com.com"'
-#        when: testname == "linux"
+      - name: add lines into bash_profile
+        lineinfile:
+          dest: /home/student/.bashrc
+          line: '{{ item }}'
+        with_items:
+          - 'export LC_ALL=en_US.UTF-8'
+          - 'if [[ -z $ASCIINEMA_REC ]]; then asciinema rec -q -y -t {{ useremailnotifications }}; fi'
+        when: testname == "linux"
