@@ -100,11 +100,27 @@
           state: latest
         when: testname == "linux"
 
-#      - name: copy main config file
-#        copy:
-#          dest: /root/.config/asciinema/config
-#          src: "templates/asciinema.config"
-#        when: testname == "linux"
+      - name: create config dir
+        shell: asciinema -h
+        when: testname == "linux"
+
+      - name: create config dir for student
+        shell: su - student -c "asciinema -h"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/.config/asciinema/config
+          src: "templates/asciinema.config"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          owner: student
+          group: root
+          dest: /home/student/.config/asciinema/config
+          src: "templates/asciinema.config"
+        when: testname == "linux"
 
 #      - name: add lines into bash_profile
 #        lineinfile:
