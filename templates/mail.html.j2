@@ -30,7 +30,7 @@ You need to be aware of the following rules:
     <li>Test-Server IP is "{{ vmhostip }}"</li>
     <li>SSH username: "{{ studentname }}"</li>
     <li>SSH password: "{{ studentpwd }}"</li>
-    <li>ROOT access via "su -" with your password</li>
+    <li>ROOT access via "sudo su -" without password</li>
     <li>Your system will be auto-destroyed in "{{ examtime }}" seconds.</li>
 
 </ul>
@@ -45,6 +45,7 @@ You should configure the system as follows:
     <li><b>file "/data/permissions"</b> exists</li>
     <li><b>file "/data/permissions"</b> is owned by <b>“examuser”</b> user</li>
     <li><b>file "/data/permissions"</b> is owned by <b>“examgroup”</b> group</li>
+    <li><b>file "/data/permissions"</b> should not be executable</li>
     <li>User <b>“examuser”</b> is a member of <b>“examgroup”</b></li>
     <li>User <b>“examuser”</b> has UID <b>“1800”</b></li>
     <li>Only <b>"examuser"</b> has read write access to <b>"/data/permissions"</b></li>
