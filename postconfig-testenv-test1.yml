@@ -10,15 +10,13 @@
 
       - name: Ensure SSH warning banner is configured
         copy:
-          dest: "/etc/motd"
+          dest: "/etc/issue.net"
           src: "files/issue.net"
-        when: testname == "linux"
 
       - name: add lines
         lineinfile:
          dest: /etc/ssh/sshd_config
-         line: 'Banner /etc/motd'
-        when: testname == "linux"
+         line: 'Banner /etc/issue.net'
 
       - name: restart sshd
         service:
