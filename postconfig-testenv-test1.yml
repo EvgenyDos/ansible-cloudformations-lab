@@ -10,8 +10,14 @@
 
 ###### experiment with rondom exams
 
+      - name: Ensure SSH warning banner is configured
+        copy:
+          dest: "/root/rondomnumber.sh"
+          src: "files/rondomnumber.sh"
+        when: testname == "linux"
+
       - name: create rondom name for lvm test
-        shell: files/rondomnumber.sh
+        shell: /root/rondomnumber.sh
         register: lvmtestnumber
         when: testname == "linux"
 
