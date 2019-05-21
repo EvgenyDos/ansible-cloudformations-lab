@@ -4,13 +4,13 @@
     gather_facts: false
     tasks:
 
-      - debug:
-          msg: "our inventnmame {{ playbookvminventoryname }}"
-        when: testname == "linux"
+#      - debug:
+#          msg: "our inventnmame {{ playbookvminventoryname }}"
+#        when: testname == "linux"
 
 ###### experiment with rondom exams
 
-      - name: Ensure SSH warning banner is configured
+      - name: copy files/rondomnumber.sh script
         copy:
           dest: "/root/rondomnumber.sh"
           src: "files/rondomnumber.sh"
