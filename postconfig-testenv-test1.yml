@@ -1,4 +1,4 @@
----
+--
   - name:
     hosts: "{{ vmhostip }}"
     gather_facts: false
@@ -8,15 +8,35 @@
           msg: "our inventnmame {{ playbookvminventoryname }}"
         when: testname == "linux"
 
+###### experiment with rondom exams
+
+      - name: create rondom name for lvm test
+        shell: files/rondomnumber.sh
+        register: lvmtestnumber
+        when: testname == "linux"
+
+      - debug:
+          msg: echo "{{ lvmtestnumber }}"
+        when: testname == "linux"
+
+      - include_tasks: exams/lvm/{{ lvmtestnumber }}/postconfig.yml
+#        vars:
+#          wp_user: timmy
+        when: testname == "linux"
+
+###### end of expiriment
+
       - name: Ensure SSH warning banner is configured
         copy:
           dest: "/etc/issue.net"
           src: "files/issue.net"
+        when: testname == "linux"
 
       - name: add lines
         lineinfile:
-         dest: /etc/ssh/sshd_config
-         line: 'Banner /etc/issue.net'
+          dest: /etc/ssh/sshd_config
+          line: 'Banner /etc/issue.net'
+        when: testname == "linux"
 
       - name: restart sshd
         service:
@@ -67,18 +87,10 @@
           state: restarted
         when: testname == "linux"
 
-#      - name: send an email with results
-#        mail: 
-#          subject: "Postconfigurations has been done"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-#          body: 'Test-VM is redy for exam.'
-
       - name: press to link for exam start
         mail:
           subject: "Li9 exam - Linux system administration exam has been started"
           to: "{{ useremailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
           from: "{{ adminemailnotifications }}"
           subtype: html
           body: "{{ lookup('template', 'templates/mail.html.j2') }}"
@@ -142,6 +154,5 @@
         lineinfile:
           dest: /etc/sudoers
           state: present
-#          regexp: '^%wheel'
           line: 'student ALL=(ALL) NOPASSWD: ALL'
           validate: 'visudo -cf %s'
