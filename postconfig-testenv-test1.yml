@@ -23,10 +23,10 @@
         when: testname == "linux"
 
       - debug:
-          msg: echo "{{ lvmtestnumber }}"
+          msg: "lvmtestnumber is {{ lvmtestnumber.stdout }}"
         when: testname == "linux"
 
-      - include_tasks: exams/lvm/{{ lvmtestnumber }}/postconfig.yml
+      - include_tasks: exams/lvm/{{ lvmtestnumber.stdout }}/postconfig.yml
 #        vars:
 #          wp_user: timmy
         when: testname == "linux"
