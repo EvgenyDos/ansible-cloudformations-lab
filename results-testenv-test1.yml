@@ -8,6 +8,10 @@
 #      - command: "chmod +rx /root/install"
 #      - command: "/root/install"
 
+      - debug:
+          msg: "lvmtestnumber is {{ lvmtestnumber.stdout }}"
+        when: testname == "linux"
+
       - shell: usermod -s /sbin/nologin {{ studentname }}
         when: testname == "linux"
 

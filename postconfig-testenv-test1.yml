@@ -51,48 +51,48 @@
           state: restarted
         when: testname == "linux"
 
-      - name: list of commands for prepare tests
-        file:
-          state: directory
-          path: /data
-          owner: root
-          group: root
-        when: testname == "linux"
+#      - name: list of commands for prepare tests
+#        file:
+#          state: directory
+#          path: /data
+#          owner: root
+#          group: root
+#        when: testname == "linux"
 
-      - name: creating /data/removeme
-        file:
-          state: touch
-          path: /data/removeme
-          state: touch
-          mode: "u+rwx,g+rwx,o+rwx"
-        when: testname == "linux"
+#      - name: creating /data/removeme
+#        file:
+#          state: touch
+#          path: /data/removeme
+#          state: touch
+#          mode: "u+rwx,g+rwx,o+rwx"
+#        when: testname == "linux"
 
-      - name: create file with chattr +i
-        shell: chattr +i /data/removeme
-        when: testname == "linux"
+#      - name: create file with chattr +i
+#        shell: chattr +i /data/removeme
+#        when: testname == "linux"
   
-      - name: enable additional repo for docker
-        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
-        when: testname == "linux"
+#      - name: enable additional repo for docker
+#        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+#        when: testname == "linux"
 
-      - name: Install a list of packages
-        yum:
-          name: "{{ packages }}"
-        vars:
-          packages:
-             - yum-utils
-             - device-mapper-persistent-data
-             - lvm2
+###      - name: Install a list of packages
+###        yum:
+###          name: "{{ packages }}"
+###        vars:
+###          packages:
+###             - yum-utils
+###             - device-mapper-persistent-data
+###             - lvm2
 #             - docker-ce
 #             - docker-ce-cli
 #             - containerd.io
         when: testname == "linux"
 
-      - name: restart sshd
-        service:
-          name: docker
-          state: restarted
-        when: testname == "linux"
+#      - name: restart sshd
+#        service:
+#          name: docker
+#          state: restarted
+#        when: testname == "linux"
 
       - name: press to link for exam start
         mail:
