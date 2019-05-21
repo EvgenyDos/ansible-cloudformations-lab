@@ -9,7 +9,7 @@
 #      - command: "/root/install"
 
       - debug:
-          msg: "lvmtestnumber is {{ lvmtestnumber.stdout }}"
+          msg: "lvmtestnumber is {{ lvmtestnumber }}"
         when: testname == "linux"
 
       - shell: usermod -s /sbin/nologin {{ studentname }}

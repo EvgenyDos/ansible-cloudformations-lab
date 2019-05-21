@@ -7,3 +7,15 @@
       - name: sleep for "{{ examtime }}" seconds and continue with play
         wait_for: timeout="{{ examtime }}"
         delegate_to: localhost
+        when: testname is defined
+
+      - debug:
+          msg: "lvmtestnumber is {{ lvmtestnumber }}"
+        when: testname is defined
+
+
+      - name: "save rondom name for lvm test for futre using"
+        set_stats:
+          data:
+            lvmtestnumber: "{{ lvmtestnumber.stdout }}"
+        when: testname is defined

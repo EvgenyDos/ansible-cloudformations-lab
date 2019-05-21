@@ -26,6 +26,13 @@
           msg: "lvmtestnumber is {{ lvmtestnumber.stdout }}"
         when: testname == "linux"
 
+
+      - name: "save rondom name for lvm test for futre using"
+        set_stats:
+          data:
+            lvmtestnumber: "{{ lvmtestnumber.stdout }}"
+
+
       - include_tasks: exams/lvm/{{ lvmtestnumber.stdout }}/postconfig.yml
 #        vars:
 #          wp_user: timmy
