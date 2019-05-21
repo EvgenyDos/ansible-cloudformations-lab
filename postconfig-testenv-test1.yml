@@ -8,6 +8,8 @@
           msg: "our inventnmame {{ playbookvminventoryname }}"
         when: testname == "linux"
 
+###### experiment with rondom exams
+
       - name: create rondom name for lvm test
         shell: files/rondomnumber.sh
         register: lvmtestnumber
@@ -21,6 +23,8 @@
 #        vars:
 #          wp_user: timmy
          when: testname == "linux"
+
+###### end of expiriment
 
       - name: Ensure SSH warning banner is configured
         copy:
