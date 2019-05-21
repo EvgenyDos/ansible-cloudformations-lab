@@ -13,9 +13,8 @@
           msg: "lvmtestnumber is {{ lvmtestnumber }}"
         when: testname is defined
 
-
       - name: "save rondom name for lvm test for futre using"
         set_stats:
           data:
-            lvmtestnumber: "{{ lvmtestnumber.stdout }}"
+            lvmtestnumber: "{{ lvmtestnumber }}"
         when: testname is defined
