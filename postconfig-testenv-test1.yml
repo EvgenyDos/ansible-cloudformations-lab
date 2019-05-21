@@ -1,4 +1,4 @@
----
+--
   - name:
     hosts: "{{ vmhostip }}"
     gather_facts: false
@@ -22,7 +22,7 @@
       - include_tasks: exams/lvm/{{ lvmtestnumber }}/postconfig.yml
 #        vars:
 #          wp_user: timmy
-         when: testname == "linux"
+        when: testname == "linux"
 
 ###### end of expiriment
 
