@@ -37,7 +37,7 @@
 
       - name: press to link for exam start
         mail:
-          subject: "youre exam environment almost ready"
+          subject: "Li9 exam - Linux system administration"
           to: "{{ useremailnotifications }}"
 #          from: Li9 Exam <do-not-reply@li9.com>
           from: "{{ adminemailnotifications }}"

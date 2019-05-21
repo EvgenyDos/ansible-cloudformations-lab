@@ -1,0 +1,87 @@
+---
+  - name:
+    hosts: "{{ vmhostip }}"
+    gather_facts: false
+    tasks:
+
+      - debug:
+          msg: "our inventnmame {{ playbookvminventoryname }}"
+        when: testname == "docker"
+
+      - name: Ensure SSH warning banner is configured
+        copy:
+          dest: "/etc/issue.net"
+          src: "files/issue.net"
+        when: testname == "docker"
+
+      - name: add lines
+        lineinfile:
+         dest: /etc/ssh/sshd_config
+         line: 'Banner /etc/issue.net'
+        when: testname == "docker"
+
+      - name: restart sshd
+        service:
+          name: sshd
+          state: restarted
+        when: testname == "docker"
+
+      - name: list of commands for prepare tests
+        file:
+          state: directory
+          path: /data
+          owner: root
+          group: root
+        when: testname == "docker"
+
+      - name: creating /data/removeme
+        file:
+          state: touch
+          path: /data/removeme
+          state: touch
+          mode: "u+rwx,g+rwx,o+rwx"
+        when: testname == "docker"
+
+      - name: create file with chattr +i
+        shell: chattr +i /data/removeme
+        when: testname == "docker"
+  
+      - name: enable additional repo for docker
+        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+        when: testname == "docker"
+
+      - name: Install a list of packages
+        yum:
+          name: "{{ packages }}"
+        vars:
+          packages:
+             - yum-utils
+             - device-mapper-persistent-data
+             - lvm2
+#             - docker-ce
+#             - docker-ce-cli
+#             - containerd.io
+        when: testname == "docker"
+
+      - name: restart sshd
+        service:
+          name: docker
+          state: restarted
+        when: testname == "docker"
+
+#      - name: send an email with results
+#        mail: 
+#          subject: "Postconfigurations has been done"
+#          to: "{{ adminemailnotifications }}"
+#          from: Li9 Exam <do-not-reply@li9.com>
+#          body: 'Test-VM is redy for exam.'
+
+      - name: press to link for exam start
+        mail:
+          subject: "youre exam is ready"
+          to: "{{ useremailnotifications }}"
+#          from: Li9 Exam <do-not-reply@li9.com>
+          from: "{{ adminemailnotifications }}"
+          subtype: html
+          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
+        when: testname == "docker"

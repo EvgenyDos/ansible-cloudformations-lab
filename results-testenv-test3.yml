@@ -1,7 +1,11 @@
 ---
   - name:
     hosts: "{{ vmhostip }}"
+<<<<<<< HEAD
     gather_facts: true
+=======
+    gather_facts: false
+>>>>>>> dos-dev
     tasks:
 #        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
 #      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
@@ -9,8 +13,15 @@
 #      - command: "/root/install"
 
       - shell: usermod -s /sbin/nologin {{ studentname }}
+<<<<<<< HEAD
 
       - reboot:
+=======
+        when: testname == "docker"
+
+      - reboot:
+        when: testname == "docker"
+>>>>>>> dos-dev
 
 #      - name: Reboot immediately.
 #        shell: "sleep 10 && reboot"
@@ -37,24 +48,46 @@
           url: "https://goss.rocks/install"
           dest: "/root/install"
           force: yes
+<<<<<<< HEAD
 
       - shell: "chmod +x /root/install"
       - shell: "/root/install"
+=======
+        when: testname == "docker"
+
+      - shell: "chmod +x /root/install"
+        when: testname == "docker"
+
+      - shell: "/root/install"
+        when: testname == "docker"
+>>>>>>> dos-dev
 
       - name: copy main config file
         copy:
           dest: /root/goss.yaml
           src: "files/goss.yaml"
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev
 
       - name: copy main config file
         copy:
           dest: /root/goss-results.sh
           src: "files/goss-results.sh"
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev
 
       - name: copy main config file
         copy:
           dest: /root/goss-ssh-results.sh
           src: "files/goss-ssh-results.sh"
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev
 
 #      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --max-concurrent 1 --format tap"
 #        ignore_errors: True
@@ -72,12 +105,25 @@
 #      - shell: ssh sshuser@localhost "id" > /root/results-ssh-access
 
       - shell: chmod +x /root/goss-results.sh
+<<<<<<< HEAD
 
       - shell: chmod +x /root/goss-ssh-results.sh
 
       - shell: /root/goss-ssh-results.sh
 
       - shell: /root/goss-results.sh
+=======
+        when: testname == "docker"
+
+      - shell: chmod +x /root/goss-ssh-results.sh
+        when: testname == "docker"
+
+      - shell: /root/goss-ssh-results.sh
+        when: testname == "docker"
+
+      - shell: /root/goss-results.sh
+        when: testname == "docker"
+>>>>>>> dos-dev
 
 #      - shell: ls -la /root/
 
@@ -89,6 +135,10 @@
       - shell: cat /root/results.txt
         ignore_errors: True
         register: bodymailreport
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev
         
 #      - name: send an email with results
 #        mail:
@@ -106,6 +156,10 @@
 #          from: Li9 Exam <do-not-reply@li9.com>
           from: "{{ adminemailnotifications }}"
           body: "{{ bodymailreport.stdout }}"
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev
 
       - name: send an email  to user that cloudformation is done
         mail:
@@ -117,6 +171,10 @@
             Your exam-time has been ended.
             We will check the results of exam and contact with you soon.
             Thanks for your time and have a nice day.
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev
 
 #      - name: remove tower_host from our VM inventory
 #        tower_host:
@@ -136,3 +194,7 @@
 
       - name: Time for troubleshooting before full destroy
         shell: "sleep {{ waittimebeforedestroy }}"
+<<<<<<< HEAD
+=======
+        when: testname == "docker"
+>>>>>>> dos-dev

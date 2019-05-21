@@ -6,6 +6,10 @@
 
       - debug:
           msg: "our inventnmame {{ playbookvminventoryname }}"
+<<<<<<< HEAD
+=======
+        when: testname == "linux"
+>>>>>>> dos-dev
 
       - name: Ensure SSH warning banner is configured
         copy:
@@ -21,6 +25,10 @@
         service:
           name: sshd
           state: restarted
+<<<<<<< HEAD
+=======
+        when: testname == "linux"
+>>>>>>> dos-dev
 
       - name: list of commands for prepare tests
         file:
@@ -28,6 +36,10 @@
           path: /data
           owner: root
           group: root
+<<<<<<< HEAD
+=======
+        when: testname == "linux"
+>>>>>>> dos-dev
 
       - name: creating /data/removeme
         file:
@@ -35,12 +47,24 @@
           path: /data/removeme
           state: touch
           mode: "u+rwx,g+rwx,o+rwx"
+<<<<<<< HEAD
 
       - name: create file with chattr +i
         shell: chattr +i /data/removeme
   
       - name: enable additional repo for docker
         shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+=======
+        when: testname == "linux"
+
+      - name: create file with chattr +i
+        shell: chattr +i /data/removeme
+        when: testname == "linux"
+  
+      - name: enable additional repo for docker
+        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+        when: testname == "linux"
+>>>>>>> dos-dev
 
       - name: Install a list of packages
         yum:
@@ -53,11 +77,19 @@
 #             - docker-ce
 #             - docker-ce-cli
 #             - containerd.io
+<<<<<<< HEAD
+=======
+        when: testname == "linux"
+>>>>>>> dos-dev
 
       - name: restart sshd
         service:
           name: docker
           state: restarted
+<<<<<<< HEAD
+=======
+        when: testname == "linux"
+>>>>>>> dos-dev
 
 #      - name: send an email with results
 #        mail: 
@@ -68,9 +100,79 @@
 
       - name: press to link for exam start
         mail:
+<<<<<<< HEAD
           subject: "youre exam is ready"
+=======
+          subject: "Li9 exam - Linux system administration exam has been started"
+>>>>>>> dos-dev
           to: "{{ useremailnotifications }}"
 #          from: Li9 Exam <do-not-reply@li9.com>
           from: "{{ adminemailnotifications }}"
           subtype: html
           body: "{{ lookup('template', 'templates/mail.html.j2') }}"
+<<<<<<< HEAD
+=======
+        when: testname == "linux"
+
+#### install ang configure asciinema recorder
+
+      - name: Install epel packag
+        yum:
+          name: epel-release
+          state: latest
+        when: testname == "linux"
+
+      - name: Install a asciinema package
+        yum:
+          name: asciinema
+          state: latest
+        when: testname == "linux"
+
+      - name: create config dir
+        shell: asciinema -h
+        when: testname == "linux"
+
+      - name: create config dir for student
+        shell: su - student -c "asciinema -h"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/.config/asciinema/config
+          src: "templates/asciinema.config"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          owner: student
+          group: root
+          dest: /home/student/.config/asciinema/config
+          src: "templates/asciinema.config"
+        when: testname == "linux"
+
+      - name: add lines into basrc of user
+        lineinfile:
+          dest: /home/student/.bashrc
+          line: '{{ item }}'
+        with_items:
+          - 'export LC_ALL=en_US.UTF-8'
+          - 'if [[ -z $ASCIINEMA_REC ]]; then asciinema rec -q -y -t {{ useremailnotifications }}; fi'
+        when: testname == "linux"
+
+      - name: add lines into basrc of root
+        lineinfile:
+          dest: /root/.bashrc
+          line: '{{ item }}'
+        with_items:
+          - 'export LC_ALL=en_US.UTF-8'
+          - 'if [[ -z $ASCIINEMA_REC ]]; then asciinema rec -q -y -t {{ useremailnotifications }}; fi'
+        when: testname == "linux"
+
+      - name: Allow passwordless sudo
+        lineinfile:
+          dest: /etc/sudoers
+          state: present
+#          regexp: '^%wheel'
+          line: 'student ALL=(ALL) NOPASSWD: ALL'
+          validate: 'visudo -cf %s'
+>>>>>>> dos-dev
