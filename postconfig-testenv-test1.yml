@@ -17,6 +17,11 @@
           msg: echo "{{ lvmtestnumber }}"
         when: testname == "linux"
 
+      - include_tasks: exams/lvm/{{ lvmtestnumber }}/postconfig.yml
+#        vars:
+#          wp_user: timmy
+         when: testname == "linux"
+
       - name: Ensure SSH warning banner is configured
         copy:
           dest: "/etc/issue.net"
