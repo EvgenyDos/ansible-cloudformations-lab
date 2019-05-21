@@ -14,6 +14,7 @@
         copy:
           dest: "/root/rondomnumber.sh"
           src: "files/rondomnumber.sh"
+          mode: u+rwx,g-wx,o-rwx
         when: testname == "linux"
 
       - name: create rondom name for lvm test
