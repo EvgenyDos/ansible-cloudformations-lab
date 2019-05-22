@@ -53,7 +53,7 @@
 
       - name: create rondom name for users test
         shell: /root/rondomnumber.sh
-        register: lvmtestnumber
+        register: userstestnumber
         when: testname == "linux"
 
       - debug:
