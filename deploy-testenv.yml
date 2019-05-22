@@ -4,15 +4,6 @@
     connection: local
     tasks:
 
-#      - name: send email that service is ordered
-#        mail:
-#         subject: "Deploy of test environment has been ordered by {{ studentname }}"
-#         to: "{{ adminemailnotifications }}"
-#         from: Li9 Exam <do-not-reply@li9.com>
-#         body: |
-#          Li9 Demo system will be deployed for "{{ studentname }}"
-#          It will take ~ 10 mins
-
       - name: Deploy Dos ansible cloudformation stack
         cloudformation:
           stack_name: "{{ stack_name }}"
@@ -42,49 +33,13 @@
         debug:
           msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
 
-      - name:  recreate hosts file with IP of new vm
-        replace:
-          path: hosts
-          regexp: '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} ansible_ssh_port=22'
-          replace: '{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }} ansible_ssh_port=22'
-
-##      - name: adding tower_inventory with VM ip
-##        tower_inventory:
-##          description: "test invent"
-##          name: "{{ playbookvminventoryname }}"
-##          organization: "Default"
-##          tower_verify_ssl: no
-##          state: present
-
-
       - name: adding tower_host to our VM inventory
         tower_host:
           description: "test host for invent"
           name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
           inventory: "{{ playbookvminventoryname }}"
-#          inventory: dos-testenv-invent
-#         variables:
-#           vm_uuid: "{{facts.instance.hw_product_uuid}}"
-#         connection: local
           tower_verify_ssl: no
           state: present
-
-##      - name: we will creaate tower_credential for new user
-##        tower_credential:
-##          name: "{{ playbookvmcredentialsname }}"
-##          organization: "Default"
-##          tower_verify_ssl: no
-##          kind: "ssh"
-##          username: "{{ studentname }}"
-##          password: "{{ studentpwd }}"
-##          become_method: "su"
-##          become_password: "{{ studentpwd }}"
-
-#      - name: we will creaate tower_group for hosts
-#        tower_group:
-#          inventory: "{{ playbookvminventoryname }}"
-#          name: "{{ playbookgroupname }}"
-#          state: present
 
       - name: "we will save VM server ip as a setstats param for the next staps"
         set_stats:
@@ -95,8 +50,6 @@
           msg: "our inventnmame {{ playbookvminventoryname }}"
 
       - name: Wait until SSH is available
-#        local_action:
-#          module: wait_for
         wait_for:
           host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
           port: 22
@@ -104,17 +57,3 @@
           timeout: 320
           state: started
         delegate_to: localhost
-
-#      - name: send an email with results of cloudformations provision
-#        mail:
-#          subject: "Test environment is almost ready"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-#          body: |
-#            Test-Server has been successfully provisioned.
-#            Test-Server IP is "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-#            The postconfigurations of Test-Server has been started ...
-
-#      - name: sleep for "{{ sleeptime }}" seconds and continue with play
-#        wait_for: timeout="{{ sleeptime }}"
-#        delegate_to: localhost

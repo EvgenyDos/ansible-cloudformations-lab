@@ -167,7 +167,7 @@
       - name: Install epel packag
         yum:
           name: epel-release
-          state: latest
+          state: present
         when: testname == "linux"
 
       - name: Install a asciinema package
@@ -177,7 +177,7 @@
         when: testname == "linux"
 
       - name: create config dir
-        shell: asciinema -h
+        command: asciinema -h
         when: testname == "linux"
 
       - name: create config dir for student
