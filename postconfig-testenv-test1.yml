@@ -47,7 +47,7 @@
         when: testname == "linux"
 
       - name: create rondom name for ssh test
-        sccommandript: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: sshtestnumber
         when: testname == "linux"
 
