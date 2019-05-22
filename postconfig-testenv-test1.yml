@@ -135,7 +135,7 @@
         when: testname == "linux"
       - include_tasks: li9_exam_system/nfs/task{{ nfstestnumber.stdout }}/pre_config.yml
         when: testname == "linux"
-      - include_tasks: li9_exam_system/grep/task{{ grepestnumber.stdout }}/pre_config.yml
+      - include_tasks: li9_exam_system/grep/task{{ greptestnumber.stdout }}/pre_config.yml
         when: testname == "linux"
       - include_tasks: li9_exam_system/apache/task{{ apachetestnumber.stdout }}/pre_config.yml
         when: testname == "linux"
