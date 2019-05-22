@@ -173,7 +173,7 @@
       - name: Install a asciinema package
         yum:
           name: asciinema
-          state: latest
+          state: present
         when: testname == "linux"
 
       - name: create config dir
