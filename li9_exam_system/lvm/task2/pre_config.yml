@@ -1,8 +1,7 @@
 ---
-  - name:
-    hosts: "{{ vmhostip }}"
-    gather_facts: false
-    tasks:
+      - debug:
+          msg: "our inventnmame {{ playbookvminventoryname }}"
+        when: testname == "linux"
 
       - shell: ls -la /root/
         when: testname == "linux"
