@@ -12,47 +12,47 @@
         when: testname == "linux"
 
       - name: create rondom name for apache test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: apachetestnumber
         when: testname == "linux"
 
       - name: create rondom name for attr test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: attrtestnumber
         when: testname == "linux"
 
       - name: create rondom name for fs test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: fstestnumber
         when: testname == "linux"
 
       - name: create rondom name for grep test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: greptestnumber
         when: testname == "linux"
 
       - name: create rondom name for lvm test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: lvmtestnumber
         when: testname == "linux"
 
       - name: create rondom name for nfs test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: nfstestnumber
         when: testname == "linux"
 
       - name: create rondom name for script test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: scripttestnumber
         when: testname == "linux"
 
       - name: create rondom name for ssh test
-        script: /root/rondomnumber.sh
+        sccommandript: /root/rondomnumber.sh
         register: sshtestnumber
         when: testname == "linux"
 
       - name: create rondom name for users test
-        script: /root/rondomnumber.sh
+        command: /root/rondomnumber.sh
         register: userstestnumber
         when: testname == "linux"
 
