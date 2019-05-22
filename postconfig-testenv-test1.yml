@@ -4,12 +4,6 @@
     gather_facts: false
     tasks:
 
-#      - debug:
-#          msg: "our inventnmame {{ playbookvminventoryname }}"
-#        when: testname == "linux"
-
-###### experiment with rondom exams
-
       - name: copy files/rondomnumber.sh script
         copy:
           dest: "/root/rondomnumber.sh"
@@ -17,23 +11,135 @@
           mode: u+rwx,g-wx,o-rwx
         when: testname == "linux"
 
+      - name: create rondom name for apache test
+        shell: /root/rondomnumber.sh
+        register: apachetestnumber
+        when: testname == "linux"
+
+      - name: create rondom name for attr test
+        shell: /root/rondomnumber.sh
+        register: attrtestnumber
+        when: testname == "linux"
+
+      - name: create rondom name for fs test
+        shell: /root/rondomnumber.sh
+        register: fstestnumber
+        when: testname == "linux"
+
+      - name: create rondom name for grep test
+        shell: /root/rondomnumber.sh
+        register: greptestnumber
+        when: testname == "linux"
+
       - name: create rondom name for lvm test
         shell: /root/rondomnumber.sh
         register: lvmtestnumber
         when: testname == "linux"
 
-      - debug:
-          msg: "lvmtestnumber is {{ lvmtestnumber.stdout }}"
+      - name: create rondom name for nfs test
+        shell: /root/rondomnumber.sh
+        register: nfstestnumber
         when: testname == "linux"
 
+      - name: create rondom name for script test
+        shell: /root/rondomnumber.sh
+        register: scripttestnumber
+        when: testname == "linux"
+
+      - name: create rondom name for ssh test
+        shell: /root/rondomnumber.sh
+        register: sshtestnumber
+        when: testname == "linux"
+
+      - name: create rondom name for users test
+        shell: /root/rondomnumber.sh
+        register: lvmtestnumber
+        when: testname == "linux"
+
+      - debug:
+          msg:
+            - "apachetestnumber is {{ apachetestnumber.stdout }}"
+            - "attrtestnumber is {{ attrtestnumber.stdout }}"
+            - "fstestnumber is {{ fstestnumber.stdout }}"
+            - "greptestnumber is {{ greptestnumber.stdout }}"
+            - "lvmtestnumber is {{ lvmtestnumber.stdout }}"
+            - "nfstestnumber is {{ nfstestnumber.stdout }}"
+            - "scripttestnumber is {{ scripttestnumber.stdout }}"
+            - "sshtestnumber is {{ sshtestnumber.stdout }}"
+            - "userstestnumber is {{ userstestnumber.stdout }}"
+        when: testname == "linux"
+
+      - name: "save rondom name for apache test for futre using"
+        set_stats:
+          data:
+            apachetestnumber: "{{ apachetestnumber.stdout }}"
+        when: testname == "linux"
+
+      - name: "save rondom name for attr test for futre using"
+        set_stats:
+          data:
+            attrtestnumber: "{{ attrtestnumber.stdout }}"
+        when: testname == "linux"
+
+      - name: "save rondom name for fs test for futre using"
+        set_stats:
+          data:
+            fstestnumber: "{{ fstestnumber.stdout }}"
+        when: testname == "linux"
+
+      - name: "save rondom name for grep test for futre using"
+        set_stats:
+          data:
+            greptestnumber: "{{ greptestnumber.stdout }}"
+        when: testname == "linux"
 
       - name: "save rondom name for lvm test for futre using"
         set_stats:
           data:
             lvmtestnumber: "{{ lvmtestnumber.stdout }}"
+        when: testname == "linux"
 
+      - name: "save rondom name for nfs test for futre using"
+        set_stats:
+          data:
+            nfstestnumber: "{{ nfstestnumber.stdout }}"
+        when: testname == "linux"
 
+      - name: "save rondom name for script test for futre using"
+        set_stats:
+          data:
+            scripttestnumber: "{{ scripttestnumber.stdout }}"
+        when: testname == "linux"
+
+      - name: "save rondom name for ssh test for futre using"
+        set_stats:
+          data:
+            sshtestnumber: "{{ sshtestnumber.stdout }}"
+        when: testname == "linux"
+
+      - name: "save rondom name for users test for futre using"
+        set_stats:
+          data:
+            userstestnumber: "{{ userstestnumber.stdout }}"
+        when: testname == "linux"
+
+      - include_tasks: li9_exam_system/script/task{{ scripttestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/attr/task{{ attrtestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/ssh/task{{ sshtestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/users/task{{ userstestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
       - include_tasks: li9_exam_system/lvm/task{{ lvmtestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/nfs/task{{ nfstestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/grep/task{{ grepestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/apache/task{{ apachetestnumber.stdout }}/pre_config.yml
+        when: testname == "linux"
+      - include_tasks: li9_exam_system/fs/task{{ fstestnumber.stdout }}/pre_config.yml
 #        vars:
 #          wp_user: timmy
         when: testname == "linux"
@@ -57,60 +163,6 @@
           name: sshd
           state: restarted
         when: testname == "linux"
-
-#      - name: list of commands for prepare tests
-#        file:
-#          state: directory
-#          path: /data
-#          owner: root
-#          group: root
-#        when: testname == "linux"
-
-#      - name: creating /data/removeme
-#        file:
-#          state: touch
-#          path: /data/removeme
-#          state: touch
-#          mode: "u+rwx,g+rwx,o+rwx"
-#        when: testname == "linux"
-
-#      - name: create file with chattr +i
-#        shell: chattr +i /data/removeme
-#        when: testname == "linux"
-  
-#      - name: enable additional repo for docker
-#        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
-#        when: testname == "linux"
-
-###      - name: Install a list of packages
-###        yum:
-###          name: "{{ packages }}"
-###        vars:
-###          packages:
-###             - yum-utils
-###             - device-mapper-persistent-data
-###             - lvm2
-#             - docker-ce
-#             - docker-ce-cli
-#             - containerd.io
-#        when: testname == "linux"
-
-#      - name: restart sshd
-#        service:
-#          name: docker
-#          state: restarted
-#        when: testname == "linux"
-
-      - name: press to link for exam start
-        mail:
-          subject: "Li9 exam - Linux system administration exam has been started"
-          to: "{{ useremailnotifications }}"
-          from: "{{ adminemailnotifications }}"
-          subtype: html
-          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
-        when: testname == "linux"
-
-#### install ang configure asciinema recorder
 
       - name: Install epel packag
         yum:
@@ -170,3 +222,12 @@
           state: present
           line: 'student ALL=(ALL) NOPASSWD: ALL'
           validate: 'visudo -cf %s'
+
+      - name: exam tasks
+        mail:
+          subject: "Li9 exam - Linux system administration exam has been started"
+          to: "{{ useremailnotifications }}"
+          from: "{{ adminemailnotifications }}"
+          subtype: html
+          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
+        when: testname == "linux"
