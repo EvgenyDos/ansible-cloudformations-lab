@@ -3,10 +3,6 @@
     hosts: "{{ vmhostip }}"
     gather_facts: false
     tasks:
-#        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
-#      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
-#      - command: "chmod +rx /root/install"
-#      - command: "/root/install"
 
       - debug:
           msg: "lvmtestnumber is {{ lvmtestnumber }}"
@@ -17,26 +13,6 @@
 
       - reboot:
         when: testname == "linux"
-
-#      - name: Reboot immediately.
-#        shell: "sleep 10 && reboot"
-#        async: 1
-#        poll: 0
-
-#      - name: Wait for the server to finish rebooting
-#        wait_for_connection:
-#          delay: 15
-#          sleep: 15
-#          timeout: 300
-
-#      - name: Wait until SSH is available
-#        wait_for:
-#          host: '{{ vmhostip }}'
-#          port: 22
-#          delay: 30
-#          state: started
-#          timeout: 320
-#        delegate_to: localhost
 
       - name: Download installer of goss
         get_url:
@@ -69,21 +45,6 @@
           src: "files/goss-ssh-results.sh"
         when: testname == "linux"
 
-#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --max-concurrent 1 --format tap"
-#        ignore_errors: True
-#        register: resultsoutput
-
-#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
-#        ignore_errors: True
-#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
-#        ignore_errors: True
-
-#      - shell: echo " StrictHostKeyChecking no" >> /root/.ssh/config
-
-#      - shell: /root/goss-ssh-results.sh
-
-#      - shell: ssh sshuser@localhost "id" > /root/results-ssh-access
-
       - shell: chmod +x /root/goss-results.sh
         when: testname == "linux"
 
@@ -96,32 +57,15 @@
       - shell: /root/goss-results.sh
         when: testname == "linux"
 
-#      - shell: ls -la /root/
-
-#      - lineinfile:
-#          path: /root/results-for-mail.txt
-#          regexp: '^ok'
-#          line: '<font color="green"> ok'
-
       - shell: cat /root/results.txt
         ignore_errors: True
         register: bodymailreport
         when: testname == "linux"
-        
-#      - name: send an email with results
-#        mail:
-#          subject: "Test results"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-#          body: "{{ resultsoutput.stdout }}"
-#          body: "{{ lookup('template', '{{ res }}') }}"
-      
 
       - name: send an email with results
         mail:
           subject: "Test results"
           to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
           from: "{{ adminemailnotifications }}"
           body: "{{ bodymailreport.stdout }}"
         when: testname == "linux"
@@ -130,29 +74,12 @@
         mail:
           subject: "Your exam-time has been ended."
           to: "{{ useremailnotifications }}"
-#          from: Li9 Test <do-not-reply@li9.com>
           from: "{{ adminemailnotifications }}"
           body: |
             Your exam-time has been ended.
             We will check the results of exam and contact with you soon.
             Thanks for your time and have a nice day.
         when: testname == "linux"
-
-#      - name: remove tower_host from our VM inventory
-#        tower_host:
-#          description: "remove VM ip from inventory"
-#          name:  "{{ vmhostip }}"
-#          inventory: "{{ playbookvminventoryname }}"
-#          tower_verify_ssl: no
-#          state: absent
-
-#  - name:
-#    hosts: localhost
-#    connection: local
-#    tasks:
-#      - name: sleep for "{{ waittimebeforedestroy }}" seconds and continue with play
-#        wait_for: timeout="{{ waittimebeforedestroy }}"
-#        delegate_to: localhost
 
       - name: Time for troubleshooting before full destroy
         shell: "sleep {{ waittimebeforedestroy }}"
