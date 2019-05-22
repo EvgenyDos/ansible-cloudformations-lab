@@ -1,6 +1,14 @@
 #!/bin/bash
 
-/usr/local/bin/goss -g /root/goss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d > /root/results.txt
+/usr/local/bin/goss -g /root/scriptgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d > /root/results.txt
+/usr/local/bin/goss -g /root/attrgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/sshgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/usersgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/lvmgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/nfsgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/grepgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/apachegoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
+/usr/local/bin/goss -g /root/fsgoss.yaml validate --format tap --max-concurrent 1 |egrep -v "ssh-access: exists: matches|exit-status: matches expectation"|sed 1d >> /root/results.txt
 
 echo "" >> /root/results.txt
 echo "The common results are:" >> /root/results.txt

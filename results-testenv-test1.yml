@@ -36,10 +36,64 @@
       - shell: "/root/install"
         when: testname == "linux"
 
+#      - name: copy main config file
+#        copy:
+#          dest: /root/goss.yaml
+#          src: "files/goss.yaml"
+#        when: testname == "linux"
+
       - name: copy main config file
         copy:
-          dest: /root/goss.yaml
-          src: "files/goss.yaml"
+          dest: /root/scriptgoss.yaml
+          src: "li9_exam_system/script/task{{ scripttestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/attrgoss.yaml
+          src: "li9_exam_system/attr/task{{ attrtestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/sshgoss.yaml
+          src: "li9_exam_system/ssh/task{{ sshtestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/usersgoss.yaml
+          src: "li9_exam_system/users/task{{ userstestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/lvmgoss.yaml
+          src: "li9_exam_system/lvm/task{{ lvmtestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/nfsgoss.yaml
+          src: "li9_exam_system/nfs/task{{ nfstestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/grepgoss.yaml
+          src: "li9_exam_system/grep/task{{ greptestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/apachegoss.yaml
+          src: "li9_exam_system/apache/task{{ apachetestnumber }}/goss.yaml"
+        when: testname == "linux"
+
+      - name: copy main config file
+        copy:
+          dest: /root/fsgoss.yaml
+          src: "li9_exam_system/fs/task{{ fstestnumber }}/goss.yaml"
         when: testname == "linux"
 
       - name: copy main config file
