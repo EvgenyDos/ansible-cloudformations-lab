@@ -1,5 +1,5 @@
 #!/bin/bash
-RANGE=1
+RANGE=7
 number=$RANDOM
 let "number %= $RANGE"
 echo "$number"
