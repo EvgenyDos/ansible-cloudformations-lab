@@ -66,3 +66,16 @@
           data:
             userstestnumber: "{{ userstestnumber }}"
         when: testname is defined
+
+      - debug:
+          msg:
+            - "apachetestnumber is {{ apachetestnumber }}"
+            - "attrtestnumber is {{ attrtestnumber }}"
+            - "fstestnumber is {{ fstestnumber }}"
+            - "greptestnumber is {{ greptestnumber }}"
+            - "lvmtestnumber is {{ lvmtestnumber }}"
+            - "nfstestnumber is {{ nfstestnumber }}"
+            - "scripttestnumber is {{ scripttestnumber }}"
+            - "sshtestnumber is {{ sshtestnumber }}"
+            - "userstestnumber is {{ userstestnumber }}"
+        when: testname is defined
