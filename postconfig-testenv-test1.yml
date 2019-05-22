@@ -93,7 +93,7 @@
 #             - docker-ce
 #             - docker-ce-cli
 #             - containerd.io
-        when: testname == "linux"
+#        when: testname == "linux"
 
 #      - name: restart sshd
 #        service:
