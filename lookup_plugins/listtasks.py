@@ -2,7 +2,6 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-# -*- coding: utf-8 -*-
 
 
 
@@ -25,26 +24,26 @@ Where "li9_exam_system" is a name of the plugin's first argument
 li9_exam_system/linux/
     apache
         newnametask
-            description.yml
-            goss.yaml
-            pre_config.yml
+            description dot yml
+            goss dot yaml
+            pre_config dot yml
         taskone
-            description.yml
-            goss.yaml
-            pre_config.yml
+            description dot yml
+            goss dot yaml
+            pre_config dot yml
         tasktwo
-            description.yml
-            goss.yaml
-            pre_config.yml
+            description dot yml
+            goss dot yaml
+            pre_config dot yml
     attr
         taskone
-            description.yml
-            goss.yaml
-            pre_config.yml
+            description dot yml
+            goss dot yaml
+            pre_config dot yml
         tasktwo
-            description.yml
-            goss.yaml
-            pre_config.yml
+            description dot yml
+            goss dot yaml
+            pre_config dot yml
 ...
 
 Example of usage:
