@@ -34,6 +34,3 @@
           - included_tasks/common_bootstrap.yml
           - included_tasks/send_email.yml
 
-      # end block section
-      when: testname == "linux"
-
