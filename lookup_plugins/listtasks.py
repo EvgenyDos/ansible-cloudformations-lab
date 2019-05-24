@@ -2,6 +2,8 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+# -*- coding: utf-8 -*-
+
 
 
 DOCUMENTATION = """
@@ -16,7 +18,93 @@ DOCUMENTATION = """
           description: path to the directories to read
           required: true
 
+
 """
+
+EXAMPLES = """
+The lookup plugin expect a directory structure like this.
+Where "li9_exam_system" is a name of the plugin's first argument
+
+li9_exam_system/linux/
+├── apache
+│   ├── newnametask
+│   │   ├── description.yml
+│   │   ├── goss.yaml
+│   │   └── pre_config.yml
+│   ├── taskone
+│   │   ├── description.yml
+│   │   ├── goss.yaml
+│   │   └── pre_config.yml
+│   └── tasktwo
+│       ├── description.yml
+│       ├── goss.yaml
+│       └── pre_config.yml
+├── attr
+│   ├── taskone
+│   │   ├── description.yml
+│   │   ├── goss.yaml
+│   │   └── pre_config.yml
+│   └── tasktwo
+│       ├── description.yml
+│       ├── goss.yaml
+│       └── pre_config.yml
+...
+
+Example of usage:
+
+  - name: Get files info
+    set_fact:
+      files_info: "{{ lookup('listtasks', 'li9_exam_system/linux/', content=False) }}"
+
+  - debug: var=files_info
+
+The plugin will create a structure like below. The sections 'content' on the top and
+'selected_task_content' are being filled with informaion from found description.yml files.
+By default this feature is enabled, but could be disabled by specifying an argument
+'content=False'
+
+{
+    "content": {
+        "description": "",
+        "ready": false,
+        "title": ""
+    },
+    "rootpath": "li9_exam_system/linux",
+    "topics": {
+        "apache": {
+            "selected_task_content": {
+                "description": "",
+                "ready": false,
+                "title": ""
+            },
+            "selected_task_id": 1,
+            "selected_task_name": "tasktwo",
+            "selected_task_path": "apache/tasktwo",
+            "tasks": [
+                "newnametask",
+                "tasktwo",
+                "taskone"
+            ]
+        },
+        "attr": {
+            "selected_task_content": {
+                "description": "",
+                "ready": false,
+                "title": ""
+            },
+            "selected_task_id": 1,
+            "selected_task_name": "taskone",
+            "selected_task_path": "attr/taskone",
+            "tasks": [
+                "tasktwo",
+                "taskone"
+            ]
+        },
+  ...
+}
+"""
+
+
 
 import os
 import yaml
