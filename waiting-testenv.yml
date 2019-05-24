@@ -13,7 +13,8 @@
 
         - name: Save exam tasks details for future using
           set_stats:
-            exam_tasks: "{{ exam_tasks }}"
+            data:
+              exam_tasks: "{{ exam_tasks }}"
 
         # Endblock 
         when: testname is defined
