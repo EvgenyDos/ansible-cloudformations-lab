@@ -10,119 +10,28 @@
 
 </head>
 
-<font color="red"><h1>{{ </h1></font>
-{# 
-<font color="red"><h1>Before you begin</h1></font>
-You need to be aware of the following rules:
-<ul>
-    
-        <li>All task results will be validates after system reboot</li>
-        <li>All tasks will be validated using SSH via centos user. Do not make any changes in /home/centos/.ssh/ authorized_key file</li>
-        <li>You are not allowed to change any network settings like routes, ip addresses, firewall settings</li>
-        <li>You are not allowed to change SELinux state from “enforcing”</li>
-
-</ul>
-#}
+<font color="red"><h1>{{ exam_tasks.content.title }} </h1></font>
+{{ exam_tasks.content.description }}
 
 <font color="red"><h1>Your credentials to access the Test-Server you can see bellow:</h1></font>
 
 <ul>
-
     <li>Hosts is accessible via ssh student@{{ vmhostip }}</li>
     <li>Test-Server IP is "{{ vmhostip }}"</li>
     <li>SSH username: "{{ studentname }}"</li>
     <li>SSH password: "{{ studentpwd }}"</li>
     <li>You may become root user using the following "sudo su -" without password</li>
     <li>Your system will be auto-destroyed in "{{ examtime }}" seconds.</li>
-
-</ul>
-
-<font color="green"><h1>Task 1 - delete /data/removeme</h1></font>
-There is a simple file located at <b>/data/removeme</b>. This file should be deleted
-
-
-<font color="green"><h1>Task 2 - users and groups</h1></font>
-You should configure the system as follows:
-
-<ul>
-    <li><b>file "/data/permissions"</b> exists</li>
-    <li><b>file "/data/permissions"</b> is owned by <b>“examuser”</b> user</li>
-    <li><b>file "/data/permissions"</b> is owned by <b>“examgroup”</b> group</li>
-    <li><b>file "/data/permissions"</b> should not be executable</li>
-    <li>User <b>“examuser”</b> is a member of <b>“examgroup”</b></li>
-    <li>User <b>“examuser”</b> has UID <b>“1800”</b></li>
-    <li>Only <b>"examuser"</b> has read write access to <b>"/data/permissions"</b></li>
-    <li>No any other users are able to read or write to <b>"/data/permissions"</b></li>
-</ul>
-
-<font color="green"><h1>Task 3 - LVM and filesystems</h1></font>
-You should configure the system as follows:
-
-<ul>
-    <li>Volume group named <b>“examvg”</b> exists
-    <li>Volume group extent size is <b>2M</b>
-    <li>Logical volume named <b>“vol1”</b> exists
-        <ul>
-                <li>“vol1” belongs to the <b>“examvg”</b> volume group
-                <li>Size is <b>200M</b>
-                <li>“vol1” is mounted at boot to /data/fs1 as EXT4 filesystem
-        </ul>
-    <li>Logical volume named <b>“vol2”</b> exists
-        <ul>
-                <li>“vol2” belongs to the <b>“examvg”</b> volume group
-                <li>Size is <b>300M</b>
-                <li>“vol2” is mounted at boot to <b>/data/fs2</b> as XFS filesystem
-        </ul>
-</ul>
-
-Note! This task may require to look for a free block device which is already attached to the exam  system.
-Do not use any used block devices.
-
-<font color="green"><h1>Task 4 - Web server</h1></font>
-Configure on the exam system an HTTP service as follows:
-
-<ul>
-        <li>Service listens on <b>80</b> and <b>8080</b> ports </li>
-        <li>Commands “curl localhost”  and “curl localhost:8080” return <b>“Li9 exam task 4”</b>.</li>
-</ul>
-
-Note! You are allowed to use any web server software
-
-<font color="green"><h1>Task 5 - NFS server</h1></font>
-Configure your system as NFS server as follows:
-
-<ul>
-
-    <li>NFS service exports <b>"/nfs_export"</b> for anyone</li>
-    <li><b>"/nfs_export"</b> is exported in Read-Write mode</li>
-    <li>Any NFS user should have Read-Write access to the share</li>
-
 </ul>
 
 
-<font color="green"><h1>Task 6 - Script</h1></font>
+{% for topic in exam_tasks.topics %}
+<font color="green"><h1>Task {{ loop.index }} - {{ topic.selected_task_content.title }}</h1></font>
+{{ topic.selected_task_content.content }}
+{% endfor %}
 
-Create a script /data/script.sh with the following requirements:
-
-<ul>
-
-    <li>It returns <b>“Hello world”</b> if no arguments passed</li>
-    <li>It returns <b>“CentOS system”</b> if the first argument is <b>“centos”</b></li>
-    <li>It returns <b>“Not a CentOS system”</b> for any other options in the first argument</li>
-    <li>It should be executable for anyone</li>
-
-</ul>
-
-Note! You are allowed to use any programming language
-
-<font color="green"><h1>Task 7 - Text</h1></font>
-Create a new file named <b>/etc/task7</b>. The file should contain all lines which contain the <b>“abc”</b> substring from <b>/etc/services</b>
-
-
-<font color="green"><h1>Task 8 - Passwordless ssh access</h1></font>
-Configure your system to allow passwordless access for the local root user to do ssh as <b>“sshuser@localhost”</b>.
 
 Note! Use the following command for checking <b>“ssh sshuser@localhost id” </b>. You can use any password for sshuser.
-'
+
 
 </html>

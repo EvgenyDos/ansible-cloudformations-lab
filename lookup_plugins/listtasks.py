@@ -22,28 +22,28 @@ The lookup plugin expect a directory structure like this.
 Where "li9_exam_system" is a name of the plugin's first argument
 
 li9_exam_system/linux/
-    apache
-        newnametask
-            description dot yml
-            goss dot yaml
-            pre_config dot yml
-        taskone
-            description dot yml
-            goss dot yaml
-            pre_config dot yml
-        tasktwo
-            description dot yml
-            goss dot yaml
-            pre_config dot yml
-    attr
-        taskone
-            description dot yml
-            goss dot yaml
-            pre_config dot yml
-        tasktwo
-            description dot yml
-            goss dot yaml
-            pre_config dot yml
+  apache
+    newnametask
+      description.yml
+      goss.yaml
+      pre_config.yml
+    taskone
+      description.yml
+      goss.yaml
+      pre_config.yml
+   tasktwo
+      description.yml
+      goss.yaml
+      pre_config.yml
+  attr
+    taskone
+      description.yml
+      goss.yaml
+      pre_config.yml
+    tasktwo
+      description.yml
+      goss.yaml
+      pre_config.yml
 ...
 
 Example of usage:

@@ -10,7 +10,7 @@
 
       - name: Get tasks
         set_fact:
-          exam_tasks: "{{ lookup('listtasks', tasks_base_dir, content=False) }}"
+          exam_tasks: "{{ lookup('listtasks', tasks_base_dir) }}"
 
       - name: Save the tasks details for later using
         set_stats:
