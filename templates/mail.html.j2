@@ -25,8 +25,13 @@
 </ul>
 
 {% for topic in exam_tasks.topics %}
+{% if  exam_tasks.topics[topic].selected_task_content.ready %}
 <font color="green"><h1>Task {{ loop.index }} - {{ exam_tasks.topics[topic].selected_task_content.title }}</h1></font>
 {{ exam_tasks.topics[topic].selected_task_content.description }}
+{% else %}
+<font color="green"><h1>Task {{ loop.index }} - No title (no data)</h1></font>
+== No task description (no data) ==
+{% endif %}
 {% endfor %}
 
 Note! Use the following command for checking <b>“ssh sshuser@localhost id” </b>. You can use any password for sshuser.
