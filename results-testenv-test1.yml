@@ -26,8 +26,8 @@
         - name: Copy main config file
           copy:
             dest: /root/scriptgoss.yaml
-            src: "{{ exam_tasks.rootpath }}/{{ item.selected_task_path }}/goss.yaml"
-          loop: "{{ exam_tasks.topics }}"
+            src: "{{ exam_tasks.rootpath }}/{{ item.value.selected_task_path }}/goss.yaml"
+          with_dict: "{{ exam_tasks.topics }}"
 
         - name: Install Goss and run it
           shell: |
