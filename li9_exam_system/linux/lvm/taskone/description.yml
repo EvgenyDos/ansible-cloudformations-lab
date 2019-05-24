@@ -1,0 +1,22 @@
+title:  LVM and filesystems
+description : |
+    You should configure the system as follows:
+    
+    <ul>
+        <li>Volume group named <b>“examvg”</b> exists
+        <li>Volume group extent size is <b>2M</b>
+        <li>Logical volume named <b>“vol1”</b> exists
+            <ul>
+                    <li>“vol1” belongs to the <b>“examvg”</b> volume group
+                    <li>Size is <b>200M</b>
+                    <li>“vol1” is mounted at boot to /data/fs1 as EXT4 filesystem
+            </ul>
+        <li>Logical volume named <b>“vol2”</b> exists
+            <ul>
+                    <li>“vol2” belongs to the <b>“examvg”</b> volume group
+                    <li>Size is <b>300M</b>
+                    <li>“vol2” is mounted at boot to <b>/data/fs2</b> as XFS filesystem
+            </ul>
+    </ul>
+
+
