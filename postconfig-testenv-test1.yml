@@ -8,10 +8,6 @@
 
   tasks:
 
-    # Even not sure that we need to have 'when testname==linux'
-    - name: Executing the only tasks specific for 'linux' exam module
-      block:
-
       - name: Get tasks
         set_fact:
           exam_tasks: "{{ lookup('listtasks', tasks_base_dir) }}"
@@ -33,7 +29,4 @@
         loop:
           - included_tasks/common_bootstrap.yml
           - included_tasks/send_email.yml
-
-      # end block section
-      when: testname == "linux"
 
