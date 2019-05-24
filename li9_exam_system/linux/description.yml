@@ -12,15 +12,3 @@ description : |
   
   </ul>
   
-  <font color="red"><h1>Your credentials to access the Test-Server you can see bellow:</h1></font>
-  
-  <ul>
-  
-      <li>Hosts is accessible via ssh student@{{ vmhostip }}</li>
-      <li>Test-Server IP is "{{ vmhostip }}"</li>
-      <li>SSH username: "{{ studentname }}"</li>
-      <li>SSH password: "{{ studentpwd }}"</li>
-      <li>You may become root user using the following "sudo su -" without password</li>
-      <li>Your system will be auto-destroyed in "{{ examtime }}" seconds.</li>
-  
-  </ul>
