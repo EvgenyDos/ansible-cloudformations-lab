@@ -19,6 +19,7 @@ DOCUMENTATION = """
 """
 
 import os
+import yaml
 import random
 from ansible.errors import AnsibleError, AnsibleParserError
 from ansible.plugins.lookup import LookupBase
@@ -63,6 +64,18 @@ class LookupModule(LookupBase):
           topic_data['selected_task_id'] = generated_id
           topic_data['selected_task_name'] = topic_data['tasks'][generated_id]
           topic_data['selected_task_path'] = "/".join([ topic, topic_data['selected_task_name'] ])
+          task_dir = '/'.join([ curr_data.get('rootpath'), topic_data.get('selected_task_path')])
+
+          if kwargs.get('content', True):
+            try:
+              desc_content = {}
+              with open('/'.join([ task_dir, 'description.yml' ])) as fd:
+                desc_content = yaml.load( fd )
+                if desc_content.get('title', None) and desc_content.get('description', None):
+                  topic_data['selected_task_content'] = desc_content
+            except:
+              topic_data['selected_task_content'] = { 'title': '', 'description': '' }
+
 
         results.append( curr_data )
       else:

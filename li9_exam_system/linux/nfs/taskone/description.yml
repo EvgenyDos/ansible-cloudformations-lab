@@ -1,11 +1,11 @@
 title:  NFS server
 description : |
-Configure your system as NFS server as follows:
-
-<ul>
-
-    <li>NFS service exports <b>"/nfs_export"</b> for anyone</li>
-    <li><b>"/nfs_export"</b> is exported in Read-Write mode</li>
-    <li>Any NFS user should have Read-Write access to the share</li>
-
-</ul>
+  Configure your system as NFS server as follows:
+  
+  <ul>
+  
+      <li>NFS service exports <b>"/nfs_export"</b> for anyone</li>
+      <li><b>"/nfs_export"</b> is exported in Read-Write mode</li>
+      <li>Any NFS user should have Read-Write access to the share</li>
+  
+  </ul>
