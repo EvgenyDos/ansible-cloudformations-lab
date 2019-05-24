@@ -29,56 +29,61 @@ display = Display()
 random.seed()
 
 
+def getDescription(base_dir, include=True):
+  if not include: 
+    result = { "title": "", "description": "", "ready": False }
+  else:
+    try:
+      desc_content = {}
+      with open('/'.join([base_dir, 'description.yml']), 'r') as fd:
+        desc_content = yaml.load( fd )
+        if desc_content.get('title', None) and desc_content.get('description', None):
+          result = desc_content
+          result['ready'] = True
+    except Exception as err:
+      raise AnsibleError("Getting description error: {0}, on directory: {1}".format(err, base_dir))
+  return result
+
+
 class LookupModule(LookupBase):
 
   def run(self, paths, variables=None, **kwargs):
     results = []
+
     for path in paths:
       path = '/'.join([ component for component in path.split('/') if len(component.strip()) > 0 ])
       curr_data = { 'topics': {}, 'rootpath': path }
-      display.debug("Tasks lookup path: %s" % path)
+      display.vvvv("Tasks lookup path: %s" % path)
+
       if os.path.exists(path) and os.path.isdir(path):
         for root, dirs, files in os.walk(path):
-
-          if path == root[0:len(path)]:
-            root = root[len(path):]
-          else: continue
-
-          if root.count('/') != 2: continue
-
-          rootdir, topic, task_name = root.split('/')
-
-          display.vvvv("Current Rootdir is {0}".format(topic))
-    
-          topic_data = { 'tasks': []}
-
-          if topic in curr_data['topics'].keys():
-            curr_data['topics'][topic]['tasks'].append(task_name)
-          else:
-            curr_data['topics'][topic] = { "tasks": [ task_name ]}
-
-
+           
+          for filename in files:
+            if filename == 'description.yml':
+              subpath = root[len(path)+1:]
+              if subpath == "": # found root directory of an exam
+                curr_data['content'] = getDescription(root, kwargs.get('content', True))
+              elif subpath.count('/') == 1: # found a task within a topic
+                topic_name, task_name = subpath.split('/')
+                topic_data = curr_data['topics'].get(topic_name, { "tasks": []})
+                curr_data['topics'][topic_name] = topic_data
+                topic_data['tasks'].append( task_name )
         for topic in curr_data['topics'].keys():
-          topic_data = curr_data['topics'][topic]
-          generated_id = random.randint(0, len(topic_data['tasks'])-1)
+          topic_data = curr_data['topics'].get(topic)
+          generated_id = random.randint(0, len(topic_data.get('tasks'))-1)
           topic_data['selected_task_id'] = generated_id
-          topic_data['selected_task_name'] = topic_data['tasks'][generated_id]
-          topic_data['selected_task_path'] = "/".join([ topic, topic_data['selected_task_name'] ])
-          task_dir = '/'.join([ curr_data.get('rootpath'), topic_data.get('selected_task_path')])
+          topic_data['selected_task_name'] = topic_data.get('tasks')[generated_id]
+          topic_data['selected_task_path'] = "/".join([ topic, topic_data.get('selected_task_name')])
+          
+          topic_data['selected_task_content'] = getDescription(
+            '/'.join([ curr_data.get('rootpath'), topic_data.get('selected_task_path')]),
+            kwargs.get('content', True)
+          )
 
-          if kwargs.get('content', True):
-            try:
-              desc_content = {}
-              with open('/'.join([ task_dir, 'description.yml' ])) as fd:
-                desc_content = yaml.load( fd )
-                if desc_content.get('title', None) and desc_content.get('description', None):
-                  topic_data['selected_task_content'] = desc_content
-            except:
-              topic_data['selected_task_content'] = { 'title': '', 'description': '' }
-
-
-        results.append( curr_data )
+        results.append(curr_data)
       else:
         raise AnsibleError("Cound not locate directory: %s" % path)
-    return results
+      return results
+    pass
+
 
