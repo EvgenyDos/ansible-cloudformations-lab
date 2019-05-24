@@ -1,233 +1,38 @@
----
-  - name:
-    hosts: "{{ vmhostip }}"
-    gather_facts: false
-    tasks:
+- name:
+  hosts: "{{ vmhostip }}"
+  gather_facts: false
 
-      - name: copy files/rondomnumber.sh script
-        copy:
-          dest: "/root/rondomnumber.sh"
-          src: "files/rondomnumber.sh"
-          mode: u+rwx,g-wx,o-rwx
-        when: testname == "linux"
+  var:
+    tasks_base_dir: "li9_exam_system/"
+    exam_name: "Linux system administration exam"
 
-      - name: create rondom name for apache test
-        command: /root/rondomnumber.sh
-        register: apachetestnumber
-        when: testname == "linux"
+  tasks:
 
-      - name: create rondom name for attr test
-        command: /root/rondomnumber.sh
-        register: attrtestnumber
-        when: testname == "linux"
+    # Even not sure that we need to have 'when testname==linux'
+    - name: Executing the only tasks specific for 'linux' exam module
+      block:
 
-      - name: create rondom name for fs test
-        command: /root/rondomnumber.sh
-        register: fstestnumber
-        when: testname == "linux"
+      - name: Get tasks
+        set_fact:
+          exam_tasks: "{{ lookup('listtasks', tasks_base_dir) }}"
 
-      - name: create rondom name for grep test
-        command: /root/rondomnumber.sh
-        register: greptestnumber
-        when: testname == "linux"
-
-      - name: create rondom name for lvm test
-        command: /root/rondomnumber.sh
-        register: lvmtestnumber
-        when: testname == "linux"
-
-      - name: create rondom name for nfs test
-        command: /root/rondomnumber.sh
-        register: nfstestnumber
-        when: testname == "linux"
-
-      - name: create rondom name for script test
-        command: /root/rondomnumber.sh
-        register: scripttestnumber
-        when: testname == "linux"
-
-      - name: create rondom name for ssh test
-        command: /root/rondomnumber.sh
-        register: sshtestnumber
-        when: testname == "linux"
-
-      - name: create rondom name for users test
-        command: /root/rondomnumber.sh
-        register: userstestnumber
-        when: testname == "linux"
-
-      - debug:
-          msg:
-            - "apachetestnumber is {{ apachetestnumber.stdout }}"
-            - "attrtestnumber is {{ attrtestnumber.stdout }}"
-            - "fstestnumber is {{ fstestnumber.stdout }}"
-            - "greptestnumber is {{ greptestnumber.stdout }}"
-            - "lvmtestnumber is {{ lvmtestnumber.stdout }}"
-            - "nfstestnumber is {{ nfstestnumber.stdout }}"
-            - "scripttestnumber is {{ scripttestnumber.stdout }}"
-            - "sshtestnumber is {{ sshtestnumber.stdout }}"
-            - "userstestnumber is {{ userstestnumber.stdout }}"
-        when: testname == "linux"
-
-      - name: "save rondom name for apache test for futre using"
+      - name: Save the tasks details for later using
         set_stats:
-          data:
-            apachetestnumber: "{{ apachetestnumber.stdout }}"
-        when: testname == "linux"
+          exam_tasks: "{{ exam_tasks }}"
 
-      - name: "save rondom name for attr test for futre using"
-        set_stats:
-          data:
-            attrtestnumber: "{{ attrtestnumber.stdout }}"
-        when: testname == "linux"
+      - name: Debug selected tasks
+        debug: var=exam_tasks
 
-      - name: "save rondom name for fs test for futre using"
-        set_stats:
-          data:
-            fstestnumber: "{{ fstestnumber.stdout }}"
-        when: testname == "linux"
+      - name: Execute selected tasks specific ansible-tasks
+        include_tasks: "{{ tasks_base_dir }}/{{ item.selected_task_path }}/pre_config.yml"
+        loop: "{{ exam_tasks.topics }}"
 
-      - name: "save rondom name for grep test for futre using"
-        set_stats:
-          data:
-            greptestnumber: "{{ greptestnumber.stdout }}"
-        when: testname == "linux"
+      - name: Include additional task(s)
+        include_tasks: "{{ item }}"
+        loop:
+          - included_tasks/common_bootstrap.yml
+          - included_tasks/send_email.yml
 
-      - name: "save rondom name for lvm test for futre using"
-        set_stats:
-          data:
-            lvmtestnumber: "{{ lvmtestnumber.stdout }}"
-        when: testname == "linux"
+      # end block section
+      when: testname == "linux"
 
-      - name: "save rondom name for nfs test for futre using"
-        set_stats:
-          data:
-            nfstestnumber: "{{ nfstestnumber.stdout }}"
-        when: testname == "linux"
-
-      - name: "save rondom name for script test for futre using"
-        set_stats:
-          data:
-            scripttestnumber: "{{ scripttestnumber.stdout }}"
-        when: testname == "linux"
-
-      - name: "save rondom name for ssh test for futre using"
-        set_stats:
-          data:
-            sshtestnumber: "{{ sshtestnumber.stdout }}"
-        when: testname == "linux"
-
-      - name: "save rondom name for users test for futre using"
-        set_stats:
-          data:
-            userstestnumber: "{{ userstestnumber.stdout }}"
-        when: testname == "linux"
-
-      - include_tasks: li9_exam_system/script/task{{ scripttestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/attr/task{{ attrtestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/ssh/task{{ sshtestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/users/task{{ userstestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/lvm/task{{ lvmtestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/nfs/task{{ nfstestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/grep/task{{ greptestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/apache/task{{ apachetestnumber.stdout }}/pre_config.yml
-        when: testname == "linux"
-      - include_tasks: li9_exam_system/fs/task{{ fstestnumber.stdout }}/pre_config.yml
-#        vars:
-#          wp_user: timmy
-        when: testname == "linux"
-
-###### end of expiriment
-
-      - name: Ensure SSH warning banner is configured
-        copy:
-          dest: "/etc/issue.net"
-          src: "files/issue.net"
-        when: testname == "linux"
-
-      - name: add lines
-        lineinfile:
-          dest: /etc/ssh/sshd_config
-          line: 'Banner /etc/issue.net'
-        when: testname == "linux"
-
-      - name: restart sshd
-        service:
-          name: sshd
-          state: restarted
-        when: testname == "linux"
-
-      - name: Install epel packag
-        yum:
-          name: epel-release
-          state: present
-        when: testname == "linux"
-
-      - name: Install a asciinema package
-        yum:
-          name: asciinema
-          state: present
-        when: testname == "linux"
-
-      - name: create config dir
-        command: asciinema -h
-        when: testname == "linux"
-
-      - name: create config dir for student
-        shell: su - student -c "asciinema -h"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/.config/asciinema/config
-          src: "templates/asciinema.config"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          owner: student
-          group: root
-          dest: /home/student/.config/asciinema/config
-          src: "templates/asciinema.config"
-        when: testname == "linux"
-
-      - name: add lines into basrc of user
-        lineinfile:
-          dest: /home/student/.bashrc
-          line: '{{ item }}'
-        with_items:
-          - 'export LC_ALL=en_US.UTF-8'
-          - 'if [[ -z $ASCIINEMA_REC ]]; then asciinema rec -q -y -t {{ useremailnotifications }}; fi'
-        when: testname == "linux"
-
-      - name: add lines into basrc of root
-        lineinfile:
-          dest: /root/.bashrc
-          line: '{{ item }}'
-        with_items:
-          - 'export LC_ALL=en_US.UTF-8'
-          - 'if [[ -z $ASCIINEMA_REC ]]; then asciinema rec -q -y -t {{ useremailnotifications }}; fi'
-        when: testname == "linux"
-
-      - name: Allow passwordless sudo
-        lineinfile:
-          dest: /etc/sudoers
-          state: present
-          line: 'student ALL=(ALL) NOPASSWD: ALL'
-          validate: 'visudo -cf %s'
-
-      - name: exam tasks
-        mail:
-          subject: "Li9 exam - Linux system administration exam has been started"
-          to: "{{ useremailnotifications }}"
-          from: "{{ adminemailnotifications }}"
-          subtype: html
-          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
-        when: testname == "linux"

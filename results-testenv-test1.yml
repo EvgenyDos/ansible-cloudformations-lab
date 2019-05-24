@@ -4,146 +4,62 @@
     gather_facts: false
     tasks:
 
-      - debug:
-          msg:
-            - "apachetestnumber is {{ apachetestnumber }}"
-            - "attrtestnumber is {{ attrtestnumber }}"
-            - "fstestnumber is {{ fstestnumber }}"
-            - "greptestnumber is {{ greptestnumber }}"
-            - "lvmtestnumber is {{ lvmtestnumber }}"
-            - "nfstestnumber is {{ nfstestnumber }}"
-            - "scripttestnumber is {{ scripttestnumber }}"
-            - "sshtestnumber is {{ sshtestnumber }}"
-            - "userstestnumber is {{ userstestnumber }}"
+      - name: Make sure that the only tasks for linux module are being called
+        block:
+        - shell: usermod -s /sbin/nologin {{ studentname }}
+
+        - name: Rebooting the examinating instance
+          reboot:
+
+        - name: Downloading installer of goss
+          get_url:
+            url: "https://goss.rocks/install"
+            dest: "/root/install"
+            force: yes
+
+        - name: Configuring Goss on the instance
+          shell: "chmod +x /root/install"
+          loop:
+            - "chmod +x /root/install"
+            - "/root/install"
+
+        - name: Copy main config file
+          copy:
+            dest: /root/scriptgoss.yaml
+            src: "{{ exam_tasks.rootpath }}/{{ item.selected_task_path }}/goss.yaml"
+          loop: "{{ exam_tasks.topics }}"
+
+        - name: Install Goss and run it
+          shell: |
+            chmod +x /root/goss-results.sh /root/goss-ssh-results.sh
+            /root/goss-ssh-results.sh 
+            /root/goss-results.sh
+
+        - name: Grab the Goss results
+          shell: cat /root/results.txt
+          ignore_errors: True
+          register: bodymailreport
+
+        - name: Send an email with results
+          mail:
+            subject: "Test results"
+            to: "{{ adminemailnotifications }}"
+            from: "{{ adminemailnotifications }}"
+            body: "{{ bodymailreport.stdout }}"
+
+        - name: Send an email to user that cloudformation is done
+          mail:
+            subject: "Your exam-time has been ended."
+            to: "{{ useremailnotifications }}"
+            from: "{{ adminemailnotifications }}"
+            body: |
+              Your exam-time has been ended.
+              We will check the results of exam and contact with you soon.
+              Thanks for your time and have a nice day.
+
+        - name: Time for troubleshooting before full destroy
+          shell: "sleep {{ waittimebeforedestroy }}"
+
+        # Endblock
         when: testname == "linux"
 
-      - shell: usermod -s /sbin/nologin {{ studentname }}
-        when: testname == "linux"
-
-      - reboot:
-        when: testname == "linux"
-
-      - name: Download installer of goss
-        get_url:
-          url: "https://goss.rocks/install"
-          dest: "/root/install"
-          force: yes
-        when: testname == "linux"
-
-      - shell: "chmod +x /root/install"
-        when: testname == "linux"
-
-      - shell: "/root/install"
-        when: testname == "linux"
-
-#      - name: copy main config file
-#        copy:
-#          dest: /root/goss.yaml
-#          src: "files/goss.yaml"
-#        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/scriptgoss.yaml
-          src: "li9_exam_system/script/task{{ scripttestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/attrgoss.yaml
-          src: "li9_exam_system/attr/task{{ attrtestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/sshgoss.yaml
-          src: "li9_exam_system/ssh/task{{ sshtestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/usersgoss.yaml
-          src: "li9_exam_system/users/task{{ userstestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/lvmgoss.yaml
-          src: "li9_exam_system/lvm/task{{ lvmtestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/nfsgoss.yaml
-          src: "li9_exam_system/nfs/task{{ nfstestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/grepgoss.yaml
-          src: "li9_exam_system/grep/task{{ greptestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/apachegoss.yaml
-          src: "li9_exam_system/apache/task{{ apachetestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/fsgoss.yaml
-          src: "li9_exam_system/fs/task{{ fstestnumber }}/goss.yaml"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/goss-results.sh
-          src: "files/goss-results.sh"
-        when: testname == "linux"
-
-      - name: copy main config file
-        copy:
-          dest: /root/goss-ssh-results.sh
-          src: "files/goss-ssh-results.sh"
-        when: testname == "linux"
-
-      - shell: chmod +x /root/goss-results.sh
-        when: testname == "linux"
-
-      - shell: chmod +x /root/goss-ssh-results.sh
-        when: testname == "linux"
-
-      - shell: /root/goss-ssh-results.sh
-        when: testname == "linux"
-
-      - shell: /root/goss-results.sh
-        when: testname == "linux"
-
-      - shell: cat /root/results.txt
-        ignore_errors: True
-        register: bodymailreport
-        when: testname == "linux"
-
-      - name: send an email with results
-        mail:
-          subject: "Test results"
-          to: "{{ adminemailnotifications }}"
-          from: "{{ adminemailnotifications }}"
-          body: "{{ bodymailreport.stdout }}"
-        when: testname == "linux"
-
-      - name: send an email  to user that cloudformation is done
-        mail:
-          subject: "Your exam-time has been ended."
-          to: "{{ useremailnotifications }}"
-          from: "{{ adminemailnotifications }}"
-          body: |
-            Your exam-time has been ended.
-            We will check the results of exam and contact with you soon.
-            Thanks for your time and have a nice day.
-        when: testname == "linux"
-
-      - name: Time for troubleshooting before full destroy
-        shell: "sleep {{ waittimebeforedestroy }}"
-        when: testname == "linux"

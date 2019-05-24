@@ -1,0 +1,6 @@
+ansible.cfg
+inventory
+tmp/
+**/*.swp
+**/*.pyc
+
