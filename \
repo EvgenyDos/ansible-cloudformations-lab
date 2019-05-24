@@ -33,24 +33,20 @@ class LookupModule(LookupBase):
   def run(self, paths, variables=None, **kwargs):
     results = []
     for path in paths:
-      path = '/'.join([ component for component in path.split('/') if len(component.strip()) > 0 ])
       curr_data = { 'topics': {}, 'rootpath': path }
       display.debug("Tasks lookup path: %s" % path)
       if os.path.exists(path) and os.path.isdir(path):
         for root, dirs, files in os.walk(path):
+          while root.startswith('/'): root = root[1:]
+          while root.endswith('/'): root = root[:-1]
 
-          if path == root[0:len(path)]:
-            root = root[len(path):]
-          else: continue
+          root = root[len(path)-1:]
 
           if root.count('/') != 2: continue
-
+         
           rootdir, topic, task_name = root.split('/')
 
-          display.vvvv("Current Rootdir is {0}".format(topic))
-    
           topic_data = { 'tasks': []}
-
           if topic in curr_data['topics'].keys():
             curr_data['topics'][topic]['tasks'].append(task_name)
           else:
