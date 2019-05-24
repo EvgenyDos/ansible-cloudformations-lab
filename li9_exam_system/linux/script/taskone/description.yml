@@ -1,0 +1,14 @@
+title:  Script
+description : |
+Create a script /data/script.sh with the following requirements:
+
+<ul>
+
+    <li>It returns <b>“Hello world”</b> if no arguments passed</li>
+    <li>It returns <b>“CentOS system”</b> if the first argument is <b>“centos”</b></li>
+    <li>It returns <b>“Not a CentOS system”</b> for any other options in the first argument</li>
+    <li>It should be executable for anyone</li>
+
+</ul>
+
+Note! You are allowed to use any programming language
