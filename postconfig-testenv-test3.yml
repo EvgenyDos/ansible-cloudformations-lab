@@ -1,87 +1,39 @@
----
-  - name:
-    hosts: "{{ vmhostip }}"
-    gather_facts: false
-    tasks:
+- name:
+  hosts: "{{ vmhostip }}"
+  gather_facts: false
 
-      - debug:
-          msg: "our inventnmame {{ playbookvminventoryname }}"
-        when: testname == "docker"
+  vars:
+    tasks_base_dir: "li9_exam_system/"
+    exam_name: "Linux system administration exam"
 
-      - name: Ensure SSH warning banner is configured
-        copy:
-          dest: "/etc/issue.net"
-          src: "files/issue.net"
-        when: testname == "docker"
+  tasks:
 
-      - name: add lines
-        lineinfile:
-         dest: /etc/ssh/sshd_config
-         line: 'Banner /etc/issue.net'
-        when: testname == "docker"
+    # Even not sure that we need to have 'when testname==linux'
+    - name: Executing the only tasks specific for 'linux' exam module
+      block:
 
-      - name: restart sshd
-        service:
-          name: sshd
-          state: restarted
-        when: testname == "docker"
+      - name: Get tasks
+        set_fact:
+          exam_tasks: "{{ lookup('listtasks', tasks_base_dir) }}"
 
-      - name: list of commands for prepare tests
-        file:
-          state: directory
-          path: /data
-          owner: root
-          group: root
-        when: testname == "docker"
+      - name: Save the tasks details for later using
+        set_stats:
+          data:
+            exam_tasks: "{{ exam_tasks }}"
 
-      - name: creating /data/removeme
-        file:
-          state: touch
-          path: /data/removeme
-          state: touch
-          mode: "u+rwx,g+rwx,o+rwx"
-        when: testname == "docker"
+      - name: Debug selected tasks
+        debug: var=exam_tasks
 
-      - name: create file with chattr +i
-        shell: chattr +i /data/removeme
-        when: testname == "docker"
-  
-      - name: enable additional repo for docker
-        shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
-        when: testname == "docker"
+      - name: Execute selected tasks specific ansible-tasks
+        include_tasks: "{{ exam_tasks.rootpath }}/{{ item.value.selected_task_path }}/pre_config.yml"
+        with_dict: "{{ exam_tasks.topics }}"
 
-      - name: Install a list of packages
-        yum:
-          name: "{{ packages }}"
-        vars:
-          packages:
-             - yum-utils
-             - device-mapper-persistent-data
-             - lvm2
-#             - docker-ce
-#             - docker-ce-cli
-#             - containerd.io
-        when: testname == "docker"
+      - name: Include additional task(s)
+        include_tasks: "{{ item }}"
+        loop:
+          - included_tasks/common_bootstrap.yml
+          - included_tasks/send_email.yml
 
-      - name: restart sshd
-        service:
-          name: docker
-          state: restarted
-        when: testname == "docker"
+      # end block section
+      when: testname == "linux"
 
-#      - name: send an email with results
-#        mail: 
-#          subject: "Postconfigurations has been done"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-#          body: 'Test-VM is redy for exam.'
-
-      - name: press to link for exam start
-        mail:
-          subject: "youre exam is ready"
-          to: "{{ useremailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-          from: "{{ adminemailnotifications }}"
-          subtype: html
-          body: "{{ lookup('template', 'templates/mail.html.j2') }}"
-        when: testname == "docker"

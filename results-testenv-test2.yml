@@ -3,153 +3,76 @@
     hosts: "{{ vmhostip }}"
     gather_facts: false
     tasks:
-#        command: "echo {{ postcheckpwd }} | passwd {{ studentname }} --stdin"
-#      - command: "curl -fsSL https://goss.rocks/install -o /root/install"
-#      - command: "chmod +rx /root/install"
-#      - command: "/root/install"
 
-      - shell: usermod -s /sbin/nologin {{ studentname }}
-        when: testname == "ansible"
+      - name: Make sure that the only tasks for linux module are being called
+        block:
+        - shell: usermod -s /sbin/nologin {{ studentname }}
 
-      - reboot:
-        when: testname == "ansible"
+        - name: Rebooting the examinating instance
+          reboot:
 
-#      - name: Reboot immediately.
-#        shell: "sleep 10 && reboot"
-#        async: 1
-#        poll: 0
+        - name: Downloading installer of goss
+          get_url:
+            url: "https://goss.rocks/install"
+            dest: "/root/install"
+            mode: "+x"
+            force: yes
 
-#      - name: Wait for the server to finish rebooting
-#        wait_for_connection:
-#          delay: 15
-#          sleep: 15
-#          timeout: 300
+        - name: Configuring Goss on the instance
+          shell: "{{ item }}"
+          loop:
+            - "/root/install"
 
-#      - name: Wait until SSH is available
-#        wait_for:
-#          host: '{{ vmhostip }}'
-#          port: 22
-#          delay: 30
-#          state: started
-#          timeout: 320
-#        delegate_to: localhost
+        - name: Create a directory for Goss configs
+          file:
+            path: /root/goss.d
+            state: directory
 
-      - name: Download installer of goss
-        get_url:
-          url: "https://goss.rocks/install"
-          dest: "/root/install"
-          force: yes
-        when: testname == "ansible"
+        - name: Copy main config file
+          copy:
+            dest: "/root/goss.d/{{ item.key }}.yaml"
+            src: "{{ exam_tasks.rootpath }}/{{ item.value.selected_task_path }}/goss.yaml"
+          with_dict: "{{ exam_tasks.topics }}"
 
-      - shell: "chmod +x /root/install"
-        when: testname == "ansible"
+        - name: Copy Goss scripts
+          copy:
+            src: "{{ item.src }}"
+            dest: "{{ item.dest }}"
+            mode: "+x"
+          loop:
+            - { src: "files/goss-results.sh", dest: "/root/goss-results.sh" }
+            - { src: "files/goss-ssh-results.sh", dest: "/root/goss-ssh-results.sh" }
 
-      - shell: "/root/install"
-        when: testname == "ansible"
+        - name: Install Goss and run it
+          shell: |
+            /root/goss-ssh-results.sh 
+            /root/goss-results.sh
 
-      - name: copy main config file
-        copy:
-          dest: /root/goss.yaml
-          src: "files/goss.yaml"
-        when: testname == "ansible"
+        - name: Grab the Goss results
+          shell: cat /root/results.txt
+          ignore_errors: True
+          register: bodymailreport
 
-      - name: copy main config file
-        copy:
-          dest: /root/goss-results.sh
-          src: "files/goss-results.sh"
-        when: testname == "ansible"
+        - name: Send an email with results
+          mail:
+            subject: "Test results"
+            to: "{{ adminemailnotifications }}"
+            from: "{{ adminemailnotifications }}"
+            body: "{{ bodymailreport.stdout }}"
 
-      - name: copy main config file
-        copy:
-          dest: /root/goss-ssh-results.sh
-          src: "files/goss-ssh-results.sh"
-        when: testname == "ansible"
+        - name: Send an email to user that cloudformation is done
+          mail:
+            subject: "Your exam-time has been ended."
+            to: "{{ useremailnotifications }}"
+            from: "{{ adminemailnotifications }}"
+            body: |
+              Your exam-time has been ended.
+              We will check the results of exam and contact with you soon.
+              Thanks for your time and have a nice day.
 
-#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --max-concurrent 1 --format tap"
-#        ignore_errors: True
-#        register: resultsoutput
+        - name: Time for troubleshooting before full destroy
+          shell: "sleep {{ waittimebeforedestroy }}"
 
-#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results.yml"
-#        ignore_errors: True
-#      - shell: "/usr/local/bin/goss -g /root/goss.yaml validate --format tap > results-for-mail.yml"
-#        ignore_errors: True
+        # Endblock
+        when: testname == "linux"
 
-#      - shell: echo " StrictHostKeyChecking no" >> /root/.ssh/config
-
-#      - shell: /root/goss-ssh-results.sh
-
-#      - shell: ssh sshuser@localhost "id" > /root/results-ssh-access
-
-      - shell: chmod +x /root/goss-results.sh
-        when: testname == "ansible"
-
-      - shell: chmod +x /root/goss-ssh-results.sh
-        when: testname == "ansible"
-
-      - shell: /root/goss-ssh-results.sh
-        when: testname == "ansible"
-
-      - shell: /root/goss-results.sh
-        when: testname == "ansible"
-
-#      - shell: ls -la /root/
-
-#      - lineinfile:
-#          path: /root/results-for-mail.txt
-#          regexp: '^ok'
-#          line: '<font color="green"> ok'
-
-      - shell: cat /root/results.txt
-        ignore_errors: True
-        register: bodymailreport
-        when: testname == "ansible"
-        
-#      - name: send an email with results
-#        mail:
-#          subject: "Test results"
-#          to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-#          body: "{{ resultsoutput.stdout }}"
-#          body: "{{ lookup('template', '{{ res }}') }}"
-      
-
-      - name: send an email with results
-        mail:
-          subject: "Test results"
-          to: "{{ adminemailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-          from: "{{ adminemailnotifications }}"
-          body: "{{ bodymailreport.stdout }}"
-        when: testname == "ansible"
-
-      - name: send an email  to user that cloudformation is done
-        mail:
-          subject: "Your exam-time has been ended."
-          to: "{{ useremailnotifications }}"
-#          from: Li9 Test <do-not-reply@li9.com>
-          from: "{{ adminemailnotifications }}"
-          body: |
-            Your exam-time has been ended.
-            We will check the results of exam and contact with you soon.
-            Thanks for your time and have a nice day.
-        when: testname == "ansible"
-
-#      - name: remove tower_host from our VM inventory
-#        tower_host:
-#          description: "remove VM ip from inventory"
-#          name:  "{{ vmhostip }}"
-#          inventory: "{{ playbookvminventoryname }}"
-#          tower_verify_ssl: no
-#          state: absent
-
-#  - name:
-#    hosts: localhost
-#    connection: local
-#    tasks:
-#      - name: sleep for "{{ waittimebeforedestroy }}" seconds and continue with play
-#        wait_for: timeout="{{ waittimebeforedestroy }}"
-#        delegate_to: localhost
-
-      - name: Time for troubleshooting before full destroy
-        shell: "sleep {{ waittimebeforedestroy }}"
-        when: testname == "ansible"
