@@ -3,7 +3,7 @@
   gather_facts: false
 
   vars:
-    tasks_base_dir: "li9_exam_system/"
+    tasks_base_dir: "li9_exam_system/{{ testname }}/"
     exam_name: "Linux system administration exam"
 
   tasks:

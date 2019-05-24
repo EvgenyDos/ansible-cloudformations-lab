@@ -1,0 +1,18 @@
+file:
+  /dev/mapper/examvg-vol1:
+    exists: true
+  /dev/mapper/examvg-vol2:
+    exists: true
+command:
+  lvs -o vg_extent_size,vg_name|grep examvg|awk '{print $1}'|uniq:
+    exit-status: 0
+    stdout:
+    - "2.00m"
+  lvs -o lv_size /dev/mapper/examvg-vol1 --noheadings|awk '{print $1}':
+    exit-status: 0
+    stdout:
+    - "200.00m"
+  lvs -o lv_size /dev/mapper/examvg-vol2 --noheadings|awk '{print $1}':
+    exit-status: 0
+    stdout:
+    - "300.00m"

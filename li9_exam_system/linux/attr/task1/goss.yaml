@@ -1,0 +1,3 @@
+file:
+  /data/removeme:
+    exists: false

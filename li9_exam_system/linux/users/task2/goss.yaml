@@ -1,0 +1,15 @@
+file:
+  /data/permissions:
+    exists: true
+    owner: examuser
+    group: examgroup
+    mode: "0600"
+user:
+  examuser:
+    exists: true
+    uid: 1800
+    groups:
+    - examgroup
+group:
+  examgroup:
+    exists: true
