@@ -7,7 +7,7 @@
 
 - name: Get the email body into a variable
   shell: "cat /tmp/mail2user.html; rm -rf /tmp/mail2user.html >/dev/null"
-  regiter: email
+  register: email
 
 
 - name: Send email with credentials to the job seeker
