@@ -4,5 +4,5 @@
     to: "{{ useremailnotifications }}"
     from: "{{ adminemailnotifications }}"
     subtype: html
-    body: "{{ lookup('../template', 'templates/mail.html.j2') }}"
+    body: "{{ lookup('template', '../templates/mail.html.j2') }}"
 
