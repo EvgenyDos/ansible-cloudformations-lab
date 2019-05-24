@@ -24,14 +24,10 @@
     <li>Your system will be auto-destroyed in "{{ examtime }}" seconds.</li>
 </ul>
 
-
 {% for topic in exam_tasks.topics %}
-<font color="green"><h1>Task {{ loop.index }} - {{ topic.selected_task_content.title }}</h1></font>
-{{ topic.selected_task_content.content }}
+<font color="green"><h1>Task {{ loop.index }} - {{ exam_tasks.topics[topic].selected_task_content.title }}</h1></font>
+{{ exam_tasks.topics[topic].selected_task_content.description }}
 {% endfor %}
 
-
 Note! Use the following command for checking <b>“ssh sshuser@localhost id” </b>. You can use any password for sshuser.
-
-
 </html>
