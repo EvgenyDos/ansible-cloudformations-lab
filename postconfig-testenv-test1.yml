@@ -27,6 +27,5 @@
       - name: Include additional task(s)
         include_tasks: "{{ item }}"
         loop:
-          - included_tasks/common_bootstrap.yml
+          - li9_exam_system/{{ testname }}/common_bootstrap.yml
           - included_tasks/send_email.yml
-
