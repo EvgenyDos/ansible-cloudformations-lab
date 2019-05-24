@@ -60,6 +60,5 @@ class LookupModule(LookupBase):
         results.append( curr_data )
       else:
         raise AnsibleError("Cound not locate directory: %s" % path)
-    # results.append(path)
     return results
 
