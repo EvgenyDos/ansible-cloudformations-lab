@@ -1,7 +1,0 @@
-file:
-  /root/results-ssh-access:
-    exists: true
-    contains:
-    - groups
-    - uid
-    - gid
