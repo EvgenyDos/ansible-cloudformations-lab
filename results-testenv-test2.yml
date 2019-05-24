@@ -4,7 +4,7 @@
     gather_facts: false
     tasks:
 
-      - name: Make sure that the only tasks for linux module are being called
+      - name: Make sure that the only tasks for ansible module are being called
         block:
         - shell: usermod -s /sbin/nologin {{ studentname }}
 
@@ -74,5 +74,5 @@
           shell: "sleep {{ waittimebeforedestroy }}"
 
         # Endblock
-        when: testname == "linux"
+        when: testname == "ansible"
 
