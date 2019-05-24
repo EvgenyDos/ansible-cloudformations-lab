@@ -40,7 +40,6 @@ class LookupModule(LookupBase):
           while root.startswith('/'): root = root[1:]
           while root.endswith('/'): root = root[:-1]
           if root.count('/') != 2: continue
-          local_path = root[len(path)+1:] # removing also trailing slash "/"
          
           rootdir, topic, task_name = root.split('/')
 
