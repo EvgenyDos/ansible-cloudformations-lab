@@ -4,8 +4,6 @@
     gather_facts: false
     tasks:
 
-      - name: Make sure that the only tasks for linux module are being called
-        block:
         - shell: usermod -s /sbin/nologin {{ studentname }}
 
         - name: Rebooting the examinating instance
