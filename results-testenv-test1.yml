@@ -15,19 +15,28 @@
           get_url:
             url: "https://goss.rocks/install"
             dest: "/root/install"
+            mode: "+x"
             force: yes
 
         - name: Configuring Goss on the instance
-          shell: "chmod +x /root/install"
+          shell: "{{ item }}"
           loop:
-            - "chmod +x /root/install"
             - "/root/install"
 
         - name: Copy main config file
           copy:
-            dest: /root/scriptgoss.yaml
+            dest: "/root/{{ item.key }}goss.yaml"
             src: "{{ exam_tasks.rootpath }}/{{ item.value.selected_task_path }}/goss.yaml"
           with_dict: "{{ exam_tasks.topics }}"
+
+        - name: Copy Goss scripts
+          copy:
+            src: "{{ item.src }}"
+            dest: "{{ item.dest }}"
+            mode: "+x"
+          loop:
+            - { src: "files/goss-results.sh", dest: "/root/goss-results.sh" }
+            - { src: "files/goss-ssh-results.sh", dest: "/root/goss-ssh-results.sh" }
 
         - name: Install Goss and run it
           shell: |
