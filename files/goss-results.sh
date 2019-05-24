@@ -2,11 +2,13 @@
 
 cat /dev/null > /root/results.txt
 
-for config in /root/goss.d/*.yaml; do
+pushd /root/goss.d/
+for config in *.yaml; do
   /usr/local/bin/goss -g "$config" validate --format tap --max-concurrent 1 | \
     egrep -v "ssh-access: exists: matches|exit-status: matches expectation" | \
     sed 1d >> /root/results.txt
 done
+popd
 
 
 echo "" >> /root/results.txt
