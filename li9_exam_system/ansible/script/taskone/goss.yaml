@@ -1,0 +1,13 @@
+command:
+  /data/script.sh:
+    exit-status: 0
+    stdout:
+    - "Hello world"
+  /data/script.sh centos:
+    exit-status: 0
+    stdout:
+    - "CentOS system"
+  /data/script.sh test:
+    exit-status: 0
+    stdout:
+    - "Not a CentOS system"

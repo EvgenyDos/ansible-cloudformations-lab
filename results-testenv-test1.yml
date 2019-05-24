@@ -72,7 +72,3 @@
 
         - name: Time for troubleshooting before full destroy
           shell: "sleep {{ waittimebeforedestroy }}"
-
-        # Endblock
-        when: testname == "linux"
-

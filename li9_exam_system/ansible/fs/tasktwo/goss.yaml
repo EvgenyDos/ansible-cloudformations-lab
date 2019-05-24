@@ -1,0 +1,9 @@
+mount:
+  /data/fs1:
+    exists: true
+    source:  /dev/mapper/examvg-vol1
+    filesystem: ext4
+  /data/fs2:
+    exists: true
+    source: /dev/mapper/examvg-vol2
+    filesystem: xfs
