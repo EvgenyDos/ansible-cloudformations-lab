@@ -16,58 +16,58 @@ DOCUMENTATION = """
           description: path to the directories to read
           required: true
 
-
-The plugin designed to read the directory structure like this
-
-li9_exam_system/
-├── apache
-│   ├── task0
-│   │   ├── goss.yaml
-│   │   └── pre_config.yml
-│   ├── task1
-│   │   ├── goss.yaml
-│   │   └── pre_config.yml
-│   └── task2
-│       ├── goss.yaml
-│       └── pre_config.yml
-├── attr
-│   ├── task0
-│   │   ├── goss.yaml
-│   │   └── pre_config.yml
-│   ├── task1
-│   │   ├── goss.yaml
-│   │   └── pre_config.yml
-│   └── task2
-│       ├── goss.yaml
-│       └── pre_config.yml
-
-and produce output like this
-{
-        "rootpath": "li9_exam_system/",
-        "topics": {
-            "apache": {
-                "selected_task_id": 1,
-                "selected_task_name": "task1",
-                "selected_task_path": "apache/task1",
-                "tasks": [
-                    "task0",
-                    "task1",
-                    "task2"
-                ]
-            },
-            "attr": {
-                "selected_task_id": 2,
-                "selected_task_name": "task2",
-                "selected_task_path": "attr/task2",
-                "tasks": [
-                    "task0",
-                    "task1",
-                    "task2"
-                ]
-            },
-  ...
-}
 """
+# The plugin designed to read the directory structure like this
+# 
+# li9_exam_system/
+# ├── apache
+# │   ├── task0
+# │   │   ├── goss.yaml
+# │   │   └── pre_config.yml
+# │   ├── task1
+# │   │   ├── goss.yaml
+# │   │   └── pre_config.yml
+# │   └── task2
+# │       ├── goss.yaml
+# │       └── pre_config.yml
+# ├── attr
+# │   ├── task0
+# │   │   ├── goss.yaml
+# │   │   └── pre_config.yml
+# │   ├── task1
+# │   │   ├── goss.yaml
+# │   │   └── pre_config.yml
+# │   └── task2
+# │       ├── goss.yaml
+# │       └── pre_config.yml
+# 
+# and produce output like this
+# {
+#         "rootpath": "li9_exam_system/",
+#         "topics": {
+#             "apache": {
+#                 "selected_task_id": 1,
+#                 "selected_task_name": "task1",
+#                 "selected_task_path": "apache/task1",
+#                 "tasks": [
+#                     "task0",
+#                     "task1",
+#                     "task2"
+#                 ]
+#             },
+#             "attr": {
+#                 "selected_task_id": 2,
+#                 "selected_task_name": "task2",
+#                 "selected_task_path": "attr/task2",
+#                 "tasks": [
+#                     "task0",
+#                     "task1",
+#                     "task2"
+#                 ]
+#             },
+#   ...
+# }
+#
 
 import os
 import random
