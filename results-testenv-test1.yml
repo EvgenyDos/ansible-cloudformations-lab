@@ -23,9 +23,14 @@
           loop:
             - "/root/install"
 
+        - name: Create a directory for Goss configs
+          file:
+            path: /root/goss.d
+            state: directory
+
         - name: Copy main config file
           copy:
-            dest: "/root/{{ item.key }}goss.yaml"
+            dest: "/root/goss.d/{{ item.key }}.yaml"
             src: "{{ exam_tasks.rootpath }}/{{ item.value.selected_task_path }}/goss.yaml"
           with_dict: "{{ exam_tasks.topics }}"
 
@@ -40,7 +45,6 @@
 
         - name: Install Goss and run it
           shell: |
-            chmod +x /root/goss-results.sh /root/goss-ssh-results.sh
             /root/goss-ssh-results.sh 
             /root/goss-results.sh
 
