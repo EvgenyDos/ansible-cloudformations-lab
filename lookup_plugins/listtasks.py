@@ -3,8 +3,6 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 
-
-
 DOCUMENTATION = """
     listtasks: file
       author: Dmitrii Mostovshchikov <dmadm2008@gmail.com>
@@ -101,7 +99,6 @@ By default this feature is enabled, but could be disabled by specifying an argum
 """
 
 
-
 import os
 import yaml
 import random
@@ -169,5 +166,3 @@ class LookupModule(LookupBase):
         raise AnsibleError("Cound not locate directory: %s" % path)
       return results
     pass
-
-
