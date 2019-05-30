@@ -1,0 +1,14 @@
+title: Web server
+description : |
+  Configure a HTTP service as follows:
+ 
+  * Service listens on **80** and **8080** ports.
+  * Commands `curl http://localhost` and `curl http://localhost:8080` should return **Hello, World**.
+
+explanation:
+  A participant should do following:
+  * install httpd package
+  * configure /etc/httpd/conf/httpd.conf with *Listen 80* and *Listen 8080*
+  * configure file `/var/www/html/index.html`
+  * configure SELinux port to enable apache run on ports 80 and 8080
+

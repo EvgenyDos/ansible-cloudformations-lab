@@ -1,0 +1,28 @@
+---
+- name: Just a dummy
+  debug: 
+    msg: There is nothing to configure
+
+
+- name: Stop and remove Apache from boot
+  service:
+    name: httpd
+    enabled: false
+    state: stopped
+
+
+- name: Remove modified files
+  file:
+    path: /etc/httpd/conf/httpd.conf
+    state: absent
+  loop:
+    - /etc/httpd/conf/httpd.conf
+    - /var/www/html/index.html
+
+
+- name: Uninstall Apache
+  package:
+    name: httpd
+    state: absent
+
+

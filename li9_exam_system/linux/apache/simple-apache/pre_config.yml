@@ -1,0 +1,5 @@
+---
+- name: Just a dummy
+  debug: 
+    msg: There is nothing to configure
+

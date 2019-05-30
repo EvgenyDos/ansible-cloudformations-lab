@@ -1,0 +1,46 @@
+---
+- name: Install Apache
+  package:
+    name: httpd
+    state: present
+
+
+- name: Configure Apache
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: "{{ item.what }}"
+    line: "{{ item.to }}"
+  loop:
+    - { what: "^Listen 80", to: "Listen 80" }
+    - { what: "^Listen 8080", to: "Listen 8080" }
+  register: apache_conf
+
+
+- name: Configure SELinux to listen on ports 80 and 8080
+  seport:
+    ports: 80,8080
+    proto: tcp
+    setype: http_port_t
+    state: present
+
+
+- name: Start service Apache
+  service:
+    name: httpd
+    enabled: true
+    state: started
+
+
+- name: Creating index.html
+  copy:
+    content: Hello, World
+    dest: /var/www/html/index.html
+    mode: "0644"
+
+
+- name: Restart Apache, if needed
+  service:
+    name: httpd
+    state: restarted
+  when: apache_conf is changed
+

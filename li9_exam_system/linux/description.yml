@@ -27,5 +27,5 @@ description : |
 completed_tasks:
   The list includes tasks which have been verified and completed.
   - `attr/modify-file`
-
+  - `apache/simple-apache`
 

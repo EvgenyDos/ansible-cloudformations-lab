@@ -1,0 +1,20 @@
+package:
+  httpd:
+    installed: true
+
+service:
+  httpd:
+    enabled: true
+    running: true
+
+command:
+  curl http://localhost:80:
+    exit-status: 0
+    stdout:
+    - "Hello, World"
+
+  curl http://localhost:8080:
+    exit-status: 0
+    stdout:
+    - "Hello, World"
+

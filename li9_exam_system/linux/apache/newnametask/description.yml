@@ -1,8 +1,0 @@
-title: Web server
-description : |
-  Configure a HTTP service as follows:
- 
-  * Service listens on **80** and **8080** ports.
-  * Commands _curl localhost_  and _curl localhost:8080_ return "**Hello, World**" (without quotes).
-  
-  Note! You are allowed to use any web server software
