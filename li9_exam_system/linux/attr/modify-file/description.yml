@@ -3,8 +3,8 @@ description : |
   There is an empty file `/data/message`.
 
   Modify the file `/data/message` as follows:
-  * Owner should be set as *manager*
-  * It should be owned by group *staff*.
+  * Owner should be set as *aria*
+  * It should be owned by group *stark*.
   * Permissions should be set as:
     * owner=read,write,execute
     * group=read,write
