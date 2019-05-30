@@ -1,0 +1,42 @@
+- hosts: "{{ target | default('target') }}"
+  gather_facts: false
+  become: true
+  tasks:
+
+  - name: Checking variables
+    assert:
+      that: task_path is defined
+      fail_msg: Variable task_path should be defined
+      success_msg: "Variable task_path defined as {{ task_path }}"
+    tags:
+      - always
+
+
+  - name: Running only pre-config tasks
+    block:
+
+    - name: Include tasks from the provided playbook
+      include_tasks: "{{ task_path }}/pre_config.yml"
+
+    tags:
+      - pre-config
+
+
+  - name: Running only reset-config tasks
+    block:
+
+    - name: Include tasks from the provided playbook
+      include_tasks: "{{ task_path }}/reset_config.yml"
+
+    tags:
+      - reset-config
+
+
+  - name: Running only do-task tasks
+    block:
+
+    - name: Include tasks from the provided playbook
+      include_tasks: "{{ task_path }}/do_task.yml"
+
+    tags:
+      - do-task

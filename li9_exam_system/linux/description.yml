@@ -24,3 +24,8 @@ description : |
     * Do not modify settings for user `centos`, any improper changes may affect the scoring process.
 
 
+completed_tasks:
+  The list includes tasks which have been verified and completed.
+  - `attr/modify-file`
+
+

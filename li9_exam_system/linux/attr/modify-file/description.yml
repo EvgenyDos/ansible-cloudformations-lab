@@ -1,0 +1,23 @@
+title: Modify a file
+description : |
+  There is an empty file `/data/message`.
+
+  Modify the file `/data/message` as follows:
+  * Owner should be set as *manager*
+  * It should be owned by group *staff*.
+  * Permissions should be set as:
+    * owner=read,write,execute
+    * group=read,write
+    * other=nothing
+    * existing content of the file cannot be modified
+    * new content can be added
+  * file should be renamed to `/data/message.fixed`
+  * file should contain a single line *Updated*.
+  * file `/data/message` should not exist
+
+  *Note!*: The content of the file should remain unchanged.
+explanation: |
+  This file is protected as `chattr +i /data/message` and cannot be modified without clearing this flag.
+  Permissions should be changed to `chattr -i +a /data/message`. To update other attributes use `chmod`, and 
+  create group *staff* if it does not exist.
+

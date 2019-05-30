@@ -1,0 +1,17 @@
+---
+- name: Make sure directory /data exists
+  file:
+    path: /data
+    state: directory
+
+
+- name: Update attributes
+  file:
+    path: /data/message
+    attributes: +i
+    modification_time: preserve
+    access_time: preserve
+    owner: root
+    group: root
+    state: touch
+

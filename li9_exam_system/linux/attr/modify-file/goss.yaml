@@ -1,0 +1,28 @@
+user:
+  centos:
+    exists: true
+
+group:
+   data:
+     exists: true
+
+
+file:
+  /data/message:
+    exists: false
+  /data/message.fixed:
+    exists: true
+    mode: "0640"
+    owner: aria
+    group: stark
+    filetype: file
+    contains:
+    - "Updated"
+
+command:
+  /usr/bin/lsattr /data/message.fixed:
+    exit-status: 0
+    stdout:
+    - "-----a---------- /data/message.fixed"
+    stderr: []
+

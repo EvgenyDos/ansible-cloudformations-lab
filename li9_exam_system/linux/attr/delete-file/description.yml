@@ -1,4 +1,5 @@
 title: Delete file
 description : |
   Delete file `/data/deleteme`.
-
+explanation: |
+  This file is protected as chattr +i /data/deleteme.

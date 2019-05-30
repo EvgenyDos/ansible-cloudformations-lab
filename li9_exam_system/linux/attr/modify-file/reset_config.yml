@@ -1,0 +1,30 @@
+---
+- name: Clean +i attribute on files /data/message and /data/message.fixed
+  file:
+    path: "{{ item }}"
+    attr: -ia
+    state: touch
+  loop:
+    - /data/message.fixed
+    - /data/message
+
+
+- name: Make sure files /data/message and /data/message.fixed do not exist
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /data/message.fixed
+    - /data/message
+
+- name: Remove user aria
+  user:
+    name: stark
+    state: absent
+    force: true
+    remove: true
+
+- name: Remove group stark
+  group:
+    name: stark
+

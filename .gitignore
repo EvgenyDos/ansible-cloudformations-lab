@@ -3,4 +3,5 @@ inventory
 tmp/
 **/*.swp
 **/*.pyc
+**/*.retry
 

@@ -1,0 +1,36 @@
+---
+- name: Cleaning lsattr attributes and delete file /data/message
+  file: 
+    path: /data/message
+    attributes: -ia
+    state: touch
+
+
+- name: Removing file /data/message
+  file: 
+    path: /data/message
+    state: absent
+
+
+- name: Adding group data, if does not exist
+  group:
+    name: stark
+
+- name: Adding user centos, if does not exist
+  user:
+    name: aria
+
+- name: Put a content into the file
+  copy:
+    content: "Updated"
+    dest: /data/message.fixed
+    mode: "0640"
+    owner: aria
+    group: stark
+
+
+- name: Set up needed lsattr attributes
+  file:
+    path: /data/message.fixed
+    attributes: "+a"
+
