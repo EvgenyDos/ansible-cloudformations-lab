@@ -1,0 +1,21 @@
+title: LVM and Filesystems
+description : |
+  You should configure the system as follows:
+  
+  * Volume group named **examvg** exists.
+  * Volume group extent size is **2M**.
+  * Logical volume named **vol1** exists:
+
+    * **vol1** belongs to the **examvg** volume group
+    * Size is **200M**
+    * **vol1** is mounted at boot to `/data/fs1` as EXT4 filesystem
+    
+  * Logical volume named **vol2** exists
+
+    * **vol2** belongs to the **examvg** volume group
+    * Size is **300M**
+    * **vol2** is mounted at boot to `/data/fs2` as XFS filesystem
+  
+  **Note!** This task may require to look for a free block device which is already attached to the exam  system.
+  Do not use any used block devices.
+

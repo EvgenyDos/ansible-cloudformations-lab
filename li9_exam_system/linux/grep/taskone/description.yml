@@ -1,3 +1,0 @@
-title:  TExt
-description : |
- Create a new file named <b>/etc/task7</b>. The file should contain all lines which contain the <b>“abc”</b> substring from <b>/etc/services</b>

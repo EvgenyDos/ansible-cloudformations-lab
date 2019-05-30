@@ -1,10 +1,8 @@
-title:  Web server
+title: Web server
 description : |
-  Configure on the exam system an HTTP service as follows:
-  
-  <ul>
-          <li>Service listens on <b>80</b> and <b>8080</b> ports </li>
-          <li>Commands “curl localhost”  and “curl localhost:8080” return <b>“Li9 exam task 4”</b>.</li>
-  </ul>
+  Configure a HTTP service as follows:
+ 
+  * Service listens on **80** and **8080** ports.
+  * Commands _curl localhost_  and _curl localhost:8080_ return "**Hello, World**" (without quotes).
   
   Note! You are allowed to use any web server software

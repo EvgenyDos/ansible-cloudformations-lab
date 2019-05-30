@@ -1,0 +1,6 @@
+title: Text
+description : |
+ Create a file `/etc/file`:
+ 
+ * It should contain all lines which contain the *abc* substring from `/etc/services`.
+

@@ -1,0 +1,40 @@
+title: Access management
+description : |
+  Managing users, groups, and permissions.
+
+
+  Users:
+    
+  * Create a user *john*, with UID 1004.
+  * Create a user *robb*, with UID 1005.
+  * Create a user *tyrion*, with UID 1006.
+  * Create a user *aria*, with UID 1007.
+
+
+  Groups:
+
+  * Create a group *infra* with GID 3004.
+  * Create a group *qa* with GID 3005.
+
+
+  Membership:
+
+  * Users *john* and *robb* are members of *infra* group.
+  * Users *tyrion* and *aria* are members of *qa* group.
+  * Members of group *infra* should have a shell `/bin/bash`.
+  * Members of group *qa* should have a shell `/bin/sh`.
+
+
+  Directories:
+  
+  * Create directory `/devops/infra`:
+    * The only users of group *infa* should have permissions to read and write in there.
+    * No other users should have access there
+    * Files and directories created in this directory should be owned by users who create them. Other users should be able to read and write such files.
+  * Create directory `/devops/qa`:
+    * Members of group *qa* should have permissions to write in this directory.
+    * Other users should have permissions to read files and directories in there.
+  * Create directory `/devops/common`:
+    * All users should have all permissions.
+    * Files created by users should be owned by those users.
+

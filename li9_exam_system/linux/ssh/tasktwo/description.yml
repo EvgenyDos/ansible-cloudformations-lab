@@ -1,8 +1,0 @@
-title:  Passwordless ssh access
-description : |
-  Configure your system to allow passwordless access for the local root user to do ssh as <b>“sshuser@localhost”</b>.
-  
-  Note! Use the following command for checking <b>“ssh sshuser@localhost id” </b>. You can use any password for sshuser.
-  '
-  
-  </html>

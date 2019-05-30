@@ -1,14 +1,26 @@
-title:  Li9 Test system environment
+title:  Li9 Test System Environment
+format: markdown
 description : |
-  <font color="red"><h1>Before you begin</h1></font>
-  
+  Your environment is ready and you can start the hands-on tests. **Read the below instructions carefully before you begin**.
+
+  See more information about requirements there [(Red Hat Certified Administrator exam](https://www.redhat.com/en/services/training/ex200-red-hat-certified-system-administrator-rhcsa-exam)).
+
+  ## Exam rules
+
   You need to be aware of the following rules:
-  <ul>
-      
-          <li>All task results will be validates after system reboot</li>
-          <li>All tasks will be validated using SSH via centos user. Do not make any changes in /home/centos/.ssh/ authorized_key file</li>
-          <li>You are not allowed to change any network settings like routes, ip addresses, firewall settings</li>
-          <li>You are not allowed to change SELinux state from “enforcing”</li>
-  
-  </ul>
-  
+    * All task results will be validated after system reboot.
+    * All tasks will be validated using SSH via centos user. Do not make any changes in `/home/centos/.ssh/authorized_key` file.
+    * You are not allowed to change any network settings like routes, ip addresses, firewall settings.
+    * You are not allowed to change SELinux state from *"enforcing"*.
+
+
+  ## Recommendations
+
+    * Read all tasks and then start doing them.
+    * First complete the most easier for you tasks.
+    * Do not spend much time on doing a single task, you can return and finish it later.
+    * Reboot the server to make sure that your changes persist and will not be lost after rebooting.
+    * Partially completed tasks are not scored.
+    * Do not modify settings for user `centos`, any improper changes may affect the scoring process.
+
+
