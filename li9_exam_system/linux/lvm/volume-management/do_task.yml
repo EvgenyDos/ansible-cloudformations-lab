@@ -26,7 +26,7 @@
   lvg:
     vg: "{{ item.vgname }}"
     pvs: "{{ item.phys_dev }}{{ item.part_number }}"
-    pesize: "{{ item.pe_size }}"
+    pesize: "{{ item.pe_size }}m"
   loop: "{{ lvm_conf }}"
 
 
@@ -44,6 +44,27 @@
     fstype: "{{ item[1].fstype }}"
     dev: "/dev/{{ item[0].vgname }}/{{ item[1].name }}"
   loop: "{{ lvm_conf | subelements('log_vols') }}"
+
+
+- name: Assign labels on file systems
+  shell: |
+    {% if item[1].fstype|lower == "ext4" %}
+      tune2fs -L {{ item[1].label }} /dev/{{ item[0].vgname }}/{{ item[1].name }}
+    {% elif item[1].fstype|lower == "xfs" %}
+      xfs_admin -L {{ item[1].label }} /dev/{{ item[0].vgname }}/{{ item[1].name }}
+    {% else %}
+      echo "Unknown type of file system ({{ item[1].fstype }}) on /dev/{{ item[0].vgname }}/{{ item[1].name }}"
+      exit 1
+    {% endif %}
+  loop: "{{ lvm_conf | subelements('log_vols') }}"
+  register: labeling_status
+
+
+- name: Check that labeling is done correctly
+  assert:
+    that: labeling_status is changed
+    fail_msg: "Labeling failed: {{ labeling_status }}"
+    success_msg: "Labeling done successfully"
 
 
 - name: Mount file systems

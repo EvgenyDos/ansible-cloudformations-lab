@@ -1,18 +1,66 @@
 file:
-  /dev/mapper/examvg-vol1:
+  /dev/vgroup1/static-data:
     exists: true
-  /dev/mapper/examvg-vol2:
+  /dev/vgroup1/database:
     exists: true
-command:
-  lvs -o vg_extent_size,vg_name|grep examvg|awk '{print $1}'|uniq:
+  /dev/vgroup2/runtime-data:
+    exists: true
+
+
+mount:
+  /volumes/static-data:
+    exists: true
+    filesystem: ext4
+    source: /dev/mapper/vgroup1-static--data
+    opts:
+      - ro
+  /volumes/database:
+    exists: true
+    filesystem: xfs
+    source: /dev/mapper/vgroup1-database
+    opts: 
+      - rw
+  /volumes/runtime-data:
+    exists: false
+    filesystem: xfs
+    source: /dev/mapper/vgroup2-runtime--data
+    opts:
+      - rw
+
+
+command: 
+  # Check sizes of physical extents
+  lvs -o vg_extent_size --noheadings --unit B vgroup1/database | awk '{print $1}':
     exit-status: 0
     stdout:
-    - "2.00m"
-  lvs -o lv_size /dev/mapper/examvg-vol1 --noheadings|awk '{print $1}':
+      - "2097152B"
+  lvs -o vg_extent_size --noheadings --unit B vgroup2/runtime-data | awk '{print $1}':
     exit-status: 0
     stdout:
-    - "200.00m"
-  lvs -o lv_size /dev/mapper/examvg-vol2 --noheadings|awk '{print $1}':
+      - "4194304B"
+  # Check sizes of volumes
+  lvs --noheadings -o lv_name,lv_size vgroup1/database | awk '{print $1,$2}':
     exit-status: 0
     stdout:
-    - "300.00m"
+      - "database 384.00m"
+  lvs --noheadings -o lv_name,lv_size vgroup1/static-data | awk '{print $1,$2}':
+    exit-status: 0
+    stdout: 
+      - "static-data 128.00m"
+  lvs --noheadings -o lv_name,lv_size vgroup2/runtime-data | awk '{print $1,$2}':
+    exit-status: 0
+    stdout: 
+      - "runtime-data 512.00m"
+  # Check that the file systems can be mounted
+  mount -a && grep /volumes/static-data /proc/mounts | awk '{print $2}':
+    exit-status: 0
+    stdout:
+      - "/volumes/static-data"
+  mount -a && grep /volumes/database /proc/mounts | awk '{print $2}':
+    exit-status: 0
+    stdout:
+      - "/volumes/database"
+  umount /volumes/runtime-data 2>/dev/null || true && mount -a && grep /volumes/runtime-data /proc/mounts | awk '{print $2}':
+    exit-status: 0
+    stdout: [ ]
+

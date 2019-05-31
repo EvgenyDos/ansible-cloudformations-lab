@@ -33,4 +33,5 @@ completed_tasks:
 
   - `attr/modify-file`
   - `apache/simple-apache`
+  - `lvm/volume-management`
 

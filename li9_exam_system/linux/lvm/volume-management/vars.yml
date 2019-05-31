@@ -4,28 +4,31 @@ lvm_conf:
     part_start: 1MiB
     part_end: 514MiB
     part_number: 1
-    pe_size: 2m
+    pe_size: 2
     log_vols:
       - name: static-data
         size_m: "128"
         fstype: ext4
         mount_opts: "ro"
         mount_point: /volumes/static-data
+        label: STATIC-DATA
       - name: database
         size_m: "384"
         fstype: xfs
         mount_point: /volumes/database
+        label: DATABASE
 
   - vgname: vgroup2
     phys_dev: /dev/xvdf
     part_start: 515MiB
     part_end: 1540MiB
     part_number: 2
-    pe_size: 4m
+    pe_size: 4
     log_vols:
       - name: runtime-data
         size_m: "512"
         fstype: xfs
         mount_opts: "noauto"
         mount_point: /volumes/runtime-data
+        label: RUNTIME-DATA
 
