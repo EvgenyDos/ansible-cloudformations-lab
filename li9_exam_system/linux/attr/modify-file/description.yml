@@ -3,6 +3,7 @@ description : |
   There is an empty file `/data/message`.
 
   Modify the file `/data/message` as follows:
+
   * Owner should be set as *aria*
   * It should be owned by group *stark*.
   * Permissions should be set as:
@@ -15,7 +16,6 @@ description : |
   * file should contain a single line *Updated*.
   * file `/data/message` should not exist
 
-  *Note!*: The content of the file should remain unchanged.
 explanation: |
   This file is protected as `chattr +i /data/message` and cannot be modified without clearing this flag.
   Permissions should be changed to `chattr -i +a /data/message`. To update other attributes use `chmod`, and 

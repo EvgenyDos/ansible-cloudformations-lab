@@ -1,0 +1,53 @@
+---
+- name: Include vars from external file
+  include_vars: vars.yml
+
+
+- name: Unmount file systems
+  mount:
+    path: "{{ item[1].mount_point }}"
+    src: "/dev/{{ item[0].vgname }}/{{ item[1].name }}"
+    fstype: "{{ item[1].fstype }}"
+    opts: "{{ item[1].mount_opts | default('defaults') }}"
+    state: absent
+  loop: "{{ lvm_conf | subelements('log_vols') }}"
+
+
+- name: Remove logical volumes
+  lvol:
+    vg: "{{ item[0].vgname }}"
+    lv: "{{ item[1].name }}"
+    size: "{{item[1].size_m }}"
+    active: true
+    state: absent
+    force: true
+  loop: "{{ lvm_conf | subelements('log_vols') }}"  
+
+
+- name: Remove volume groups
+  lvg:
+    vg: "{{ item.vgname }}"
+    pvs: "{{ item.phys_dev }}{{ item.part_number }}"
+    pesize: "{{ item.pe_size }}"
+    state: absent
+  loop: "{{ lvm_conf }}"
+
+
+- name: Remove partitions
+  parted:
+    unit: MiB
+    device: "{{ item.phys_dev }}"
+    state: absent
+    flags: [ lvm ]
+    number: "{{ item.part_number }}"
+    part_type: primary
+    part_start: "{{ item.part_start }}"
+    part_end: "{{ item.part_end }}"
+  loop: "{{ lvm_conf }}"
+
+    
+- name: Uninstall LVM package
+  package: 
+    name: lvm2
+    state: absent
+

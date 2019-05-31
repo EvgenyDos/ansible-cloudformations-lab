@@ -8,6 +8,7 @@ description : |
   ## Exam rules
 
   You need to be aware of the following rules:
+
     * All task results will be validated after system reboot.
     * All tasks will be validated using SSH via centos user. Do not make any changes in `/home/centos/.ssh/authorized_key` file.
     * You are not allowed to change any network settings like routes, ip addresses, firewall settings.
@@ -24,8 +25,12 @@ description : |
     * Do not modify settings for user `centos`, any improper changes may affect the scoring process.
 
 
+comments: |
+  CSS file for rendered html file migth be taken here https://github.com/sindresorhus/github-markdown-css.
+
 completed_tasks:
   The list includes tasks which have been verified and completed.
+
   - `attr/modify-file`
   - `apache/simple-apache`
 

@@ -1,0 +1,27 @@
+title: LVM and Filesystems
+description : |
+  You should configure the system as described below.
+  To complete this task look for an unused (unallocated) space on any block device and use it. Don't modify any existing volumes and file systems.
+
+  * Volume *vgroup1*:
+    * Size of the volume group is *512 MiB*.
+    * Size of a physical extent should be *2 MiB*.
+    * Has a logical volume named *static-data*:
+      * size of the logical volume is *128 MiB*
+      * the logical volume should be mounted as `/volumes/static-data` at a boot  time
+      * the mounted file system should be available in *Read-Only* mode.
+    * Has a logical volume named *database*:
+      * size of the logical volume gets all free space in the group
+      * *database* is mounted at boot to `/volumes/database` as EXT4 filesystem.
+  * Logical group *vgroup2*:
+    * Size of the volume group is *1024 MiB*.
+    * Size of a physical extent should be *2 MiB*.
+    * Has a logical volume named *runtime-data*:
+      * the volume should take 100% of size of the volume group
+      * when run a command `mount /volumes/runtime-data` it is mounted as `/volumes/runtime-data`.
+ 
+  *Attention*: Pay attention on a unit size!
+
+  *Note!* This task may require to look for a free block device which is already attached to the exam system.
+  Do not use any used block devices.
+
