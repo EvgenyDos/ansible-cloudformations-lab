@@ -64,3 +64,17 @@ command:
     exit-status: 0
     stdout: [ ]
 
+  # Check labels
+  blkid -L DATABASE:
+    exit-status: 0
+    stdout: 
+      - "/dev/mapper/vgroup1-database"
+  blkid -L RUNTIME-DATA:
+    exit-status: 0
+    stdout: 
+      - "/dev/mapper/vgroup2-runtime--data"
+  blkid -L STATIC-DATA:
+    exit-status: 0
+    stdout: 
+      - "/dev/mapper/vgroup1-static--data"
+
