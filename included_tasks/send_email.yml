@@ -1,13 +1,38 @@
 ---
-- name: Render an email body
+- name: Install Pip package
+  package:
+    name: python2-pip.noarch
+    state: present
+
+
+- name: Install Markdown2 pip module
+  pip:
+    name: "markdown2"
+
+
+- name: Copy parts of the message to the managed host
   template:
-    src: "../templates/mail.html.j2"
-    dest: "/tmp/mail2user.html"
+    src: "templates/{{ item }}.j2"
+    dest: "/tmp/{{ item }}"
+  vars: 
+    css_style_file: "files/tasks-css.html"
+  loop:
+    - "mail-header.html"
+    - "mail-footer.html"
+    - "mail-body.md"
 
 
-- name: Get the email body into a variable
-  shell: "cat /tmp/mail2user.html; rm -rf /tmp/mail2user.html >/dev/null"
-  register: email
+- name: Render HTML from Markdown
+  shell: "{{ item }}"
+  loop:
+    - "markdown2 /tmp/mail-body.md > /tmp/mail-body.html && rm -f /tmp/mail-body.md"
+    - "cat /tmp/{mail-header.html,mail-body.html,mail-footer.html} > /tmp/mail.html"
+
+
+- name: Get the rendered mail message to localhost
+  fetch:
+    src: "/tmp/mail.html"
+    dest: "~/tmp/final-mailbody.html"
 
 
 - name: Send email with credentials to the job seeker

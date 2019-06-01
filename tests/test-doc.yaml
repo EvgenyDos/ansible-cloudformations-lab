@@ -1,5 +1,5 @@
 - hosts: 
-  - localhost
+  - target
   gather_facts: false
   vars:
     testname: linux
@@ -12,30 +12,10 @@
         set_fact:
           exam_tasks: "{{ lookup('listtasks', tasks_base_dir, content=True) }}"
 
+
       - debug: var=exam_tasks
 
 
-      - name: Put docs into a file
-        copy:
-          content: |
-            # {{ exam_tasks.content.title }}
-
-            {{ exam_tasks.content.description }}
-
-            ## Exercises
-
-            {% for topic in exam_tasks.topics %}
-            {% if exam_tasks.topics[topic].selected_task_content.ready %}
-            ### Task {{ loop.index }}: {{ exam_tasks.topics[topic].selected_task_content.title }}
-            
-            {{ exam_tasks.topics[topic].selected_task_content.description }}
-            {% else %}
-            ### Task {{ loop.index }} - No title (no data)
-
-            == No task description (no data) ==
-            {% endif %}
-            {% endfor %}
-
-            **Note!** Use the following command for checking `ssh sshuser@localhost id`. You can use any password for ssh user.
-          dest: ~/tmp/rendered-doc.md
+      - name: Including sending mails
+        include_tasks: "included_tasks/send_email.yml"
 
