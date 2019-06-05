@@ -1,0 +1,4 @@
+---
+- debug:
+    msg: "There is nothing to pre configure"
+

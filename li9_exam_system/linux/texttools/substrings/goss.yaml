@@ -1,7 +1,7 @@
 file:
-  /etc/task7:
+  /etc/file:
     exists: true
     contains:
     - abcvoice-port
     - abcsoftware
-    - omabcastltkm
+

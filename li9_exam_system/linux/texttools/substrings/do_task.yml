@@ -1,0 +1,5 @@
+---
+- name: Creating /etc/file with the content as needed
+  shell: |
+    awk '/^abc/ {print $1}' /etc/services | uniq > /etc/file
+

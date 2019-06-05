@@ -1,0 +1,6 @@
+---
+- name: Make sure file /etc/file does not exist
+  file:
+    path: /etc/file
+    state: absent
+
