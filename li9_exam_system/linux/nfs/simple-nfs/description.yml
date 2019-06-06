@@ -1,0 +1,11 @@
+title: NFS server
+description : |
+  Configure your system as NFS server as follows:
+
+  * NFS service exports `/nfs_export` directory for anyone.
+  * `/nfs_export` is exported in Read-Write mode.
+  * Any NFS user should have Read-Write access to the share.
+  * Files created on this share from remote hosts should be owned by user *nfsstore*.
+  * On the NFS server, the only user *nfsstore* should have read-write access to the files below `/nfs_export`. Other users don't have any permissions.
+  * All created files and directories by NFS clients should be owned by *nfsstore* user.
+

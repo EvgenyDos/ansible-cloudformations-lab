@@ -40,3 +40,49 @@
 
     tags:
       - do-task
+
+
+  - name: Run Goss tests
+    block:
+     
+      - name: Install Goss
+        get_url:
+          dest: /usr/local/bin/goss
+          group: root
+          owner: root
+          mode: '0755'
+          url: "https://github.com/aelsabbahy/goss/releases/download/0.3.6/goss-linux-amd64"
+
+      - name: Register a temp directory for goss.yml
+        tempfile:
+          state: directory
+        register: temp_dir
+
+      - name: Create temprorary directory "{{ temp_dir }}"
+        file: 
+          path: "{{ temp_dir.path }}"
+          state: directory
+
+      - name: Copy goss.yml of the task to the managed host
+        copy:
+          src: "{{ task_path }}/goss.yaml"
+          dest: "{{ temp_dir.path }}/goss.yaml"
+
+      - name: Run goss validate
+        command: "/usr/local/bin/goss -g {{ temp_dir.path }}/goss.yaml validate"
+        register: goss_output
+
+      - name: Display Goss output
+        debug:
+          var: goss_output.stdout
+
+      - name: Delete temprorary files/directory "{{ temp_dir.path }}"
+        file:
+          path: "{{ temp_dir.path }}"
+          state: absent
+          force: true
+
+    tags:
+      - do-goss
+      - validate
+

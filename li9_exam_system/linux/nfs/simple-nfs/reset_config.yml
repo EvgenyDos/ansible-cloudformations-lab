@@ -1,0 +1,33 @@
+---
+- name: Stop NFS server
+  service:
+    name: nfs-server
+    state: stopped
+
+
+- name: Uninstall NFS server
+  package:
+    name: nfs-server
+    state: absent
+
+
+- name: Remove /nfs_export directory
+  file: 
+    path: /nfs_export
+    force: true
+    state: absent
+
+
+- name: Remove user nfsstore
+  user:
+    name: nfsstore
+    state: absent
+    force: true
+    remove: true
+
+
+- name: Delete file /etc/exports
+  file:
+    path: /etc/exports
+    state: absent
+

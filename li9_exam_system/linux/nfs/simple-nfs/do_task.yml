@@ -1,0 +1,54 @@
+--- 
+- name: Set some variables
+  set_fact:
+    nfsdir: /nfs_export
+
+
+- name: Install package nfs-utils
+  package:
+    name: nfs-utils
+    state: present
+
+
+- name: NFS service enabled and run
+  service:
+    name: nfs-server
+    enabled: on
+    state: started
+
+
+- name: Create user 
+  user:
+    name: nfsstore
+    uid: 10501
+
+
+- name: Create directory "{{ nfsdir }}"
+  file:
+    path: "{{ nfsdir }}"
+    state: directory
+    owner: nfsstore
+    mode: u=rwx,g=,o=
+
+
+- name: Update "{{ nfsdir }}"
+  copy: 
+    content: >
+      {{ nfsdir }}    *(rw,all_squash,anonuid=10501)
+    dest: /etc/exports
+  register: config_updated
+
+
+- name: Apply new SELinux file context to filesystem
+  command: "{{ item }}"
+  loop:
+    - "semanage fcontext -a -t var_lib_nfs_t '{{ nfsdir }}(/.*)?'"
+    - "restorecon -irv {{ nfsdir }}"
+
+
+- name: Restart NFS server
+  service:
+    name: nfs-server
+    state: restarted
+  when: config_updated is changed
+

@@ -1,0 +1,38 @@
+package:
+  nfs-utils:
+    installed: true
+
+
+service:
+  nfs-server:
+    enabled: true
+    running: true
+
+
+user:
+  nfsstore:
+    exists: true
+
+
+file:
+  /nfs_export:
+    exists: true
+    mode: "0700"
+    owner: nfsstore
+    filetype: directory
+
+
+command:
+  exportfs:
+    exit-status: 0
+    stdout:
+      - "/nfs_export   	<world>"
+
+#  umount -f /mnt >/dev/null; mount 127.0.0.1:/nfs_export /mnt || true:
+#    exit-status: 0
+  
+  umount -f /mnt 2>/dev/null; mount 127.0.0.1:/nfs_export /mnt && touch /mnt/testfile && stat -c %U%a /mnt/testfile; rm -rf /mnt/testfile >/dev/null; umount -f /mnt || true:
+    exit-status: 0
+    stdout:
+      - "nfsstore644"
+  
