@@ -1,0 +1,26 @@
+---
+- name: Create an empty file
+  command: dd if=/dev/zero of=/virtual-dev-storage bs=1M count=512
+
+
+- name: Create a file system on the file
+  filesystem:
+    dev: /virtual-dev-storage
+    fstype: ext4
+    opts: -m 0
+
+
+- name: Create the mount point /opt/virtual-storage
+  file:
+    path: /opt/virtual-storage
+    state: directory
+
+
+- name: Mount the file system and update /etc/fstab
+  mount:
+    fstype: ext4
+    path: /opt/virtual-storage
+    src: /virtual-dev-storage
+    state: mounted
+    opts: loop
+

@@ -1,0 +1,21 @@
+---
+- name: Unmount the file system and update /etc/fstab
+  mount:
+    fstype: ext4
+    path: /opt/virtual-storage
+    src: /virtual-dev-storage
+    state: absent
+    opts: loop
+
+
+- name: Delete the storage file
+  file: 
+    path: /virtual-dev-storage
+    state: absent
+
+
+- name: Delete the mount point /opt/virtual-storage
+  file:
+    path: /opt/virtual-storage
+    state: absent
+

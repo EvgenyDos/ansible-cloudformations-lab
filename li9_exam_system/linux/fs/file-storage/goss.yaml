@@ -1,0 +1,26 @@
+file:
+  /virtual-dev-storage:
+    exists: true
+    size: 536870912
+    filetype: file
+  /opt/virtual-storage:
+    exists: true
+    filetype: directory
+
+
+mount:
+  /opt/virtual-storage:
+    exists: true
+    filesystem: ext4
+    source:
+      have-prefix: "/dev/loop"
+
+
+command:
+  df --output=source /opt/virtual-storage | tail -1 | grep loop:
+    exit-status: 0
+  tune2fs -l $(df --output=source /opt/virtual-storage | tail -1 | grep loop) | grep "Reserved block count":
+    exit-status: 0
+    stdout:
+    - "Reserved block count:     0"
+

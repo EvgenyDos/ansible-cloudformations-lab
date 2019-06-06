@@ -40,5 +40,5 @@ completed_tasks:
   - `ssh/root-sshuser`
   - `users/basic-attributes`
   - `users/users-and-groups`
-
+  - `fs/file-storage`
 

@@ -1,0 +1,12 @@
+title: Filesystems
+description : |
+  Constructing a new file system over existing file system.
+
+  An application needs a separate block device and a file system on it to run successfully but the server does not have any unused block devices. Configure your system as follows:
+
+  * create a file sized *512 MiB* as /virtual-dev-storage
+  * create *Ext4* file system on it. Do not preserve any space for *root* user
+  * do the file system available as `/opt/virtual-storage`
+
+  **Note!**. The file system should remain available on the specified mount point after reboot. 
+
