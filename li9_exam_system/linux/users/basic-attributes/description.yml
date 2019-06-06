@@ -1,13 +1,13 @@
-title: Users and Groups
+title: Users, Groups, and Permissions
 description : |
   You should configure the system as follows:
-  <ul>
-      <li><b>file "/data/permissions"</b> exists</li>
-      <li><b>file "/data/permissions"</b> is owned by <b>“examuser”</b> user</li>
-      <li><b>file "/data/permissions"</b> is owned by <b>“examgroup”</b> group</li>
-      <li><b>file "/data/permissions"</b> should not be executable</li>
-      <li>User <b>“examuser”</b> is a member of <b>“examgroup”</b></li>
-      <li>User <b>“examuser”</b> has UID <b>“1800”</b></li>
-      <li>Only <b>"examuser"</b> has read write access to <b>"/data/permissions"</b></li>
-      <li>No any other users are able to read or write to <b>"/data/permissions"</b></li>
-  </ul>
+
+  * file `/users/permissions` exists
+  * file `/users/permissions` is owned by *examuser* user
+  * file `/users/permissions` is owned by *examgroup* group
+  * file `/users/permissions` can be modified by the owner
+  * file `/users/permissions` can be read by owner and members of group *examgroup*, others can do nothing
+  * file `/users/permissions` cannot be executed
+  * user *examuser* has a primary group *examgroup*
+  * user *examuser* has UID *1800*
+

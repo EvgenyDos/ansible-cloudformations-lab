@@ -1,0 +1,28 @@
+---
+- name: Create group examgroup
+  group:
+    name: examgroup
+    state: present
+
+
+- name: Create user examuser
+  user:
+    name: examuser
+    uid: 1800
+    group: examgroup
+
+
+- name: Create directory /users
+  file:
+    path: /users
+    state: directory
+
+
+- name: Create file /users/permissions
+  file:
+    path: /users/permissions
+    owner: examuser
+    group: examgroup
+    mode: "0640"
+    state: touch
+

@@ -38,4 +38,5 @@ completed_tasks:
   - `nfs/simple-nfs`
   - `script/simple-script`
   - `ssh/root-sshuser`
+  - `users/basic-attributes`
 

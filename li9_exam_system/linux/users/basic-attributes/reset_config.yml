@@ -1,0 +1,21 @@
+---
+- name: Delete /users/permissions file and /users directory
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /users/permissions
+    - /users
+
+
+- name: Delete user examuser
+  user:
+    name: examuser
+    state: absent
+
+
+- name: Delete group examgroup
+  group:
+    name: examgroup
+    state: absent
+
