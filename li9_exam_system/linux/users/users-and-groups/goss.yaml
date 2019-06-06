@@ -1,15 +1,48 @@
-file:
-  /data/permissions:
-    exists: true
-    owner: examuser
-    group: examgroup
-    mode: "0600"
-user:
-  examuser:
-    exists: true
-    uid: 1800
-    groups:
-    - examgroup
 group:
-  examgroup:
+  infra:
     exists: true
+  qa:
+    exists: true
+
+
+user:
+  john:
+    exists: true
+    uid: 1004
+    groups:
+    - infra
+    shell: /bin/bash
+  robb:
+    exists: true
+    uid: 1005
+    groups:
+    - infra
+    shell: /bin/bash
+  tyrion:
+    exists: true
+    uid: 1006
+    groups:
+    - qa
+    shell: /bin/sh
+  aria:
+    exists: true
+    uid: 1007
+    groups:
+    - qa
+    shell: /bin/sh
+
+
+file:
+  /devops/infra:
+    exists: true
+    filetype: directory
+    mode: "1770"
+  /devops/qa:
+    exists: true
+    filetype: directory
+    mode: "1775"
+  /devops/common:
+    exists: true
+    filetype: directory
+    mode: "0777"
+

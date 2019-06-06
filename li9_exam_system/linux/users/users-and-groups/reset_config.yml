@@ -1,0 +1,37 @@
+---
+- name: Delete users
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    group: "{{ item.group }}"
+    shell: "{{ item.shell }}"
+    state: absent
+  loop:
+    - { name: john, uid: 1004, group: "infra", shell: "/bin/bash" }
+    - { name: robb, uid: 1005, group: "infra", shell: "/bin/bash" }
+    - { name: tyrion, uid: 1006, group: "qa", shell: "/bin/sh" }
+    - { name: aria, uid: 1007, group: "qa", shell: "/bin/sh" }
+
+
+- name: Delete groups
+  group:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - infra
+    - qa
+
+
+- name: Delete directories
+  file:
+    path: "{{ item.dir }}"
+    owner: root
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: absent
+  loop:
+    - { dir: "/devops/infra", group: "infra", mode: "1770" }
+    - { dir: "/devops/qa", group: "qa", mode: "1775" }
+    - { dir: "/devops/common", group: "root", mode: "0777" }
+    - { dir: "/devops" }
+

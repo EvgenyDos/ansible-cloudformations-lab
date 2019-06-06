@@ -28,13 +28,18 @@ description : |
   Directories:
   
   * Create directory `/devops/infra`:
+    * The directory must be owned by *root* user.
     * The only users of group *infa* should have permissions to read and write in there.
-    * No other users should have access there
-    * Files and directories created in this directory should be owned by users who create them. Other users should be able to read and write such files.
+    * No other users should have access there.
+    * Files and directories created in this directory should be owned by users who create them. 
+    * Other members of *infra* group should also be able to read such files.
+
   * Create directory `/devops/qa`:
+    * The directory must be owned by *root* user.
     * Members of group *qa* should have permissions to write in this directory.
+    * Files and directories created in this directory should be owned by users who create them. 
     * Other users should have permissions to read files and directories in there.
+
   * Create directory `/devops/common`:
     * All users should have all permissions.
-    * Files created by users should be owned by those users.
 
