@@ -39,4 +39,6 @@ completed_tasks:
   - `script/simple-script`
   - `ssh/root-sshuser`
   - `users/basic-attributes`
+  - `users/users-and-groups`
+
 
