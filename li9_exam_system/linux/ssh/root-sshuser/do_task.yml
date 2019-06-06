@@ -1,0 +1,21 @@
+---
+- name: Create user sshuser
+  user:
+    name: sshuser
+    create_home: true
+
+
+- name: Get my public ssh key
+  shell: |
+    if ! test -f ~/.ssh/id_dsa; then
+      ssh-keygen -N '' -f /root/.ssh/id_rsa >/dev/null
+    fi
+    cat /root/.ssh/id_rsa.pub
+  register: public_sshkey
+
+
+- name: Deploy ssh key for sshuser
+  authorized_key:
+    key: "{{ public_sshkey.stdout }}"
+    user: sshuser
+

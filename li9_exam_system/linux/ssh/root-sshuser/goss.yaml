@@ -1,7 +1,14 @@
-file:
-  /root/results-ssh-access:
+user:
+  sshuser:
     exists: true
-    contains:
-    - groups
-    - uid
-    - gid
+
+
+file:
+  ~/.ssh/id_rsa:
+    exists: true
+
+
+command:
+  ssh sshuser@localhost -o BatchMode=yes -o NoHostAuthenticationForLocalhost=yes id:
+    exit-status: 0
+

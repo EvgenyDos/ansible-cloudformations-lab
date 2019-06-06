@@ -37,4 +37,5 @@ completed_tasks:
   - `texttools/substrings`
   - `nfs/simple-nfs`
   - `script/simple-script`
+  - `ssh/root-sshuser`
 
