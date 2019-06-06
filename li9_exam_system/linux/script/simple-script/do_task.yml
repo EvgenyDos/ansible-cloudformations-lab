@@ -1,0 +1,7 @@
+---
+- name: Copy the script to the managed host
+  copy:
+    src: files/script.sh
+    dest: /usr/local/bin/script
+    mode: "0755"
+

@@ -1,11 +1,11 @@
-title:  Script
+title: Script
 description : |
-  Create a script `/data/script.sh`:
+  Create a script `/usr/local/bin/script`:
 
   * It returns _Hello world_ if no arguments passed.
   * It returns _CentOS system_ if the first argument is _centos_.
   * It returns _Not a CentOS system_ for any other options in the first argument.
   * It should be executable for anyone.
   
-  **Note!** You are allowed to use any programming language
+  **Note!** You can use any programming language.
 

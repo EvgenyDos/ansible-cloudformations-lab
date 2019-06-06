@@ -1,0 +1,6 @@
+---
+- name: Delete the script
+  file:
+    path: /usr/local/bin/script
+    state: absent
+

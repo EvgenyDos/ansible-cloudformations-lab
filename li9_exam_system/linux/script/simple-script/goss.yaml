@@ -1,13 +1,21 @@
+file:
+  /usr/local/bin/script:
+    exists: true
+
+
 command:
-  /data/script.sh:
+  /usr/local/bin/script:
     exit-status: 0
     stdout:
     - "Hello world"
-  /data/script.sh centos:
+
+  /usr/local/bin/script centos:
     exit-status: 0
     stdout:
     - "CentOS system"
-  /data/script.sh test:
+
+  /usr/local/bin/script test:
     exit-status: 0
     stdout:
     - "Not a CentOS system"
+

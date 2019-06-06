@@ -35,5 +35,6 @@ completed_tasks:
   - `apache/simple-apache`
   - `lvm/volume-management`
   - `texttools/substrings`
-
+  - `nfs/simple-nfs`
+  - `script/simple-script`
 
