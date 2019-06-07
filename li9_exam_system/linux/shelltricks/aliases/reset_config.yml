@@ -1,0 +1,39 @@
+---
+- name: Create aliases
+  copy:
+    content: |
+      alias lsall='ls -la --color=auto'
+      alias cdwork='cd /projects/operators'
+    dest: /etc/profile.d/user-aliases.sh
+    mode: "0644"
+    state: absent
+
+
+- name: Create user testoper
+  user:
+    name: stannis
+    group: operators
+    state: absent
+
+
+- name: Create group operators
+  group:
+    name: operators
+    state: absent
+
+
+- name: Create /etc/security/limits.do/99-operators.conf
+  copy: 
+    content: |
+      @operators hard nproc 10
+    dest: /etc/security/limits.d/99-operators.conf
+    state: absent
+
+
+- name: Create directory /projects/operators
+  file:
+    path: /projects/operators
+    state: absent
+    group: operators
+    mode: '0775' 
+

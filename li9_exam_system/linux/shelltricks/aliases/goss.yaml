@@ -1,0 +1,29 @@
+group:
+  operators:
+    exists: true
+
+
+user:
+  stannis:
+    exists: true
+    groups:
+      - operators
+    shell: /bin/bash
+
+
+command:
+  su - stannis -c 'ulimit -a | grep ^max\ user\ processes':
+    exit-status: 0
+    stdout:
+      - "max user processes              (-u) 10"
+
+  /bin/bash --login -c 'alias lsall | tr -d " "':
+    exit-status: 0
+    stdout:
+      - "aliaslsall='ls-a'"
+
+  /bin/bash --login -c 'alias cdwork | tr -d " "':
+    exit-status: 0
+    stdout:
+      - "aliascdwork='cd/projects/operators'"
+
