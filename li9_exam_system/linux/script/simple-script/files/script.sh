@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]; then
   echo "Hello world"
-  exit 0
+  exit 1
 fi
 
 case "$1" in
