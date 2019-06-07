@@ -5,19 +5,15 @@
 
       - shell: "whoami && w"
 
+
       - name: generate rondom name
         set_fact: rondomname="{{ 99999999999999999999999 | random | to_uuid }}"
+
 
       - name: import login-password from vault file
         include_vars:
           file: "files/api"
 
-#      - debug:
-#          msg: login = {{ apilogin }}
-#      - debug:
-#          msg: password = {{ apipassword }}
-#      - debug:
-#          msg: link = {{ apilink }}
 
       - name: just create a file
         template:
@@ -27,28 +23,22 @@
           mode: '0755'
           src: "templates/cgi-bin.j2"
 
-#      - debug:
-#          msg: "useremailnotifications={{  useremailnotifications  }}"
 
-#      - name: "save hyperlinkname for remove later"
-#        set_stats:
-#          data:
-#            removehyperlinkfromtower: "{{ rondomname }}"
-
-      - name: press to link for exam start
-        mail:
-          subject: "Li9 exam - Linux system administration"
-          to: "{{ useremailnotifications }}"
-#          from: Li9 Exam <do-not-reply@li9.com>
-          from: "{{ adminemailnotifications }}"
-          subtype: html
-          body: "{{ lookup('template', 'templates/mailhyperlink.html.j2') }}"
+      - name: Send a link to the user which will deploy the exam
+        include_tasks: send_email.yml
+        vars:
+          mail_subject: "The link to deploy the exam environment"
+          mail_body: "{{ lookup('template', 'templates/mailhyperlink.html.j2') }}"
+          send_to: "{{ useremailnotifications }}"
+          body_content_format: html
 
 
       - name: just show hyperlink name
         debug:
           msg: "it is link to start ===> http://tower.demo.li9.com:8080/cgi-bin/{{ rondomname }}"
 
+
       - name: It is output informations to be sure regarding correct variables
         debug:
           msg: "useremailnotifications = {{ useremailnotifications }}"
+

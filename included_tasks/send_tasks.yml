@@ -1,0 +1,50 @@
+---
+- name: Install Pip package
+  package:
+    name: python2-pip.noarch
+    state: present
+
+
+- name: Install Markdown2 pip module
+  pip:
+    name: "markdown2"
+
+
+- name: Copy parts of the message to the managed host
+  template:
+    src: "templates/{{ item }}.j2"
+    dest: "/tmp/{{ item }}"
+  vars: 
+    css_style_file: "files/tasks-css.html"
+  loop:
+    - "mail-header.html"
+    - "mail-footer.html"
+    - "mail-body.md"
+
+
+- name: Render HTML from Markdown
+  shell: "{{ item }}"
+  loop:
+    - "markdown2 /tmp/mail-body.md > /tmp/mail-body.html && rm -f /tmp/mail-body.md"
+    - "cat /tmp/{mail-header.html,mail-body.html,mail-footer.html} > /tmp/mail.html"
+
+
+- name: Get the rendered mail message to localhost (just for debug)
+  fetch:
+    src: "/tmp/mail.html"
+    dest: "~/tmp/final-mailbody.html"
+
+
+- name: Get email into a variable
+  shell: "cat /tmp/mail.html"
+  register: email
+
+
+- name: Include mail sender to send the mail
+  include_tasks: send_email.yml
+  vars:
+    mail_subject: 'Exam "{{ exam_tasks.content.title }}" has been started'
+    mail_body: "{{ email.stdout }}"
+    send_to: "{{ useremailnotifications }}"
+    body_content_format: html 
+

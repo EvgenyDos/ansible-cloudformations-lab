@@ -17,5 +17,5 @@
 
 
       - name: Including sending mails
-        include_tasks: "included_tasks/send_email.yml"
+        include_tasks: "included_tasks/send_tasks.yml"
 

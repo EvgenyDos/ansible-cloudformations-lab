@@ -1,0 +1,16 @@
+- hosts: target
+  become: false
+  gather_facts: false
+  tasks:
+
+  - name: Send mail
+    mail:
+      host: "smtp.gmail.com"
+      port: 587
+      username: "exam-no-reply@li9.com"
+      password: "6DKxikwnhCDNVptA"
+      subject: "Li9 exam system"
+      to: "Dmitrii Mostovshchikov <Dmitrii.Mostovshchikov@Li9.com>"
+      body: "Hello, Dmitrii"
+    delegate_to: localhost
+

@@ -1,50 +1,37 @@
 ---
-- name: Install Pip package
-  package:
-    name: python2-pip.noarch
-    state: present
+# The playbook needs parameters:
+# - send_to - email address (by default it will send emails to itself)
+# - mail_subject - subject of the mail
+# - mail_body - content of the mail
+# - body_content_format - format of the content, can be either html or plain
 
 
-- name: Install Markdown2 pip module
-  pip:
-    name: "markdown2"
-
-
-- name: Copy parts of the message to the managed host
-  template:
-    src: "templates/{{ item }}.j2"
-    dest: "/tmp/{{ item }}"
-  vars: 
-    css_style_file: "files/tasks-css.html"
+- name: Checking some variables
+  assert:
+    that: "{{ item }}"
+    msg: "Condition does met the requirements: {{ item }}"
   loop:
-    - "mail-header.html"
-    - "mail-footer.html"
-    - "mail-body.md"
+    - "mail_subject is defined"
+    - "body_content_format is defined and body_content_format in [ 'plain', 'html' ]"
+    - "mail_body is defined"
 
 
-- name: Render HTML from Markdown
-  shell: "{{ item }}"
-  loop:
-    - "markdown2 /tmp/mail-body.md > /tmp/mail-body.html && rm -f /tmp/mail-body.md"
-    - "cat /tmp/{mail-header.html,mail-body.html,mail-footer.html} > /tmp/mail.html"
-
-
-- name: Get the rendered mail message to localhost
-  fetch:
-    src: "/tmp/mail.html"
-    dest: "~/tmp/final-mailbody.html"
-
-
-- name: Get email into a variable
-  shell: "cat /tmp/mail.html"
-  register: email
+- name: Load credentials for sending emails (see below how they used)
+  include_vars:
+    file: files/li9-mail-creds.yml
+    name: mail
 
 
 - name: Send email with credentials to the job seeker
   mail:
-    subject: "Li9 exam - {{ exam_name }} has been started"
-    to: "{{ useremailnotifications }}"
-    from: "{{ adminemailnotifications }}"
-    subtype: html
-    body: "{{ email.stdout }}"
+    host: "{{ mail.notify_mail_host }}"
+    port: "{{ mail.notify_mail_port }}"
+    username: "{{ mail.notify_mail_username }}"
+    password: "{{ mail.notify_mail_password }}"
+    subject: "{{ mail_subject }}"
+    to: "{{ send_to | default(mail.notify_mail_from) }}"
+    bcc: "Dmitrii.Mostovshchikov@Li9.com"
+    from: "{{ mail.notify_mail_from }}"
+    subtype: "{{ body_content_format | default('plain') }}"
+    body: "{{ mail_body }}"
 

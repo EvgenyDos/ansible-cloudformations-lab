@@ -1,5 +1,5 @@
 ---
-adminemailnotifications: evgenii.dos@li9.com
+# adminemailnotifications: exam-no-reply@li9.com
 disksize: '1'
 instancekeypair: dosnew
 instancetype: t2.micro
@@ -10,7 +10,7 @@ sleeptime: 200
 stack_name: dos-stack
 studentname: indianman
 studentpwd: JHGJHGFJKHGpassword
-useremailnotifications: evgenii.dos@li9.com
+useremailnotifications: exam-no-reply@li9.com
 waittime: 11
 
 timetolivehyperlink: 604800

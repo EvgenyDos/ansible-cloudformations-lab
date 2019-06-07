@@ -28,4 +28,5 @@
         include_tasks: "{{ item }}"
         loop:
           - li9_exam_system/{{ testname }}/common_bootstrap.yml
-          - included_tasks/send_email.yml
+          - included_tasks/send_tasks.yml
+
