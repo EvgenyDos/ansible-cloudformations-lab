@@ -36,8 +36,7 @@
 
 
 - name: Get email into a variable
-  shell: cat ~/tmp/final-mailbody.html
-  delegate_to: localhost
+  shell: "cat /tmp/mail.html"
   register: email
 
 
