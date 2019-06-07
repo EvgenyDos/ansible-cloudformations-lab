@@ -61,7 +61,7 @@
 
 
         - name: Send an email with results
-          include_tasks: send_email.yml
+          include_tasks: included_tasks/send_email.yml
           vars:
             mail_subject: "Test results"
             mail_body: "{{ bodymailreport.stdout }}"
@@ -69,7 +69,7 @@
 
 
         - name: Send an email to user that cloudformation is done
-          include_tasks: send_email.yml
+          include_tasks: included_tasks/send_email.yml
           vars:
             mail_subject: "Your exam-time has been ended"
             mail_body: "{{ bodymailreport.stdout }}"

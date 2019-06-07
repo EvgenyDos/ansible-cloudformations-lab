@@ -25,7 +25,7 @@
 
 
       - name: Send a link to the user which will deploy the exam
-        include_tasks: send_email.yml
+        include_tasks: included_tasks/send_email.yml
         vars:
           mail_subject: "The link to deploy the exam environment"
           mail_body: "{{ lookup('template', 'templates/mailhyperlink.html.j2') }}"
