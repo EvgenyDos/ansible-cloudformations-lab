@@ -35,6 +35,12 @@
     dest: "~/tmp/final-mailbody.html"
 
 
+- name: Get email into a variable
+  shell: cat ~/tmp/final-mailbody.html
+  delegate_to: localhost
+  register: email
+
+
 - name: Send email with credentials to the job seeker
   mail:
     subject: "Li9 exam - {{ exam_name }} has been started"
