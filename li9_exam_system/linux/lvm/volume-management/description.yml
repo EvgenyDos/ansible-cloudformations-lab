@@ -11,7 +11,7 @@ description : |
        - create a file system of type *ext4*
        - the file system should be labeled as *STATIC-DATA*
        - the logical volume should be mounted as `/volumes/static-data` at a boot time
-       - the mounted file system should mount in *Read-Only* mode.
+       - the file system should mount in *Read-Only* mode.
      * Create a logical volume named *database*:
        - size of the logical volume is *384 MiB*
        - size of the logical volume gets all free space in the group

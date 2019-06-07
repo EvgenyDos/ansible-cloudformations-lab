@@ -2,10 +2,11 @@ title: Script
 description : |
   Create a script `/usr/local/bin/script`:
 
-  * It returns _Hello world_ if no arguments passed.
+  * It returns _Hello world_ if no arguments passed and the script return code should be one (1).
   * It returns _CentOS system_ if the first argument is _centos_.
   * It returns _Not a CentOS system_ for any other options in the first argument.
   * It should be executable for anyone.
+  * The script should return code zero (0) if not said other.
   
   **Note!** You can use any programming language.
 

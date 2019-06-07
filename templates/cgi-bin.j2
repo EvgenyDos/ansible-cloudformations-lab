@@ -1,9 +1,10 @@
 #!/bin/bash
+
 echo "Content-type: text/plain"
 echo
 curl -s -k -X POST -u {{ apilogin  }}:{{ apipassword }} -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"{{ useremailnotifications }}\", \"testname\": \"{{ testname }}\" }" }' '{{ apilink }}' > /dev/null 2>&1
 
 echo "Your test environment has been started for provision. It will take some time. Wait for next email with details"
 
-#mv $0 $0.old
 rm -rf $0
+

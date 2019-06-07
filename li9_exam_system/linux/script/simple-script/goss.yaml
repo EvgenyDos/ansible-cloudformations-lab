@@ -5,7 +5,7 @@ file:
 
 command:
   /usr/local/bin/script:
-    exit-status: 0
+    exit-status: 1
     stdout:
     - "Hello world"
 
