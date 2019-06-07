@@ -1,26 +1,11 @@
-title:  Li9 Test System Environment
+title: Test Linux Skills
 format: markdown
 description : |
-  ## Exam rules
 
-  You need to be aware of the following rules:
+## Exam Specifics
 
-    * All task results will be validated after system reboot.
-    * All tasks will be validated using SSH via centos user. Do not make any changes in `/home/centos/.ssh/authorized_key` file.
-    * You are not allowed to change any network settings like routes, ip addresses, firewall settings.
-    * You are not allowed to change SELinux state from *"enforcing"*.
-
-
-  ## Recommendations
-
-    * Read all tasks and then start doing them.
-    * First complete the most easier for you tasks.
-    * Do not spend much time on doing a single task, you can return and finish it later.
-    * Reboot the server to make sure that your changes persist and will not be lost after rebooting.
-    * Partially completed tasks are not scored.
-    * Read each task entirely before doing it.
-    * Do not modify settings for user `centos`, any improper changes may affect the scoring process.
-
+The exam host is a CentOS 7 linux. It has access to the Internet. 
+You are free to use any repositories and sources which help you do the exam.
 
 comments: |
   CSS file for rendered html file migth be taken here https://github.com/sindresorhus/github-markdown-css.

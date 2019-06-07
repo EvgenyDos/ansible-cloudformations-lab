@@ -1,19 +1,43 @@
-# {{ exam_tasks.content.title }}
+# Li9 Test System Environment
+
+You have been assigned exam **{{ exam_tasks.content.title }}**.
 
 Your environment is ready and you can start the hands-on tests. **Read the below instructions carefully before you begin**.
 
+
 ## Credentials
 
-Here are the details you need to get an access the test system.
+Here are the details you need to get an access to the test system.
 
   - hosts is accessible as `ssh student@{{ vmhostip }}`
   - exam system IP is `{{ vmhostip }}`
   - username is `{{ studentname }}`
   - password is `{{ studentpwd }}`
   - you may become root user using `sudo su -` without prompting a password
-  - your system will be auto-destroyed in **{{ examtime }}** seconds .
+  - your system becomes unaccessible for you in **{{ examtime | int / 60 }}** minutes.
 
 
+## Exam Rules
+
+You need to be aware of the following rules:
+
+  * All task results will be validated after system reboot.
+  * All tasks will be validated using SSH via centos user. Do not make any changes in `/home/centos/.ssh/authorized_key` file.
+  * You are not allowed to change any network settings like routes, ip addresses, firewall settings.
+{#  * You are not allowed to change SELinux state from **Enforcing**. #}
+
+
+## Recommendations
+
+  * Read all tasks and then start doing them.
+  * First complete the most easier for you tasks.
+  * Do not spend much time on doing a single task, you can return and finish it later.
+  * Reboot the server to make sure that your changes persist and will not be lost after rebooting.
+  * Partially completed tasks are not scored.
+  * Read each task entirely before doing it.
+  * Do not modify settings for user `centos`, any improper changes may affect the scoring process.
+
+{# it contains exam specific information from linux/description.yml, docker/description.yml, etc #}
 {{ exam_tasks.content.description }}
 
 
