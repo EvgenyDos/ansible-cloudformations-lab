@@ -1,14 +1,14 @@
-title: Environment Customization
+title: Environment customization
 description: |
 
   Configure the system as follows:
 
-  * user *stannis* exists, has its primary group *operators*, and configured shell as `/bin/bash`
-  * all users have a command `lsall` which works as `ls -a` without creating such command on the local system
-  * users of group *operators* have a command `cdwork` which changes current directory to `/projects/operators`
-  * command `cdwork` is not a file on the system
-  * users of group *operators* have permissions to write in `/projects/operators`
-  * users of group *operators* cannot run more than ten (10) processes
+  * User *stannis* exists, has its primary group *operators*, and configured shell as `/bin/bash`.
+  * All users have a command `lsall` which works as `ls -a` without creating such command on the local system.
+  * Users of group *operators* have a command `cdwork` which does this command  `cd /projects/operators`.
+  * Command `cdwork` is not a file on the system.
+  * Users of group *operators* have permissions to write in `/projects/operators`.
+  * Users of group *operators* cannot run more than ten (10) processes.
 
   *Assuming that users have shell `/bin/bash`.*
 

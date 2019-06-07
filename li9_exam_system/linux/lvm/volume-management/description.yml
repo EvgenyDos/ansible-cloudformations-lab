@@ -1,4 +1,4 @@
-title: LVM and Filesystems
+title: LVM and file systems
 description : |
   You should configure the system as described below.
   To complete this task look for an unused (unallocated) space on any block device and use it. Don't modify any existing volumes and file systems.
@@ -28,7 +28,7 @@ description : |
        - when command `mount /volumes/runtime-data` is run it should mount the volume as `/volumes/runtime-data`
        - it should not mount at a boot time.
  
-  **Attention:**
+  *Notes*:
 
     - Pay attention on a unit size. It is an important point.
     - This task may require to look for a free block device which is already attached to the exam system.

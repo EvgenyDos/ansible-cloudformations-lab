@@ -1,13 +1,13 @@
 title: Users, Groups, and Permissions
 description : |
-  You should configure the system as follows:
+  You should configure the system as follows.
 
-  * file `/users/permissions` exists
-  * file `/users/permissions` is owned by *examuser* user
-  * file `/users/permissions` is owned by *examgroup* group
-  * file `/users/permissions` can be modified by the owner
-  * file `/users/permissions` can be read by owner and members of group *examgroup*, others can do nothing
-  * file `/users/permissions` cannot be executed
-  * user *examuser* has a primary group *examgroup*
-  * user *examuser* has UID *1800*
+  * File `/users/permissions` exists.
+  * File `/users/permissions` is owned by *examuser* user.
+  * File `/users/permissions` is owned by *examgroup* group.
+  * File `/users/permissions` can be modified by the owner.
+  * File `/users/permissions` can be read by owner and members of group *examgroup*, others can do nothing.
+  * File `/users/permissions` cannot be executed.
+  * User *examuser* has a primary group *examgroup*.
+  * User *examuser* has UID *1800*.
 

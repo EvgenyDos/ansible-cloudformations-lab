@@ -2,7 +2,7 @@ title: Web server
 description : |
   Configure a HTTP service as follows:
  
-  * Service listens on **80** and **8080** ports.
+  * Service listens on *80* and *8080* ports.
   * Commands `curl http://localhost` and `curl http://localhost:8080` should return *Hello, World*.
 
 explanation: |

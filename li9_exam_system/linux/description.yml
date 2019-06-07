@@ -1,11 +1,11 @@
-title: Test Linux Skills
+title: Basic Linux Skills
 format: markdown
 description : |
 
-## Exam Specifics
-
-The exam host is a CentOS 7 linux. It has access to the Internet. 
-You are free to use any repositories and sources which help you do the exam.
+  ## Exam Specifics
+  
+  The exam host is a CentOS 7 linux. It has access to the Internet. 
+  You are free to use any repositories and sources which help you do the exam.
 
 comments: |
   CSS file for rendered html file migth be taken here https://github.com/sindresorhus/github-markdown-css.

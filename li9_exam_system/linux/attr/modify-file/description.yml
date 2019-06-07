@@ -4,17 +4,17 @@ description : |
 
   Modify the file `/data/message` as follows:
 
-  * Owner should be set as *aria*
+  * Owner should be set as *aria*.
   * It should be owned by group *stark*.
   * Permissions should be set as:
     * owner=read,write,execute
     * group=read,write
     * other=nothing
     * existing content of the file cannot be modified
-    * new content can be added
-  * file should be renamed to `/data/message.fixed`
-  * file should contain a single line *Updated*.
-  * file `/data/message` should not exist
+    * new content can be added.
+  * File should be renamed to `/data/message.fixed`.
+  * File should contain a single line *Updated*.
+  * File `/data/message` should not exist.
 
 explanation: |
   This file is protected as `chattr +i /data/message` and cannot be modified without clearing this flag.

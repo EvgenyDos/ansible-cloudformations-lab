@@ -9,12 +9,14 @@ Your environment is ready and you can start the hands-on tests. **Read the below
 
 Here are the details you need to get an access to the test system.
 
-  - hosts is accessible as `ssh student@{{ vmhostip }}`
-  - exam system IP is `{{ vmhostip }}`
-  - username is `{{ studentname }}`
-  - password is `{{ studentpwd }}`
+  - hosts is accessible as `ssh student@{{ vmhostip | default("not defined") }}`
+  - exam system IP is `{{ vmhostip | default("not defined") }}`
+  - username is `{{ studentname | default("not defined") }}`
+  - password is `{{ studentpwd | default("not defined") }}`
   - you may become root user using `sudo su -` without prompting a password
-  - your system becomes unaccessible for you in **{{ examtime | int / 60 }}** minutes.
+  - your system becomes unaccessible for you in **{{ examtime | default(0) | int / 60 }}** minutes.
+
+**If any of the above parameters is not defined, report it as fast as possible to your contact person.**
 
 
 ## Exam Rules
