@@ -1,21 +1,6 @@
 title:  Li9 Test System Environment
 format: markdown
 description : |
-  Your environment is ready and you can start the hands-on tests. **Read the below instructions carefully before you begin**.
-
-
-  ## Credentials
-
-  Here are the details you need to get an access to the test system.
-
-    - hosts is accessible as `ssh student@{{ vmhostip }}`
-    - exam system IP is `{{ vmhostip }}`
-    - username is `{{ studentname }}`
-    - password is `{{ studentpwd }}`
-    - you may become root user using `sudo su -` without prompting a password
-    - your system will be auto-destroyed in "{{ examtime }}" seconds .
-
-
   ## Exam rules
 
   You need to be aware of the following rules:
