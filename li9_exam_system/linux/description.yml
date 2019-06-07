@@ -21,6 +21,7 @@ description : |
     * Do not spend much time on doing a single task, you can return and finish it later.
     * Reboot the server to make sure that your changes persist and will not be lost after rebooting.
     * Partially completed tasks are not scored.
+    * Read each task entirely before doing it.
     * Do not modify settings for user `centos`, any improper changes may affect the scoring process.
 
 
