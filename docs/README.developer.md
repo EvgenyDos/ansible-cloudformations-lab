@@ -1,6 +1,6 @@
 # Li9 Exam System
 
-You are at a right place if you are a developer.
+You are at a right place if you are a developer. Check the diagram [here](README.manager.md) to understand the workflow. Other details are coming.
 
 
 ## An exam task's structure
