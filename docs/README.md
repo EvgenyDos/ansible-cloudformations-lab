@@ -14,7 +14,7 @@ There are two components which included in the system:
 
 ## Exam Scenario
 
-### A company needs to test knowledge of a student. 
+### You need to test knowledge of some one
 
 There is a pictured workflow ![Ordering an exam](https://github.com/EvgenyDos/ansible-cloudformations-lab/blob/master/files/ExamWorkflow.svg)
 
