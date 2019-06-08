@@ -1,6 +1,8 @@
 # Li9 Exam System
 
-You are at a right place if you are a developer. Check the diagram [here](README.manager.md) to understand the workflow. Other details are coming.
+You are at a right place if you are a developer. Check the diagram [here](README.manager.md) to understand the workflow. 
+
+It is too much to say about developing. Are you an Ansible Guru? You'll figure out what to do ;).
 
 
 ## An exam task's structure
