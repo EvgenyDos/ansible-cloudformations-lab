@@ -2,35 +2,8 @@
 
 You are at a right place if you are a developer. Check the diagram [here](README.manager.md) to understand the workflow. 
 
-It is too much to say about developing. Are you an Ansible Guru? You'll figure out what to do ;).
+It is too much to say about developing. Are you an Ansible, Ansible Tower guru, yes? You'll figure out what to do ;).
 
-
-## An exam task's structure
-
-
-This section mostly repeats the information for [operators](README.operator.md).
-
-
-A task is a directory with set of predefined files that should exist. There are the files:
-- file `description.yml`:
-  - text content should be written using **Markdown** structured language
-  - is a YAML file which has following keys:
-    - *title (mandatory)* - name of the task (one line text). This name is sent to a participant. 
-      Don't use here *Markdown* tags
-    - *description (mandatory)* - text of the task. Provide here all details needed to solve the task. 
-      This description is sent to a participant
-    - *explanation (optional)*  - technical details that exlains how the task works (only for managers). 
-      Can be written in any form but using *Markdown* is prefferable
-- file `pre_config.yml`:
-  - is an Ansible playbook which deploys the task on an exam machine
-- file `reset_config.yml`:
-  - is an Ansible playbook which resets the task on an exam machine to an initial state.
-    Saying other words, it rollbacks the changes made by `pre_config.yml` playbook
-- file `do_task.yml`:
-  - is an Ansible playbook which completes the task 100%
-  - it is needed to automate testing other playbooks and `goss.yaml` configuration
-- file `goss.yaml`:
-  - is a configuration file for **Goss**, which checks how good the task is completed by a participant
 
 
 ## How to test your task
