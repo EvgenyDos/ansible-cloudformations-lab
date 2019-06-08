@@ -16,7 +16,7 @@ There are two components which included in the system:
 
 ### A company needs to test knowledge of a student. 
 
-There is a pictured workflow [Ordering an exam](https://github.com/EvgenyDos/ansible-cloudformations-lab/blob/master/files/ExamWorkflow.svg)
+There is a pictured workflow ![Ordering an exam](https://github.com/EvgenyDos/ansible-cloudformations-lab/blob/master/files/ExamWorkflow.svg)
 
 And the same description:
 
