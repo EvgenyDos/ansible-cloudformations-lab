@@ -13,7 +13,7 @@ Base directory for all exams is `/li9_exam_system` on the top level. Currently i
     └── linux
 
 
-These subdirectories are called **exams**. When you assign an `linux` exam to a person, the tasks from subdirectory `linux` are taken.
+These subdirectories called **exams**. When you assign the `linux` exam to a person, the tasks from subdirectory `linux` are taken.
 
 
 ### Exams
