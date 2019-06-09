@@ -15,7 +15,7 @@ There is too much to say about developing. Are you an Ansible, Ansible Tower gur
      - *path/to/task* is path to the task directory with files 
        (`description.yml`, `pre_config.yml`, `reset_config.yml`, `goss.yaml`)
      - *action* is a tag for Ansible, can be: `pre-config`, `do-task`, `do-goss` or `validate`, and `reset-config`.
-     - *target* is a variable you can use to pass a host group or group from your inventory. 
+     - *target* is a variable you can use to pass a host group or host from your inventory. 
        By default, the playbook expects *[target]* host group is being defined.
    - Example of configuring a target system:
      `ansible-playbook tests/test-task.yaml -e task_path=../li9_exam_system/linux/attr/modify-file -t pre-config`.
