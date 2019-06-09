@@ -90,7 +90,7 @@ Develop as many tasks as possible for each of topics. In that case every student
 
 #### A Task
 
-A task a subdirectory one level below of a topic and follows the next structure.
+A **task** is a subdirectory one level below of a topic and follows the next structure.
 
     li9_exam_system/linux/users/basic-attributes/
     ├── description.yml
@@ -99,15 +99,15 @@ A task a subdirectory one level below of a topic and follows the next structure.
     ├── pre_config.yml
     └── reset_config.yml
 
-- a _YAML_ file `description.yml` follows the same structure as on an exam level. It also includes `title` and `description` keys and should include specific for the particular task. This information is also included into email that sent to a student.
-- an _Ansible_ playbook `pre_config.yml` which used to prepare an exam host for a student. For example, some package should be installed for doing the task.
+- a _YAML_ file `description.yml` follows the same structure as on an exam level. It also includes `title` and `description` keys and should include specifics for the particular task. This information is also included into an email which is sent to a student.
+- an _Ansible_ playbook `pre_config.yml` is used to prepare an exam host for a student. For example, some package should be installed for doing the task.
 - an _Ansible_ playbook `do_task.yml` is used to do the task. It would do the tasks like a student but it has to do all 100% correctly.
 - an _Ansible_ playbook `reset_config.yml` is used to take reverse steps of `do_task.yml`.
-- a _Goss_ configuration file `goss.yaml`.
+- a [Goss](https://github.com/aelsabbahy/goss/blob/master/docs/manual.md) configuration file `goss.yaml` is used to evaluate a student. Be very careful in writing this file. This file should include all checks, and only the checks which conform the description provided in file `description.yml` and expected to be done by a student.
 
 A task has to contain mandatory files `description.yml`, `pre_config.yml`, and `goss.yaml`. Other two playbooks `do_task.yml` and `reset_config.yml` are needed for testing purposes when you write `goss.yaml` file.
 
-Write these two optional playbooks, this helps to automate testing of `goss.yaml` configuration. Check the [developer doc](README.developer.md) how to test goss files.
+Write these two optional playbooks, this helps to automate testing of `goss.yaml` configuration. Check the [developer doc](README.developer.md) how to test _Goss_ files and playbooks.
 
 
 *Note: The only file `goss.yaml` should be ended as `.yaml`. Other files should be ended as `.yml`.*
