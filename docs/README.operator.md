@@ -13,12 +13,12 @@ Base directory for all exams is `/li9_exam_system` on the top level. Currently i
     └── linux
 
 
-These subdirectories called **exams**. When you assign the `linux` exam to a person, the tasks from subdirectory `linux` are taken.
+These subdirectories called **exams**. When you assign the `linux` exam to a person, the tasks from subdirectory `linux` are involved.
 
 
 ### Exams
 
-As already said, currently there are three exams `linux`, `docker`, and `ansible`. Actually there is only one a fully developed exam is `linux`.
+As already said, currently there are three exams `linux`, `docker`, and `ansible`. So far there is only one a fully developed exam, that is `linux`.
 
 If you'd like to rename existed or create new exams (subdirectories) those changes should be reflected in __Ansible Tower__.
 
