@@ -2,7 +2,7 @@
 
 You are at a right place if you are a developer. Check the diagram [here](README.manager.md) to understand the workflow. 
 
-It is too much to say about developing. Are you an Ansible, Ansible Tower guru, yes? You'll figure out what to do ;).
+There is too much to say about developing. Are you an Ansible, Ansible Tower guru, yes? You'll figure out what to do ;).
 
 
 
