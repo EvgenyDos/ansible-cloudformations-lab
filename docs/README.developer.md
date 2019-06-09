@@ -10,8 +10,7 @@ There is too much to say about developing. Are you an Ansible, Ansible Tower gur
 
 1. Create a virtual machine running *CentOS 7*.
 2. Use playbook `tests/test-task.yaml:
-     be redefining by using a variable *target*.
-   - Format: `ansible-playbook tests/test-task.yaml -e task_path=<path/to/task> -e target=myhost -t <action>
+   - Format: `ansible-playbook tests/test-task.yaml -e task_path=<path/to/task> -e target=myhost -t <action>`
      where:
      - *path/to/task* is path to the task directory with files 
        (`description.yml`, `pre_config.yml`, `reset_config.yml`, `goss.yaml`)
