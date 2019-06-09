@@ -73,7 +73,7 @@ The exam directory must include subdirectories. The `linux` exam has following s
     ├── texttools
     └── users
 
-In this context the subdirectories are called **Topics**. An exam has so many tasks for a student as many topics are defined on this level.
+In this context the subdirectories called **Topics**. An exam has so many tasks for a student as many topics are defined on this level. For example, if an exam has ten topics, a student will be assigned ten tasks of the exam.
 
 
 Let's see the **users** topic.
