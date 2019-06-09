@@ -48,7 +48,7 @@ There are two important files.
    * `title` is a title for the exam, e.g. **Linux Basics Exam**.
    * `description` gives the exam specific information.
 
-`description`should be written in _Markdown_ format. Title should be just a plain text. It worths to note that `description` does not exlpain everything about the exam. It includes only a part specific for the particular exam because remain text is taken from file`templates/mail-body.md.j2`. So just keep in mind that content of the both files should be connected.
+`description`should be written in _Markdown_ format. Title should be just a plain text. It worths to note that `description` does not exlpain everything about the exam. It includes only a part specific for the particular exam because remain text is taken from file`templates/mail-body.md.j2`. So just keep in mind that content of the both files is being combined.
 
 Both `title` and `description` are rendered into an email that is sent to a student. Therefore be so much accurate in the content as possible.
 
