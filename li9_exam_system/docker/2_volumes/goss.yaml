@@ -4,7 +4,7 @@ service:
     running: true
     
 command:
-  docker volume:
+  docker volume ls:
     exit-status: 0
     stdout:
     - "li9"
