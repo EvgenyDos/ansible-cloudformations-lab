@@ -1,0 +1,6 @@
+---
+- name: remove docker volume
+  docker_volume:
+    state: absent
+    name: li9
+  ignore_errors: yes

@@ -1,0 +1,14 @@
+---
+- name: remove tagged image
+  docker_image:
+    state: absent
+    name: webserver
+    tag: v0.1
+  ignore_erros: yes
+
+- name: remove downloaded image
+  docker_image:
+    state: absent
+    name: nginx
+    tag: latest
+  ignore_errors: yes

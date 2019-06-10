@@ -1,0 +1,11 @@
+title: Manage Docker volumes
+description : |
+  Create docker volume:
+ 
+  * Volume must have a name "li9"
+  * Driver type must be "local"
+
+explanation: |
+  A participant should do following:
+  * create docker volume with defined name
+  * driver type for volume must be "local"

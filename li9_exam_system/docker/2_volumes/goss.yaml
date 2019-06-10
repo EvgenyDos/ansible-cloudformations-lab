@@ -1,0 +1,10 @@
+service:
+  docker:
+    enabled: true
+    running: true
+    
+command:
+  docker volume:
+    exit-status: 0
+    stdout:
+    - "li9"
