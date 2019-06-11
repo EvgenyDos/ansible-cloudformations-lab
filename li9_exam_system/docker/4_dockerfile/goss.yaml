@@ -1,0 +1,21 @@
+service:
+  docker:
+    enabled: true
+    running: true
+    
+command:
+  docker run -d funky:
+    exit-status: 0
+    
+http:
+  http://localhost:8081
+  status: 200
+  body: ["This is a new welcome page!"]
+  timeout: 1000
+  
+command:
+  grep 'webserver' /home/centos/Dockerfile:
+  exit-status: 0
+  stdout:
+  - FROM webserver:v0.1
+  timeout: 10000

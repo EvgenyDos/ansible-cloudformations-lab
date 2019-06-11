@@ -1,0 +1,11 @@
+---
+- name: remove docker volume
+  docker_volume:
+    state: absent
+    name: li9
+  ignore_errors: yes
+
+- name: stop docker container
+  docker_container:
+    state: absent
+    name: funky

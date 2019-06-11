@@ -1,0 +1,40 @@
+---
+- name: create Dockerfile
+  file:
+    path: /home/centos/Dockerfile
+    owner: centos
+    group: centos
+    mode: '0644'
+
+- name: download httpd container
+  docker_image:
+    name: httpd:latest
+    source: pull
+
+- name: tag image as webserver
+  docker_image:
+    name: httpd:latest
+    repository: webserver:v0.1
+    source: local
+
+- name: Modify Dockerfile
+  blockinfile:
+    path: /home/centos/Dockerfile
+    block: |
+      FROM webserver:v0.1
+      RUN echo "This is a new welcome page!" > /var/www/html/index.html
+      EXPOSE 8081
+
+- name: Build Docker container
+  docker_image:
+    name: funky
+    build:
+      path: /home/centos/
+    tag: v1
+    source: build
+
+- name: run docker container
+  docker_container:
+    name: funky
+    image: funky:v1
+    state: started

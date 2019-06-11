@@ -1,0 +1,20 @@
+service:
+  docker:
+    enabled: true
+    running: true
+    
+command:
+  docker volume ls:
+    exit-status: 0
+    stdout:
+    - "li9"
+    
+http:
+  http://localhost:8080
+  status: 200
+  timeout: 1000
+  
+command:
+  docker exec -ti funky stat /etc/funky
+  exit-status: 0
+  timeout: 10000

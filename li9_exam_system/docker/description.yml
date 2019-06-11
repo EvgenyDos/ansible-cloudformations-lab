@@ -12,4 +12,8 @@ comments: |
 completed_tasks:
   The list includes tasks which have been verified and completed.
 
-  - 'pull/apache'
+  - '1_pull_and_tag/apache'
+  - '1_pull_and_tag/nginx'
+  - '2_volumes'
+  - '3_docker_run'
+  - '4_dockerfile'
