@@ -4,8 +4,6 @@ service:
     running: true
     
 command:
-  docker run -d funky:
-    exit-status: 0
   grep 'webserver' /home/student/Dockerfile:
     exit-status: 0
     stdout:
