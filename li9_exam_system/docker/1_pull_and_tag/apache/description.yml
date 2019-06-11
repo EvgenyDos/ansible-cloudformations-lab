@@ -1,0 +1,14 @@
+title: Download Apache docker-image
+description : |
+  Download the latest Apache Web-server docker-container:
+ 
+  * Find latest official docker-image of Apache Web-server
+  * Download this latest image and store it in the local registry
+  * Tag this image as webserver:v0.1
+  * Docker service must be enabled and started
+
+explanation: |
+  A participant should do following:
+  * find httpd container
+  * download this container to the local machine
+  * tag this container as described in the description

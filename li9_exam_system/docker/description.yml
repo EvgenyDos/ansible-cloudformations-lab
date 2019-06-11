@@ -1,0 +1,19 @@
+title: Basic Docker Skills
+format: markdown
+description : |
+  ## Exam Specifics
+  
+  The exam host is a CentOS 7 linux. It has access to the Internet. 
+  You are free to use any repositories and sources which help you do the exam.
+
+comments: |
+  CSS file for rendered html file migth be taken here https://github.com/sindresorhus/github-markdown-css.
+
+completed_tasks:
+  The list includes tasks which have been verified and completed.
+
+  - '1_pull_and_tag/apache'
+  - '1_pull_and_tag/nginx'
+  - '2_volumes'
+  - '3_docker_run'
+  - '4_dockerfile'

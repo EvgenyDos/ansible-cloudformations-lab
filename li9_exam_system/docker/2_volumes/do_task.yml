@@ -1,0 +1,5 @@
+---
+- name: create docker volume
+  docker_volume:
+    name: li9
+    driver: local

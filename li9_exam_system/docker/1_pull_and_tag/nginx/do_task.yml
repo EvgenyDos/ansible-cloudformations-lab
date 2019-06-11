@@ -1,0 +1,11 @@
+---
+- name: download httpd container
+  docker_image:
+    name: nginx:latest
+    source: pull
+
+- name: tag image as webserver
+  docker_image:
+    name: nginx:latest
+    repository: webserver:v0.1
+    source: local

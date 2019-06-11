@@ -1,0 +1,16 @@
+service:
+  docker:
+    enabled: true
+    running: true
+    
+command:
+  docker images:
+    exit-status: 0
+    stdout:
+    - "nginx"
+
+command:
+  docker images:
+    exit-status: 0
+    stdout:
+    - "webserver:v0.1"
