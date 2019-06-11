@@ -25,7 +25,7 @@ Your system becomes inaccessible for you in **{{ examtime | default(0) | int / 6
 
 - Exam duration is **{{ examtime | int / 60 }}** minutes.
 - Exam started at **{{ exam_time_begin.stdout }}**.
-- Exam will finish at **{{ exam_time_end.stdout }}**.
+- Exam ends at **{{ exam_time_end.stdout }}**.
 {% endif %}
 
 
