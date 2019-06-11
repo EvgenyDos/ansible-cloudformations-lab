@@ -2,12 +2,12 @@ title: Create Dockerfile
 description : |
   Create Dockerfile with requirements:
  
-  * Dockerfile must be created in /home/centos directory
+  * Dockerfile must be created in /home/student directory
   * Container must be built from image "webserver:v0.1"
   * Container must be exposed to the port 8081 (default 80)
   * Modify basic web-page of your webserver to contain string "This is a new welcome page!"
 
 explanation: |
   A participant should do following:
-  * Create Dockerfile in /home/centos directory with proper configuration
+  * Create Dockerfile in /home/student directory with proper configuration
   * Dockerfile must be buildable

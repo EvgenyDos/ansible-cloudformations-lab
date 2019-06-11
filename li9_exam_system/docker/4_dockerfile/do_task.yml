@@ -1,7 +1,7 @@
 ---
 - name: create Dockerfile
   file:
-    path: /home/centos/Dockerfile
+    path: /home/student/Dockerfile
     owner: centos
     group: centos
     mode: '0644'
@@ -19,7 +19,7 @@
 
 - name: Modify Dockerfile
   blockinfile:
-    path: /home/centos/Dockerfile
+    path: /home/student/Dockerfile
     block: |
       FROM webserver:v0.1
       RUN echo "This is a new welcome page!" > /var/www/html/index.html
@@ -29,7 +29,7 @@
   docker_image:
     name: funky
     build:
-      path: /home/centos/
+      path: /home/student/
     tag: v1
     source: build
 

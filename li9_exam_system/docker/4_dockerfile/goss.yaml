@@ -14,7 +14,7 @@ http:
   timeout: 1000
   
 command:
-  grep 'webserver' /home/centos/Dockerfile:
+  grep 'webserver' /home/student/Dockerfile:
   exit-status: 0
   stdout:
   - FROM webserver:v0.1
