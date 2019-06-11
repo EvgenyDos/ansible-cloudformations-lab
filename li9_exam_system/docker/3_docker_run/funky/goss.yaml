@@ -8,13 +8,11 @@ command:
     exit-status: 0
     stdout:
     - "li9"
-    
+  docker exec -ti funky stat /etc/funky
+    exit-status: 0
+    timeout: 10000
+
 http:
   http://localhost:8080
   status: 200
   timeout: 1000
-  
-command:
-  docker exec -ti funky stat /etc/funky
-  exit-status: 0
-  timeout: 10000

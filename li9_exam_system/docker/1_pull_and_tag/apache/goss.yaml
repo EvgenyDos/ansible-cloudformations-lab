@@ -8,8 +8,6 @@ command:
     exit-status: 0
     stdout:
     - "httpd"
-
-command:
   docker images webserver --filter=reference="*:latest":
     exit-status: 0
     stdout:
