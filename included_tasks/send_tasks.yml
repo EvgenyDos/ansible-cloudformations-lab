@@ -47,4 +47,6 @@
     mail_body: "{{ email.stdout }}"
     send_to: "{{ useremailnotifications }}"
     body_content_format: html 
+  when: useremailnotifications is defined
+  ignore_errors: true
 
