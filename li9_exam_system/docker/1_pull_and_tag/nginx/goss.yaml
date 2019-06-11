@@ -10,7 +10,7 @@ command:
     - "nginx"
 
 command:
-  docker images:
+  docker images webserver --filter=reference="*:latest":
     exit-status: 0
     stdout:
-    - "webserver:v0.1"
+    - "webserver"
