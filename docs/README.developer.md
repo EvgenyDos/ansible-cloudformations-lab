@@ -48,7 +48,7 @@ There is too much to say about developing. Are you an Ansible, Ansible Tower gur
 
   where:
 
-    - `exam` tells which exam (subdirectory) located in the directory `/li9_exam_system` to test. Default value is **linux**.
+  - `exam` tells which exam (subdirectory) located in the directory `/li9_exam_system` to test. Default value is **linux**.
 
   You can find a message which a candidate receives in subdirectory `~/tmp/final-mailbody.html"` - look for a file `mail.html`.
 
