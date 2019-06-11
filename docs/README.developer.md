@@ -37,3 +37,15 @@ There is too much to say about developing. Are you an Ansible, Ansible Tower gur
    
          ansible-playbook tests/test-task.yaml -e task_path=../li9_exam_system/linux/attr/modify-file -t do-goss
          ansible-playbook tests/test-task.yaml -e task_path=../li9_exam_system/linux/attr/modify-file -t validate
+
+## How to test rendering of an Exam
+
+  To make testing easier, there is a playbook which helps to check what the system can see when an Exam is being prepared.
+
+  Call this command to check what a message a candidate receives for a particular exam:
+
+      ansible-playbook test-doc.yaml <-e exam=name>
+
+  where:
+    - `exam` tells which exam (subdirectory) located in the directory `/li9_exam_system` to test. Default value is **linux**.
+

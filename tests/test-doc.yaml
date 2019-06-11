@@ -2,7 +2,7 @@
   - target
   gather_facts: false
   vars:
-    testname: linux
+    testname: "{{ exam | default('linux') }}"
     tasks_base_dir: "li9_exam_system/{{ testname }}/"
     exam_name: "Linux system administration exam"
 
@@ -18,4 +18,6 @@
 
       - name: Including sending mails
         include_tasks: "included_tasks/send_tasks.yml"
+        vars:
+          useremailnotifications: "{{ send_to }}"
 
