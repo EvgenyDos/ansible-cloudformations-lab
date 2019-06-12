@@ -1,27 +1,11 @@
 ---
-- name: create docker volume
-  docker_volume:
-    name: li9
-    driver: local
-
 - name: download httpd container
   docker_image:
-    name: httpd:latest
+    name: nginx:latest
     source: pull
-
-- name: tag image as webserver
-  docker_image:
-    name: httpd:latest
-    repository: webserver:v0.1
-    source: local
 
 - name: run docker container
   docker_container:
     name: funky
-    image: webserver:v0.1
-    volumes:
-      - li9:/test
+    image: nginx:latest
     state: started
-
-- name: create funky file
-  shell: docker exec -ti funky touch /test/funly

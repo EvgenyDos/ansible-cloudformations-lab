@@ -4,11 +4,7 @@ service:
     running: true
     
 command:
-  docker volume ls:
-    exit-status: 0
-    stdout:
-    - "li9"
-  docker exec -ti funky stat /etc/funky
+  docker exec -ti funky test
     exit-status: 0
     timeout: 10000
 

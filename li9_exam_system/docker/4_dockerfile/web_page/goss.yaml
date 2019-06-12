@@ -4,10 +4,10 @@ service:
     running: true
     
 command:
-  grep 'webserver' /home/student/Dockerfile:
+  grep 'httpd' /home/student/Dockerfile:
     exit-status: 0
     stdout:
-    - FROM webserver:v0.1
+    - FROM httpd:latest
     timeout: 10000
 
 http:
