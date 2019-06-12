@@ -4,6 +4,16 @@
     connection: local
     tasks:
 
+      - name: Get current time
+        setup:
+          filter: "ansible_date_time"
+
+
+      - name: Set the stack name
+        set_fact:
+          stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_micro }}"
+
+
       - name: Deploy Dos ansible cloudformation stack
         cloudformation:
           stack_name: "{{ stack_name }}"
@@ -57,3 +67,4 @@
           timeout: 320
           state: started
         delegate_to: localhost
+
