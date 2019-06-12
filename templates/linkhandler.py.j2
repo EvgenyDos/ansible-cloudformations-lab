@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+#
+# CGI script
+#
+
+import requests
+
+
+try:
+  import warnings
+  import contextlib
+  from urllib3.exceptions import InsecureRequestWarning
+finally:
+  pass
+
+
+api_url = "{{ apilink }}"
+api_username = "{{ apilogin }}"
+api_password = "{{ apipassword }}"
+exam_name = "{{ testname }}"
+initiator_email = "{{ initiator_email }}"
+participant_email = "{{ useremailnotifications }}"
+participant_id = "{{ participant_id }}"
+participant_details = "{{ participant_details }}"
+
+
+
+api_url = "https://tower.demo.li9.com/api/v2/workflow_job_templates/70/launch/"
+api_username = "admin"
+api_password = "Li9P@ssw0rd"
+exam_name = "linux"
+initiator_email = "Dmitrii.Mostovshchikov@Li9.com"
+participant_email = "Dmitrii.Mostovshchikov@Li9.com"
+participant_id = "My-participant-ID"
+participant_details = "No details"
+
+
+def self_destroy():
+  from os import remove
+  from sys import argv
+  remove(argv[0])
+
+
+def send_api_call_to_tower(url, username, password, payload):
+  """
+  It makes an API call to Ansible Tower
+  """
+  req = requests.post(
+    url,   
+    headers = {
+      "Content-Type": "application/json"
+    },
+    json = payload,
+    },
+    verify=False,
+  )
+
+  if req and req.status_code in [ 200, 201, 202 ]:
+    response_msg = """Content-type: text/plain
+
+
+    Your test environment has been started for provision. It will take some time. Wait for next email with details 
+    """
+  else:
+    response_msg = str(req.json())
+  print(reponse_msg)
+
+
+if __name__ == "__main__":
+  payload = {
+    "username", 
+      payload = {
+        "username": api_username,
+        "password": api_password,
+        "extra_vars": {
+          "useremailnotifications": participant_email,
+          "testname": exam_name,
+          "participant_id": participant_id,
+          "participant_details": participant_details,
+          "initiator_email": initiator_email,
+        }
+      }
+  }
+  send_api_call_to_tower( api_url, api_username, api_password, payload )
+  # self_destroy()
+

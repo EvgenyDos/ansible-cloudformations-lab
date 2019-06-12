@@ -1,4 +1,10 @@
 ---
+# Variables are provided externally, e.g. from Ansible Tower
+# - participant_id
+# - participant_details
+# - initiator_email
+#
+
 - hosts: localhost
   gather_facts: false
   tasks:
@@ -22,6 +28,7 @@
           group: apache
           mode: '0755'
           src: "templates/cgi-bin.j2"
+          # src: "templates/linkhandler.py.j2"
 
 
       - name: Send a link to the user which will deploy the exam
