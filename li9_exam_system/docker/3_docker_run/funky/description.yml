@@ -3,7 +3,7 @@ description : |
   Run docker container with following requirements:
   
   * Container must be started from image "nginx:latest"
-  * Container must be exposed to the port 8080 (default 80)
+  * Containerized application must be exposed to the port 8080 on the host machine
   * Started container name must have a name "funky"
   * Container must be restarted after system reboot
 
