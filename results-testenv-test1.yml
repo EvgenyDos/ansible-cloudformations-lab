@@ -84,13 +84,13 @@
         # - name: Time for troubleshooting before full destroy
         #   shell: "sleep {{ waittimebeforedestroy | default(10) }}"
 
-        - name: Install boto(3) package
-          package:
-            name: "{{ item }}"
-            state: present
-          loop:
-            - python-boto3.noarch
-            - python-boto.noarch
+#         - name: Install boto(3) package
+#           package:
+#             name: "{{ item }}"
+#             state: present
+#           loop:
+#             - python-boto3.noarch
+#             - python-boto.noarch
 
         - name: cloudformation stack down
           cloudformation:
@@ -98,6 +98,8 @@
             state: "absent"
             region: "{{ region_name }}"
             disable_rollback: true
+          delegate_to: localhost
+
         - debug:
             msg: vmhostip is "{{ vmhostip }}"
 
