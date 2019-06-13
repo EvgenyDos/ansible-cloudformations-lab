@@ -16,19 +16,36 @@
         set_fact: rondomname="{{ 99999999999999999999999 | random | to_uuid }}"
 
 
-      - name: import login-password from vault file
+      - name: Load additional credentials from vault file(s)
         include_vars:
-          file: "files/api"
+          file: "{{ item }}"
+        loop:
+          - "files/tower-creds.vault"
+
+
+      - name: Accumulating extra_vars
+        set_fact:
+          job_extra_vars:
+            extra_vars:
+              participant_id: "{{ participant_id | default('') }}"
+              participant_details: "{{ participant_details | default('') }}"
+              participant_email: "{{ participant_email | default(useremailnotifications) }}"
+              initiator_email: "{{ initiator_email }}"
+              useremailnotifications: "{{ useremailnotifications }}"
+              testname: "{{ testname }}"
 
 
       - name: just create a file
         template:
           dest: /var/www/cgi-bin/{{ rondomname }}
+          # dest: ./{{ rondomname }}
           owner: apache
           group: apache
           mode: '0755'
           src: "templates/cgi-bin.j2"
-          # src: "templates/linkhandler.py.j2"
+        vars:
+          extra_vars: "{{ job_extra_vars }}"
+          endpoint: "{{ job_templates.deploy_exam.endpoint }}"
 
 
       - name: Send a link to the user which will deploy the exam
