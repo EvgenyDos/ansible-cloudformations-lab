@@ -80,6 +80,20 @@
             state: started
           delegate_to: localhost
 
+        - name: Call Job for performing post-tasks (configure for a particular exam)
+          include_tasks: "included_tasks/tower_client.yml"
+          vars:
+            job_template_name: "{{ job_templates.postconfig.name }}"
+            tower_action: "job_launch"
+            job_extra_vars:
+              participant_id: "{{ participant_id }}"
+              participant_details: "{{ participant_details }}"
+              participant_email: "{{ participant_email }}"
+              initiator_email: "{{ initiator_email }}"
+              useremailnotifications: "{{ useremailnotifications }}"
+              testname: "{{ testname }}"
+              stack_name: "{{ stack_name }}"
+
       rescue:
 
         - name: Informing initiator about the fail
@@ -92,11 +106,8 @@
 
 
               The AWS stack "{{ stack_name }}" failed to provision. Clean up has been initiated. 
-
               The exam {{ testname }} assigned to {{ participant_email }} {%- if reference_id | default("") | length > 0 -%}({{ reference_id }}){%- endif %} not started.
-
               Let this know technicians to look into it. After the issue is being fixed initiate the exam again.
-
 
               Sincerely,
               Li9 Exam System.
@@ -110,4 +121,3 @@
             region: "{{ region_name }}"
             disable_rollback: true
 
-  

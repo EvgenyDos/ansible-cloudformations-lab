@@ -21,8 +21,8 @@
     - name: Launch a Tower Job Template
       tower_job_launch:
         job_template: "{{ job_template_name }}"
+        extra_vars: "{{ job_extra_vars | default({}) }}"
       register: job
 
   when: tower_action == "job_launch"
-
 
