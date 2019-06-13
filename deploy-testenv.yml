@@ -86,8 +86,8 @@
             job_template_name: "{{ job_templates.postconfig.name }}"
             tower_action: "job_launch"
             job_extra_vars:
-              - "participant_id={{ participant_id }}"
-              - "participant_details={{ participant_details }}"
+              - "participant_id={{ participant_id | default('') }}"
+              - "participant_details={{ participant_details | default('') }}"
               - "participant_email={{ participant_email | default(useremailnotifications) }}"
               - "initiator_email={{ initiator_email }}"
               - "useremailnotifications={{ useremailnotifications }}"
@@ -96,6 +96,10 @@
 
       rescue:
 
+        - name: Display a warning
+          debug: 
+            msg: "The Rescue section of the block construction initiated. Something went wrong"
+  
         - name: Informing initiator about the fail
           include_tasks: "included_tasks/send_email.yml"
           vars:
