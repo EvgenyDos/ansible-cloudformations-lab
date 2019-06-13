@@ -72,7 +72,6 @@
           include_tasks: included_tasks/send_email.yml
           vars:
             mail_subject: "Your exam-time has been ended"
-            mail_body: "{{ bodymailreport.stdout }}"
             send_to: "{{ useremailnotifications }}"
             body_content_format: plain
             mail_body: |  
@@ -99,6 +98,7 @@
             region: "{{ region_name }}"
             disable_rollback: true
           become: false
+          connection: local
           delegate_to: localhost
 
         - debug:
