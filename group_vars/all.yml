@@ -15,5 +15,5 @@ waittime: 11
 
 timetolivehyperlink: 604800
 examtime: 3600
-
+exam_length_seconds: "{{ examtime }}"
 
