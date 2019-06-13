@@ -33,7 +33,9 @@
     create_home: true
 
 - name: Create config dir for student
-  shell: su - student -c "asciinema -h"
+  # shell: su - student -c "asciinema -h"
+  shell: "asciinema -h"
+  become_user: student
 
 - name: Copy main config file
   copy:
