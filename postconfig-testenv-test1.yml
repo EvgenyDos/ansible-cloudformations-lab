@@ -20,13 +20,17 @@
       - name: Debug selected tasks
         debug: var=exam_tasks
 
+      - name: Doing common bootstrapping
+        include_tasks: "{{ item }}"
+        loop:
+          - li9_exam_system/{{ testname }}/common_bootstrap.yml
+
       - name: Execute selected tasks specific ansible-tasks
         include_tasks: "{{ exam_tasks.rootpath }}/{{ item.value.selected_task_path }}/pre_config.yml"
         with_dict: "{{ exam_tasks.topics }}"
 
-      - name: Include additional task(s)
+      - name: Emailing tasks
         include_tasks: "{{ item }}"
         loop:
-          - li9_exam_system/{{ testname }}/common_bootstrap.yml
           - included_tasks/send_tasks.yml
 
