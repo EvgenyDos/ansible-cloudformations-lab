@@ -57,4 +57,5 @@
               student_name: "{{ student_name }}"
               exam_length_seconds: "{{ exam_length_seconds }}"
               vmhostip: "{{ vmhostip }}"
+              exam_tasks: "{{ exam_tasks }}"
 
