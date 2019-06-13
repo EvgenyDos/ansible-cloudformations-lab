@@ -82,5 +82,15 @@
 
 
         - name: Time for troubleshooting before full destroy
-          shell: "sleep {{ waittimebeforedestroy }}"
+          shell: "sleep {{ waittimebeforedestroy | default(10) }}"
+
+
+        - name: cloudformation stack down
+          cloudformation:
+            stack_name: "{{ stack_name }}"
+            state: "absent"
+            region: "{{ region_name }}"
+            disable_rollback: true
+        - debug:
+            msg: vmhostip is "{{ vmhostip }}"
 
