@@ -9,7 +9,8 @@
 
 - name: Check what action provided
   assert: 
-    that: "{{ item }}"
+    that: "{{ item.test }}"
+    fail_msg: "{{ item.fail_msg }}"
   loop:
     - test: tower_action is defined and tower_action in [ "job_launch", ]
       fail_msg: "Action is not defined or action is not supported. Current value {{ tower_action }}"
