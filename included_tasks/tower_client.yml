@@ -4,7 +4,7 @@
 #
 - name: Get needed credentials from a vault storage
   include_vars:
-    file: "files/api"
+    file: "files/tower-creds.vault"
 
 
 - name: Check what action provided
@@ -21,9 +21,13 @@
 
     - name: Launch a Tower Job Template
       tower_job_launch:
+        tower_host: "{{ tower_host }}"
+        tower_username: "{{ tower_username }}"
+        tower_password: "{{ tower_password }}"
         job_template: "{{ job_template_name }}"
         extra_vars: "{{ job_extra_vars | default({}) }}"
-      register: job
+        tower_verify_ssl: false
+      register: tower_job
 
   when: tower_action == "job_launch"
 
