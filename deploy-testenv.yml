@@ -20,7 +20,7 @@
 
     - name: Set the stack name
       set_fact:
-        stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_micro }}"
+        stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_basic_short }}"
 
 
     - name: "Run stack {{ stack_name }} and add the created VM into internal inventory"
