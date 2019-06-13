@@ -55,5 +55,5 @@
               testname: "{{ testname }}"
               stack_name: "{{ stack_name }}"
               student_name: "{{ student_name }}"
-              delay_seconds: "{{ exam_length_seconds }}"
+              exam_length_seconds: "{{ exam_length_seconds }}"
 

@@ -105,7 +105,7 @@
                 vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
                 student_name: "{{ student_name }}"
                 student_pass: "{{ student_pass }}"
-
+                exam_length_seconds: "{{ exam_length_seconds }}"
 
       rescue:
 

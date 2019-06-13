@@ -33,6 +33,7 @@
               initiator_email: "{{ initiator_email }}"
               useremailnotifications: "{{ useremailnotifications }}"
               testname: "{{ testname }}"
+              exam_length_seconds: "{{ exam_length_seconds | default(60) }}"
 
 
       - name: just create a file

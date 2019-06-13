@@ -14,7 +14,7 @@ Here are the details you need to get an access to the test system.
   - username is `{{ student_name | default("not defined") }}`
   - password is `{{ student_pass | default("not defined") }}`
   - you may become root user using `sudo su -` without prompting a password
-  - your system becomes unaccessible for you in **{{ examtime | default(0) | int / 60 }}** minutes.
+  - your system becomes unaccessible for you in **{{ exam_length_seconds | default(0) | int / 60 }}** minutes.
 
 **If any of the above parameters is not defined, report it as fast as possible to your contact person.**
 

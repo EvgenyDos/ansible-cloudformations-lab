@@ -8,12 +8,8 @@
       when: testname is defined
       block:
 
-      - name: Set examtime
-        set_fact: 
-          examtime: "{{ delay_seconds }}"
-
-      - name: sleep for "{{ delay_seconds }}" seconds and continue with play
-        wait_for: timeout="{{ delay_seconds }}"
+      - name: sleep for "{{ exam_length_seconds }}" seconds and continue with play
+        wait_for: timeout="{{ exam_length_seconds }}"
         delegate_to: localhost
 
 
@@ -33,5 +29,5 @@
               testname: "{{ testname }}"
               stack_name: "{{ stack_name }}"
               student_name: "{{ student_name }}"
-              delay_seconds: "{{ delay_seconds }}"
+              exam_length_seconds: "{{ exam_length_seconds }}"
   
