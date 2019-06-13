@@ -27,7 +27,7 @@
        validate_certs: false
        method: "POST"
        body_format: "json"
-       body: "{{ job_extra_vars | to_json }}"
+       body: "{{ job_extra_vars }}"
        force_basic_auth: true
        status_code: 201
 
