@@ -94,7 +94,7 @@
               useremailnotifications: "{{ useremailnotifications }}"
               testname: "{{ testname }}"
               stack_name: "{{ stack_name }}"
-              exam_host_ip: "{{ vmhostip }}"
+              vmhostip: "{{ vmhostip }}"
 
 
       rescue:
