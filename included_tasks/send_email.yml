@@ -18,11 +18,11 @@
 
 - name: Load credentials for sending emails (see below how they used)
   include_vars:
-    file: files/li9-mail-creds.yml
+    file: files/li9-mail-creds.vault
     name: mail
 
 
-- name: Send email with credentials to the job seeker
+- name: "Send email to {{ send_to | default(mail.notify_mail_from) }}. Subject: {{ mail_subject }}"
   mail:
     host: "{{ mail.notify_mail_host }}"
     port: "{{ mail.notify_mail_port }}"

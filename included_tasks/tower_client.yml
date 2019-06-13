@@ -1,0 +1,28 @@
+---
+#
+# This module makes a call to Ansible Tower
+#
+- name: Get needed credentials from a vault storage
+  include_vars:
+    file: "files/api"
+
+
+- name: Check what action provided
+  assert: 
+    that: "{{ item }}"
+  loop:
+    - test: tower_action is defined and tower_action in [ "job_launch", ]
+      fail_msg: "Action is not defined or action is not supported. Current value {{ tower_action }}"
+
+
+- name: Call to Ansible Tower Job
+  block:
+
+    - name: Launch a Tower Job Template
+      tower_job_launch:
+        job_template: "{{ job_template_name }}"
+      register: job
+
+  when: tower_action == "job_launch"
+
+

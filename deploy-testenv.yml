@@ -1,70 +1,113 @@
 ---
-  - name:
-    hosts: localhost
-    connection: local
-    tasks:
-
-      - name: Get current time
-        setup:
-          filter: "ansible_date_time"
-
-
-      - name: Set the stack name
-        set_fact:
-          stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_micro }}"
+#
+# Following variables must be provided:
+# - participant_email
+# - participant_id
+# - participant_details
+# - initiator_email
+# - testname
 
 
-      - name: Deploy Dos ansible cloudformation stack
-        cloudformation:
-          stack_name: "{{ stack_name }}"
-          state: "present"
-          region: "{{ region_name }}"
-          disable_rollback: true
-          template: "files/li9-tests.template"
-          template_parameters:
-            KeyName: "{{ instancekeypair }}"
-            EC2InstanceType: "{{ instancetype }}"
-            User: "{{ studentname }}"
-            Password: "{{ studentpwd }}"
-            VolumeSize: "{{ disksize }}"
+- name:
+  hosts: localhost
+  connection: local
+  tasks:
 
-      - name: we have to collect some facts from cloudformations stack
-        cloudformation_facts:
-          stack_name: "{{ stack_name }}"
-          region: "{{ region_name }}"
-          all_facts: true
-        register: my_stack
+    - name: Get current time
+      setup:
+        filter: "ansible_date_time"
 
-      - name: it is output of cloudformations instalation
-        debug:
-          msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs }}"
 
-      - name: it is our VM ip
-        debug:
-          msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+    - name: Set the stack name
+      set_fact:
+        stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_micro }}"
 
-      - name: adding tower_host to our VM inventory
-        tower_host:
-          description: "test host for invent"
-          name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-          inventory: "{{ playbookvminventoryname }}"
-          tower_verify_ssl: no
-          state: present
 
-      - name: "we will save VM server ip as a setstats param for the next staps"
-        set_stats:
-          data:
-            vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+    - name: "Run stack {{ stack_name }} and add the created VM into internal inventory"
+      block:
 
-      - debug:
-          msg: "our inventnmame {{ playbookvminventoryname }}"
+        - name: Deploy Dos ansible cloudformation stack
+          cloudformation:
+            stack_name: "{{ stack_name }}"
+            state: "present"
+            region: "{{ region_name }}"
+            disable_rollback: true
+            template: "files/li9-tests.template"
+            template_parameters:
+              KeyName: "{{ instancekeypair }}"
+              EC2InstanceType: "{{ instancetype }}"
+              User: "{{ studentname }}"
+              Password: "{{ studentpwd }}"
+              VolumeSize: "{{ disksize }}"
 
-      - name: Wait until SSH is available
-        wait_for:
-          host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-          port: 22
-          delay: 30
-          timeout: 320
-          state: started
-        delegate_to: localhost
+        - name: we have to collect some facts from cloudformations stack
+          cloudformation_facts:
+            stack_name: "{{ stack_name }}"
+            region: "{{ region_name }}"
+            all_facts: true
+          register: my_stack
+  
+        - name: it is output of cloudformations instalation
+          debug:
+            msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs }}"
+  
+        - name: it is our VM ip
+          debug:
+            msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+  
+        - name: adding tower_host to our VM inventory
+          tower_host:
+            description: "test host for invent"
+            name: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+            inventory: "{{ playbookvminventoryname }}"
+            tower_verify_ssl: no
+            state: present
+  
+        - name: "we will save VM server ip as a setstats param for the next staps"
+          set_stats:
+            data:
+              vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+  
+        - debug:
+            msg: "our inventnmame {{ playbookvminventoryname }}"
+  
+        - name: Wait until SSH is available
+          wait_for:
+            host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
+            port: 22
+            delay: 30
+            timeout: 320
+            state: started
+          delegate_to: localhost
 
+      rescue:
+
+        - name: Informing initiator about the fail
+          include_tasks: "included_tasks/send_email.yml"
+          vars:
+            send_to: "{{ initiator_email }}"
+            mail_subject: "Li9Exam environment failed to start up"
+            mail_body: |
+              Dear {{ initiator_email }},
+
+
+              The AWS stack "{{ stack_name }}" failed to provision. Clean up has been initiated. 
+
+              The exam {{ testname }} assigned to {{ participant_email }} {%- if reference_id | default("") | length > 0 -%}({{ reference_id }}){%- endif %} not started.
+
+              Let this know technicians to look into it. After the issue is being fixed initiate the exam again.
+
+
+              Sincerely,
+              Li9 Exam System.
+            body_content_format: plain
+
+
+        - name: Getting cloudformation stack down due to issue during orchestration (normally it shouldn't happen)
+          cloudformation:
+            stack_name: "{{ stack_name }}"
+            state: "absent"
+            region: "{{ region_name }}"
+            disable_rollback: true
+
+  

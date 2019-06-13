@@ -1,0 +1,25 @@
+---
+  - name:
+    hosts: localhost
+    connection: local
+    gather_facts: False
+    vars_files:
+    - group_vars/all.yml
+    tasks:
+      - name: cloudformation stack down
+        cloudformation:
+          stack_name: "{{ stack_name }}"
+          state: "absent"
+          region: "{{ region_name }}"
+          disable_rollback: true
+
+      - debug:
+          msg: vmhostip is "{{ vmhostip }}" 
+
+#      - name: remove tower_host from our VM inventory
+#        tower_host:
+#          description: "remove VM ip from inventory"
+#          name:  "{{ vmhostip }}"
+#          inventory: "{{ playbookvminventoryname }}"
+#          tower_verify_ssl: no
+#          state: absent
