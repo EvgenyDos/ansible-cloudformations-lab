@@ -17,10 +17,3 @@ timetolivehyperlink: 604800
 examtime: 3600
 
 
-job_templates:
-  initate_exam:
-    name: 
-  postconfig:
-    name: "Li9ExamSystem-postconfig@prod"
-
-

@@ -83,9 +83,18 @@
         - name: Call Job for performing post-tasks (configure for a particular exam)
           include_tasks: "included_tasks/tower_client.yml"
           vars:
-            job_template_name: "{{ job_templates.postconfig.name }}"
+            job_template_name: "{{ job_templates.postconfig.id }}"
             tower_action: "job_launch"
             job_extra_vars:
+              - participant_id: "{{ participant_id | default('') }}"
+              - participant_details: "{{ participant_details | default('') }}"
+              - participant_email: "{{ participant_email | default(useremailnotifications) }}"
+              - initiator_email: "{{ initiator_email }}"
+              - useremailnotifications: "{{ useremailnotifications }}"
+              - testname: "{{ testname }}"
+              - stack_name: "{{ stack_name }}"
+
+            job_extra_vars_old:
               - "participant_id={{ participant_id | default('') }}"
               - "participant_details={{ participant_details | default('') }}"
               - "participant_email={{ participant_email | default(useremailnotifications) }}"
