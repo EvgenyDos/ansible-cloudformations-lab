@@ -21,6 +21,13 @@
     - name: Set the stack name
       set_fact:
         stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_basic_short }}"
+        student_name: "student"
+        student_pass_tmp: "{{ ansible_date_time.iso8601_micro | b64encode }}"
+
+
+    - name: Normalize participant password
+      set_fact:
+        student_pass: "{{ student_pass_tmp[:11] }}"
 
 
     - name: "Run stack {{ stack_name }} and add the created VM into internal inventory"
@@ -32,12 +39,12 @@
             state: "present"
             region: "{{ region_name }}"
             disable_rollback: true
-            template: "files/li9-tests.template"
+            template: "files/cloudformation-template.template"
             template_parameters:
               KeyName: "{{ instancekeypair }}"
               EC2InstanceType: "{{ instancetype }}"
-              User: "{{ studentname }}"
-              Password: "{{ studentpwd }}"
+              User: "{{ student_name }}"
+              Password: "{{ student_pass }}"
               VolumeSize: "{{ disksize }}"
 
         - name: we have to collect some facts from cloudformations stack
@@ -96,8 +103,8 @@
                 testname: "{{ testname }}"
                 stack_name: "{{ stack_name }}"
                 vmhostip: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-                studentname: "{{ studentname }}"
-                studentpwd: "{{ studentpwd }}"
+                student_name: "{{ student_name }}"
+                student_pass: "{{ student_pass }}"
 
 
       rescue:
