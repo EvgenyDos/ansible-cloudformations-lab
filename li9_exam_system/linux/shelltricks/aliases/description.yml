@@ -1,7 +1,7 @@
 title: Environment customization
 description: |
 
-  Configure the system as follows:
+  Configure the host system as follows:
 
   * User *stannis* exists, has its primary group *operators*, and configured shell as `/bin/bash`.
   * All users have a command `lsall` which works as `ls -a` without creating such command on the local system.
@@ -10,5 +10,5 @@ description: |
   * Users of group *operators* have permissions to write in `/projects/operators`.
   * Users of group *operators* cannot run more than ten (10) processes.
 
-  *Assuming that users have shell `/bin/bash`.*
+  *Assuming that users have a shell `/bin/bash`.*
 

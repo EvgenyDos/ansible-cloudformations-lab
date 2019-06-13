@@ -4,7 +4,7 @@ description : |
 
   Modify the file `/data/message` as follows:
 
-  * Owner should be set as *aria*.
+  * Owner should be set to *aria*.
   * It should be owned by group *stark*.
   * Permissions should be set as:
     * owner=read,write,execute
