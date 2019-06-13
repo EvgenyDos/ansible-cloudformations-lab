@@ -98,6 +98,7 @@
             state: "absent"
             region: "{{ region_name }}"
             disable_rollback: true
+          become: false
           delegate_to: localhost
 
         - debug:
