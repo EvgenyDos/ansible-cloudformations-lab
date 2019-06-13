@@ -88,7 +88,7 @@
             job_extra_vars:
               participant_id: "{{ participant_id }}"
               participant_details: "{{ participant_details }}"
-              participant_email: "{{ participant_email }}"
+              participant_email: "{{ participant_email | default(useremailnotifications) }}"
               initiator_email: "{{ initiator_email }}"
               useremailnotifications: "{{ useremailnotifications }}"
               testname: "{{ testname }}"
