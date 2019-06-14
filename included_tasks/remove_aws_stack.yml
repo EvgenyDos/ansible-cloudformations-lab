@@ -17,6 +17,7 @@
     inventory: "{{ playbookvminventoryname }}"
     tower_verify_ssl: no
     state: absent
+  when: vmhostip is defined
 
 
 - name: Sending a bad email
