@@ -4,6 +4,9 @@
   connection: local
   tasks:
 
+  - name: Run normal tasks
+    block:
+
     - name: Set of tasks to execute when testname is defined
       when: testname is defined
       block:
@@ -32,4 +35,14 @@
               exam_length_seconds: "{{ exam_length_seconds }}"
               vmhostip: "{{ vmhostip }}"
               exam_tasks: "{{ exam_tasks }}"
-  
+
+     rescue:
+
+      - name: Something went wrong. Cleaning up resources
+        include_tasks: "included_tasks/remove_aws_stack.yml"
+        vars:
+          send_notify_email: true
+          bad_situation: true
+          mail_subject: "Waiting playbook failed"
+          mail_message: "The waiting playbook failed."
+

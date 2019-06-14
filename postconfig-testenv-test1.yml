@@ -8,6 +8,9 @@
 
   tasks:
 
+  - name: Run direct tasks
+    block:
+    
       - name: Get tasks
         set_fact:
           exam_tasks: "{{ lookup('listtasks', tasks_base_dir) }}"
@@ -58,4 +61,13 @@
               exam_length_seconds: "{{ exam_length_seconds }}"
               vmhostip: "{{ vmhostip }}"
               exam_tasks: "{{ exam_tasks }}"
+    rescue:
+
+      - name: Something went wrong and we remove allocated in AWS resources
+        include_tasks: "included_tasks/remove_aws_stack.yml"
+        vars:
+          send_notify_email: true
+          bad_situation: true
+          mail_subject: "Postconfig failed, check logs"
+          mail_message: "The postconfig playbook failed."
 

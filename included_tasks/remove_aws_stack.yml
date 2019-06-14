@@ -1,25 +1,40 @@
 ---
-  - name:
-    hosts: localhost
-    connection: local
-    gather_facts: False
-    vars_files:
-    - group_vars/all.yml
-    tasks:
-      - name: cloudformation stack down
-        cloudformation:
-          stack_name: "{{ stack_name }}"
-          state: "absent"
-          region: "{{ region_name }}"
-          disable_rollback: true
 
-      - debug:
-          msg: vmhostip is "{{ vmhostip }}" 
+- name: Deleting cloudformation stack "{{ stack_name }}"
+  - name: Clean up the cloudformation stack "{{ stack_name }}"
+    cloudformation:
+      stack_name: "{{ stack_name }}"
+      state: "absent"
+      region: "{{ region_name }}"
+      disable_rollback: true
+  
+  - debug:
+    msg: vmhostip is "{{ vmhostip }}" 
 
-#      - name: remove tower_host from our VM inventory
-#        tower_host:
-#          description: "remove VM ip from inventory"
-#          name:  "{{ vmhostip }}"
-#          inventory: "{{ playbookvminventoryname }}"
-#          tower_verify_ssl: no
-#          state: absent
+  when: do_delete_stack | default(true)
+
+
+- name: Sending a bad email
+  include_tasks: "send_email.yml"
+  vars:
+    mail_subject: "Li9ExamSystem: Attention! {{ mail_subject }}"
+    send_to: "{{ initiator_email }}"
+    body_content_format: plain
+    mail_message: |
+      Dear {{ initiator_email }},
+
+      "{{ mail_content }}"
+
+      The issue happend for "{{ participant_email }}"{% if participant_id|default("") | length > 0 %}, reference {{ participant_id }}{% endif %}.
+      Exam name: "{{ testname }}".
+      AWS stack: "{{ stack_name }}" (a signal for termination is sent).
+      VM instance IP: "{{ vmhostip }}".
+
+      Let technicians know about this. After the issue is being fixed initiate the exam again.
+
+      Yours,
+      Li9 Exam System.
+  when: 
+    - send_notify_email | default(false)
+    - bad_situation | default(false)
+

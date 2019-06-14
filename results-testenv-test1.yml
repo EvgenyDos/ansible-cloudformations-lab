@@ -4,6 +4,9 @@
     gather_facts: false
     tasks:
 
+    - name: Run normal tasks
+      block:
+
         - shell: usermod -s /sbin/nologin {{ student_name }}
 
 
@@ -80,17 +83,6 @@
               Thanks for your time and have a nice day.
 
 
-        # - name: Time for troubleshooting before full destroy
-        #   shell: "sleep {{ waittimebeforedestroy | default(10) }}"
-
-#         - name: Install boto(3) package
-#           package:
-#             name: "{{ item }}"
-#             state: present
-#           loop:
-#             - python-boto3.noarch
-#             - python-boto.noarch
-
         - name: cloudformation stack down
           cloudformation:
             stack_name: "{{ stack_name }}"
@@ -103,4 +95,14 @@
 
         - debug:
             msg: vmhostip is "{{ vmhostip }}"
+
+      rescue:
+        
+        - name: Something went wrong. Clean up resources
+          include_tasks: "included_tasks/remove_aws_stack.yml"
+          vars: 
+            send_notify_email: true
+            bad_situation: true
+            mail_subject: "Scoring failed, check logs"
+            mail_message: "The scoring playbook failed."
 

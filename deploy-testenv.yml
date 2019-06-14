@@ -109,32 +109,11 @@
 
       rescue:
 
-        - name: Display a warning
-          debug: 
-            msg: "The Rescue section of the block construction initiated. Something went wrong"
-  
-        - name: Informing initiator about the fail
-          include_tasks: "included_tasks/send_email.yml"
+        - name: Something went wrong. Clean up resources
+          include_tasks: "included_tasks/remove_aws_stack.yml"
           vars:
-            send_to: "{{ initiator_email }}"
-            mail_subject: "Li9Exam environment failed to start up"
-            mail_body: |
-              Dear {{ initiator_email }},
-
-
-              The AWS stack "{{ stack_name }}" failed to provision. Clean up has been initiated. 
-              The exam {{ testname }} assigned to {{ participant_email }} {%- if reference_id | default("") | length > 0 -%}({{ reference_id }}){%- endif %} not started.
-              Let this know technicians to look into it. After the issue is being fixed initiate the exam again.
-
-              Sincerely,
-              Li9 Exam System.
-            body_content_format: plain
-
-
-        - name: Getting cloudformation stack down due to issue during orchestration (normally it shouldn't happen)
-          cloudformation:
-            stack_name: "{{ stack_name }}"
-            state: "absent"
-            region: "{{ region_name }}"
-            disable_rollback: true
-
+            send_notify_email: true
+            bad_situation: true
+            mail_subject: "Deploy failed, check logs"
+            mail_message: "The deploy playbook failed."
+ 
