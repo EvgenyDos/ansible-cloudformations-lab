@@ -25,7 +25,7 @@
 
 
     - name: Generator random password
-      command: openssl rand -base64 12
+      command: openssl rand -hex 8
       register: student_pass_tmp
 
 
