@@ -2,9 +2,8 @@
 
 echo "Content-type: text/plain"
 echo
-curl -s -k -X POST -u '{{ tower_username }}:{{ tower_password }}' -H 'Content-Type: application/json' --data '{{ extra_vars | to_json }}' '{{ endpoint }}' > /dev/null 2>&1
+curl -s -k -X POST -u {{ apilogin  }}:{{ apipassword }} -H 'Content-Type: application/json' --data '{ "extra_vars": "{\"useremailnotifications\": \"{{ useremailnotifications }}\", \"testname\": \"{{ testname }}\", \"participant_id\": \"{{ participant_id }}\", \"participant_details\": \"{{ participant_details }}\", \"initiator_email\": \"{{ initiator_email }}\" }" }' '{{ apilink }}' > /dev/null 2>&1
 
 echo "Your test environment has been started for provision. It will take some time. Wait for next email with details"
 
 rm -rf $0
-

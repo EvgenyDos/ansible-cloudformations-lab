@@ -10,6 +10,55 @@
     name: "markdown2"
 
 
+
+- name: Getting a more convinient time format, if previous task get successful
+  # We wrap getting world time into a block-rescue section
+  # in case of if online time is not available 
+  # the user will be just informed with duration time
+  block:
+
+    - name: Obtain a world time from http://worldtimeapi.org/api/timezone/America/New_York
+      uri:
+        url: "http://worldtimeapi.org/api/timezone/America/New_York"
+        method: GET
+        body_format: json
+        return_content: true
+        status_code: 200
+      register: start_time_text
+
+    - name: Doing some conversions of time and calculations
+      set_fact:
+        datetime_extended_format: true
+
+    - name: Set curr_worldtime
+      set_fact:
+        curr_worldtime: "{{ start_time_text.json }}"
+
+    - name: Set expire_unixtime
+      set_fact:
+        expire_unixtime: "{{ curr_worldtime['unixtime'] + examtime }}"
+
+    - name: Get a printable time of begin of the exam
+      shell: |
+        date -d @{{ curr_worldtime.unixtime }} 
+      environment:
+        TZ: America/New_York
+      register: exam_time_begin
+    
+    - name: Get a printable time of end of the exam
+      shell: |
+        date -d @{{ expire_unixtime }} 
+      environment:
+        TZ: America/New_York
+      register: exam_time_end
+
+  rescue:
+  
+    - name: Doing some calculations and setings some facts
+      set_fact:
+        datetime_extended_format: false
+
+
 - name: Copy parts of the message to the managed host
   template:
     src: "templates/{{ item }}.j2"

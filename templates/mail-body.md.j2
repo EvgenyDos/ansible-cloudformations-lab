@@ -14,9 +14,19 @@ Here are the details you need to get an access to the test system.
   - username is `{{ student_name | default("not defined") }}`
   - password is `{{ student_pass | default("not defined") }}`
   - you may become root user using `sudo su -` without prompting a password
-  - your system becomes unaccessible for you in **{{ exam_length_seconds | default(0) | int / 60 }}** minutes.
 
 **If any of the above parameters is not defined, report it as fast as possible to your contact person.**
+
+
+{% if not datetime_extended_format %}
+Your system becomes inaccessible for you in **{{ examtime | default(0) | int / 60 }}** minutes.
+{% else %}
+### Exam Time Frame
+
+- Exam duration is **{{ examtime | int / 60 }}** minutes.
+- Exam started at **{{ exam_time_begin.stdout }}**.
+- Exam ends at **{{ exam_time_end.stdout }}**.
+{% endif %}
 
 
 ## Exam Rules
@@ -61,7 +71,7 @@ You need to be aware of the following rules:
 
 ## Issues
 
-We do not expect any technical issues during the exam but in case if something happens report this to your contact person.
+We do not expect any technical issues during the exam but in case if something happens report this your contact person.
 
 You can report only technical issues. Any questions regarding the tasks are not accepted.
 
