@@ -22,12 +22,12 @@
       set_fact:
         stack_name: "Li9ExamSystem-{{ ansible_date_time.iso8601_basic_short }}"
         student_name: "student"
-        student_pass_tmp: "{{ ansible_date_time.iso8601_micro | b64encode }}"
+        student_pass_tmp: "{{ ansible_date_time.iso8601_micro | password_hash('sha256') }}"
 
 
     - name: Normalize participant password
       set_fact:
-        student_pass: "{{ student_pass_tmp[:11] }}"
+        student_pass: "{{ student_pass_tmp[3:15] }}"
 
 
     - name: "Run stack {{ stack_name }} and add the created VM into internal inventory"
