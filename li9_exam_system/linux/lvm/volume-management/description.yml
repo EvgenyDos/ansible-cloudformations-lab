@@ -4,29 +4,29 @@ description : |
   To complete this task look for an unused (unallocated) space on any block device and use it. Don't modify any existing volumes and file systems.
 
   1. Create a logical volume group *vgroup1*:
-     * Size of the volume group is *512 MiB*.
+     * Size of the volume group should be *512 MiB*.
      * Size of a physical extent should be *2 MiB*.
      * Create a logical volume named *static-data*:
-       - size of the logical volume is *128 MiB*
-       - create a file system of type *ext4*
+       - size of the logical volume should be *128 MiB*
+       - create a file system with *ext4* type
        - the file system should be labeled as *STATIC-DATA*
        - the logical volume should be mounted as `/volumes/static-data` at a boot time
-       - the file system should mount in *Read-Only* mode.
+       - the file system should be mounted in *Read-Only* mode.
      * Create a logical volume named *database*:
-       - size of the logical volume is *384 MiB*
-       - size of the logical volume gets all free space in the group
-       - create a file system of type *xfs*
+       - size of the logical volume must be *384 MiB*
+       - size of the logical volume must use all available space in the group
+       - create a file system with *xfs* type
        - the file system should be labeled as *DATABASE*
-       - *database* is mounted at a boot time to `/volumes/database` as EXT4 filesystem.
+       - logical volume *database* is mounted at a boot time to `/volumes/database` as EXT4 filesystem.
   2. Create a logical volume group *vgroup2*:
      * Size of the volume group is *1024 MiB*.
      * Size of a physical extent should be *4 MiB*.
      * Create a logical volume named *runtime-data*:
-       - the volume should take *512MiB* of size of the volume group
-       - create a file system of type *xfs*
+       - volume should take *512MiB* size of the volume group
+       - create a file system with *xfs* type
        - the file system should be labeled as *RUNTIME-DATA*
-       - when command `mount /volumes/runtime-data` is run it should mount the volume as `/volumes/runtime-data`
-       - it should not mount at a boot time.
+       - when command `mount /volumes/runtime-data` is run it should mount volume as `/volumes/runtime-data`
+       - it should not be mounted at a boot time.
  
   *Notes*:
 

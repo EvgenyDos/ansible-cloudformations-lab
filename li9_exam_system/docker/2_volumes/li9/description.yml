@@ -4,6 +4,8 @@ description : |
  
   * Volume must have a name "li9"
   * Driver type must be "local"
+  * Run docker container from image "nginx:latest" with a name "grossy" and attached volume "li9" on the "/test" directory
+  * Login to started "grossy" container, and create an empty file "/test/grossy"
 
 explanation: |
   A participant should do following:

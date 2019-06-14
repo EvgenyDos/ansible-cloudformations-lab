@@ -1,6 +1,6 @@
 title:  Passwordless ssh access
 description : |
-  Configure your system to allow passwordless access:
+  Configure your host system to allow passwordless access:
 
   * local root user should be able to log in to the host as `ssh sshuser@localhost` without prompting a password.
 

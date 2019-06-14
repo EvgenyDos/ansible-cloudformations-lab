@@ -8,3 +8,5 @@ command:
     exit-status: 0
     stdout:
     - "li9"
+  docker exec -ti grossy test /test/grossy:
+    exit-status: 0

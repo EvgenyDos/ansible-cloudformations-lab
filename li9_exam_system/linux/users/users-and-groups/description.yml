@@ -3,7 +3,7 @@ description : |
   Managing users, groups, and permissions.
 
 
-  Users:
+  Create users:
     
   * Create a user *john*, with UID 1004.
   * Create a user *robb*, with UID 1005.
@@ -11,13 +11,13 @@ description : |
   * Create a user *aria*, with UID 1007.
 
 
-  Groups:
+  Create groups:
 
   * Create a group *infra* with GID 3004.
   * Create a group *qa* with GID 3005.
 
 
-  Membership:
+  Membership management:
 
   * Users *john* and *robb* are members of *infra* group.
   * Users *tyrion* and *aria* are members of *qa* group.
@@ -28,8 +28,8 @@ description : |
   Directories:
   
   * Create directory `/devops/infra`:
-    * The directory must be owned by *root* user.
-    * The only users of group *infa* should have permissions to read and write in there.
+    * Directory must be owned by *root* user.
+    * Only users of group *infa* should have permissions to read and write in there.
     * No other users should have access there.
     * Files and directories created in this directory should be owned by users who create them. 
     * Other members of *infra* group should also be able to read such files.

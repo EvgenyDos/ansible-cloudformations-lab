@@ -26,14 +26,14 @@
 - name: Create config dir
   command: asciinema -h
 
-- name: Make user user student exists
+
+- name: Make sure user student exists
   user:
     name: student
     state: present
     create_home: true
 
 - name: Create config dir for student
-  # shell: su - student -c "asciinema -h"
   shell: "asciinema -h"
   become_user: student
 

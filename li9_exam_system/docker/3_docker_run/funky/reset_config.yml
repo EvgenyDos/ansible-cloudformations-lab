@@ -1,0 +1,11 @@
+---
+- name: stop docker container
+  docker_container:
+    state: absent
+    name: funky
+
+- name: remove nginx image
+  docker_image:
+    state: absent
+    name: nginx
+    tag: latest

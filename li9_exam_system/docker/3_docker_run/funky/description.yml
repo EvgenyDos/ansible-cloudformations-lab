@@ -1,0 +1,12 @@
+title: Run Docker container
+description : |
+  Run docker container with following requirements:
+  
+  * Container must be started from image "nginx:latest"
+  * Containerized application must be exposed to the port 8080 on the host machine
+  * Started container name must have a name "funky"
+  * Container must be restarted after system reboot
+
+explanation: |
+  A participant should do following:
+  * Run a docker container with a name "funky" from image "nginx:latest" and exposed port 8080

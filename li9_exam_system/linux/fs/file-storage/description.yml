@@ -2,9 +2,9 @@ title: File systems
 description : |
   Constructing a new file system over existing file system.
 
-  An application needs a separate block device and a file system on it to run successfully but the server does not have any unused block devices. Configure your system as follows:
+  An application needs a separate block device and a file system on it to run successfully. Host machine should not have any unused block devices. Configure your system as follows:
 
   * Create a file sized *512 MiB* as `/virtual-dev-storage`.
   * Create *Ext4* file system on it. Do not preserve any space for *root* user.
-  * do the file system available as `/opt/virtual-storage`.
+  * File system must be available as `/opt/virtual-storage`.
 

@@ -1,0 +1,11 @@
+---
+- name: download httpd container
+  docker_image:
+    name: nginx:latest
+    source: pull
+
+- name: run docker container
+  docker_container:
+    name: funky
+    image: nginx:latest
+    state: started

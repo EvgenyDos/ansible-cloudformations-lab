@@ -89,11 +89,11 @@
     name: docker-ce
     state: present
 
-- name: Ensure Docker is started and enabled at boot.
+- name: Ensure Docker is started.
   service:
     name: docker
     state: started
-    enabled: true
+    enabled: false
 
 - name: Ensure docker users are added to the docker group.
   user:
