@@ -3,7 +3,8 @@
 disksize: '1'
 instancekeypair: dosnew
 instancetype: t2.micro
-playbookvminventoryname: dos-testenv-inventoty-with-all-hosts
+# playbookvminventoryname: dos-testenv-inventoty-with-all-hosts
+playbookvminventoryname: Li9ExamInventory
 postcheckpwd: JIKYGKujhjkghKGHKJ
 region_name: eu-central-1
 sleeptime: 200
