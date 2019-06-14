@@ -1,17 +1,22 @@
 ---
 
-- name: Deleting cloudformation stack "{{ stack_name }}"
-  - name: Clean up the cloudformation stack "{{ stack_name }}"
-    cloudformation:
-      stack_name: "{{ stack_name }}"
-      state: "absent"
-      region: "{{ region_name }}"
-      disable_rollback: true
-  
-  - debug:
+- name: Clean up the cloudformation stack "{{ stack_name }}"
+  cloudformation:
+    stack_name: "{{ stack_name }}"
+    state: "absent"
+    region: "{{ region_name }}"
+    disable_rollback: true
+
+- debug:
     msg: vmhostip is "{{ vmhostip }}" 
 
-  when: do_delete_stack | default(true)
+
+- name: adding tower_host to our VM inventory
+   tower_host:
+     name: "{{ vmhostip }}"
+     inventory: "{{ playbookvminventoryname }}"
+     tower_verify_ssl: no
+     state: absent
 
 
 - name: Sending a bad email
