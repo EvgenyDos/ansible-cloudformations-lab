@@ -67,7 +67,23 @@
           include_tasks: included_tasks/send_email.yml
           vars:
             mail_subject: "Test results"
-            mail_body: "{{ bodymailreport.stdout }}"
+            mail_body: |
+              Dear {{ initiator_email }}, 
+
+              This is a technical report about the exam:
+              
+              - email: "{{ participant_email }}"
+              - ref_id: "{{ participant_id }}"
+              - exam: "{{ testname }}"
+              - details: "{{ participant_details }}"
+     
+
+              There is technical details:
+
+              {{ bodymailreport.stdout }}
+
+              Yours,
+              Li9 Exam System.
             body_content_format: plain
 
 
