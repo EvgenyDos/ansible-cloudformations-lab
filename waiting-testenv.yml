@@ -36,7 +36,7 @@
               vmhostip: "{{ vmhostip }}"
               exam_tasks: "{{ exam_tasks }}"
 
-     rescue:
+    rescue:
 
       - name: Something went wrong. Cleaning up resources
         include_tasks: "included_tasks/remove_aws_stack.yml"
