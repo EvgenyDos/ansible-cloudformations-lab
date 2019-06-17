@@ -53,7 +53,7 @@
 
         - name: Install Goss and run it
           shell: |
-            /root/goss-ssh-results.sh 
+            /root/goss-ssh-results.sh
             /root/goss-results.sh
 
 
@@ -68,15 +68,15 @@
           vars:
             mail_subject: "Test results"
             mail_body: |
-              Dear {{ initiator_email }}, 
+              Dear {{ initiator_email }},
 
               This is a technical report about the exam:
-              
+
               - email: "{{ participant_email }}"
               - ref_id: "{{ participant_id }}"
               - exam: "{{ testname }}"
               - details: "{{ participant_details }}"
-     
+
 
               There is technical details:
 
@@ -93,7 +93,7 @@
             mail_subject: "Your exam-time has been ended"
             send_to: "{{ useremailnotifications }}"
             body_content_format: plain
-            mail_body: |  
+            mail_body: |
               Your exam-time has been ended.
               We will check the results of exam and contact to you soon.
               Thanks for your time and have a nice day.
@@ -113,10 +113,10 @@
             msg: vmhostip is "{{ vmhostip }}"
 
       rescue:
-        
+
         - name: Something went wrong. Clean up resources
           include_tasks: "included_tasks/remove_aws_stack.yml"
-          vars: 
+          vars:
             send_notify_email: true
             bad_situation: true
             mail_subject: "Scoring failed, check logs"

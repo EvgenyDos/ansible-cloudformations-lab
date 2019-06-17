@@ -30,7 +30,6 @@
     password: "{{ mail.notify_mail_password }}"
     subject: "{{ mail_subject }}"
     to: "{{ send_to | default(mail.notify_mail_from) }}"
-    bcc: "Dmitrii.Mostovshchikov@Li9.com"
     from: "{{ mail.notify_mail_from }}"
     subtype: "{{ body_content_format | default('plain') }}"
     body: "{{ mail_body }}"
