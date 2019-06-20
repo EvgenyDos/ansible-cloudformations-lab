@@ -7,11 +7,6 @@ description : |
   The exam host is a CentOS 7 linux. It has access to the Internet.
   You are free to use any repositories and sources which help you do the exam.
 
-{# comment #}
-  Pay attention on:
-
-    * if you know what exactly should be done but it does not work think what may prevent you from doing it. There are used only Linux specifics.
-{# endcomment #}
 
 comments: |
   CSS file for rendered html file migth be taken here https://github.com/sindresorhus/github-markdown-css.
