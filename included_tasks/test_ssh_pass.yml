@@ -2,7 +2,7 @@
   block:
 
     - name: Install sshpass package
-      package:
+      yum:
         name: sshpass
         state: present
       register: sshpass_install
@@ -26,7 +26,7 @@
       delegate_to: localhost
 
     - name: Uninstall sshpass
-      package:
+      yum:
         name: sshpass
         state: absent
       when: sshpass_install is changed
