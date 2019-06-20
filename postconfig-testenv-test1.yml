@@ -36,8 +36,8 @@
         with_dict: "{{ exam_tasks.topics }}"
 
 
-      - name: Calling checking ssh credentials
-        include_tasks: "included_tasks/test_ssh_pass.yml"
+      # - name: Calling checking ssh credentials
+      #  include_tasks: "included_tasks/test_ssh_pass.yml"
 
 
       - name: Emailing tasks
