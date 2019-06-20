@@ -1,0 +1,21 @@
+- name: Checking ssh credentials
+  block:
+
+
+    - name: Make sure that needed variables are there
+      assert:
+        that:
+          - vmhostip is defined
+          - student_name is defined
+          - student_pass is defined
+        fail_msg: "None or some of vhost, student_name, and/or student_pass variables defined"
+        success_msg: "VM credentials are there"
+      delegate_to: localhost
+
+
+    - name: Check a remote ssh password on a remote host
+      shell: |
+        sshpass -e ssh '{{ vmhostip }}' -l '{{ student_name }}' id
+      environment:
+        SSHPASS: '{{ student_pass }}'
+
