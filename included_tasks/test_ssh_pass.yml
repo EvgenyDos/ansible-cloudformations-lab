@@ -1,6 +1,12 @@
 - name: Checking ssh credentials
   block:
 
+    - name: Install sshpass package
+      package:
+        name: sshpass
+        state: present
+      register: sshpass_install
+
 
     - name: Make sure that needed variables are there
       assert:
@@ -10,7 +16,6 @@
           - student_pass is defined
         fail_msg: "None or some of vhost, student_name, and/or student_pass variables defined"
         success_msg: "VM credentials are there"
-      delegate_to: localhost
 
 
     - name: Check a remote ssh password on a remote host
@@ -18,4 +23,13 @@
         sshpass -e ssh '{{ vmhostip }}' -l '{{ student_name }}' id
       environment:
         SSHPASS: '{{ student_pass }}'
+      delegate_to: localhost
+
+    - name: Uninstall sshpass
+      package:
+        name: sshpass
+        state: absent
+      when: sshpass_install is changed
+
+  delegate_to: localhost
 
