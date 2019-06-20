@@ -1,0 +1,15 @@
+- hosts: localhost
+  connection: local
+  become: false
+  gather_facts: false
+  tasks:
+
+    - import_tasks: included_tasks/check_ssh_creds.yml
+      vars:
+        vmhostip: "ec2-54-221-45-201.compute-1.amazonaws.com"
+        student_name: "student"
+        student_pass: "Student123"
+      tags:
+        - never
+        - ssh-creds
+

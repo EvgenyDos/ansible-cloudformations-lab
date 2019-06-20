@@ -21,10 +21,11 @@
 
     - name: Check a remote ssh password on a remote host
       shell: |
-        sshpass -e ssh '{{ vmhostip }}' -l '{{ student_name }}' id
+        sshpass -e ssh '{{ vmhostip }}' -o StrictHostKeyChecking=no -l '{{ student_name }}' id
       environment:
         SSHPASS: '{{ student_pass }}'
       delegate_to: localhost
+
 
     - name: Uninstall sshpass
       yum:
