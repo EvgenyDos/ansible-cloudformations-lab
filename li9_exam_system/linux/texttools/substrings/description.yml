@@ -1,8 +1,8 @@
 title: Text tools
 description : |
  Create a file `/etc/file`:
- 
- * It should contain the first words of lines which start as **^abc** from file `/etc/services`.
+
+ * It should contain the first words of lines which start as **abc** from file `/etc/services`.
  * The order of the words must be the same as they appear in `/etc/services` file.
  * The words should not repeat.
 

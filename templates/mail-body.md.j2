@@ -13,6 +13,7 @@ Here are the details you need to get an access to the test system.
   - exam system IP is `{{ vmhostip | default("not defined") }}`
   - username is `{{ student_name | default("not defined") }}`
   - password is `{{ student_pass | default("not defined") }}`
+  - there is only **ssh** access to the system
   - you may become root user using `sudo su -` without prompting a password
 
 **If any of the above parameters is not defined, report it as fast as possible to your contact person.**
@@ -39,15 +40,29 @@ You need to be aware of the following rules:
   * If not said other, text, strings, lines should be written exactly in the same form as they shown in the tasks.
 {#  * You are not allowed to change SELinux state from **Enforcing**. #}
 
+## Scoring process
+
+There is an automated system which evaluates your hands-on exam. The scoring process is run after rebooting of your exam system. After this the system is destroyed. We get only a final report.
+
+**Pay a special attention on system wide changes that you may require to made. For example, if you need to modify file `/etc/fstab` make sure that your changes are correct and will work as expected after reboot. If the system becomes unavailable after a reboot (e.g. due to broken `/etc/fstab` file)  it will not be scored at all.**
+
+
 
 ## Recommendations
 
-  * Read all tasks and then start doing them.
+  * Read all tasks entirely before doing them.
+  * Be very careful. The automated system cannot check your typos. For example, if you are asked to create a user `demouser` it must be written the same way.
   * First complete the most easier for you tasks.
   * Do not spend much time on doing a single task, you can return and finish it later.
-  * Reboot the server to make sure that your changes persist and they will not lost after rebooting.
-  * Read each task entirely before doing it.
+  * Reboot the exam system to make sure that your changes persist and they will not lost after rebooting.
   * Do not modify settings for user `centos` as it may affect the scoring process.
+  * Do exactly what you are required to do and nothing more.
+  * If you are not sure in the changes which you made, it is a good idea to have another host to test such changes before applying them on the exam system. We provide only the exam host.
+  * If you are not sure in the changes which you made, you can omit such changes. In this case, the only completed actions will be scored.
+
+
+Doing the exam you must demonstrate your skills. We do not expect you complete all tasks 100% and 100% correctly. Show us your knowledge.
+
 
 {# it contains exam specific information from linux/description.yml, docker/description.yml, etc #}
 {{ exam_tasks.content.description }}
