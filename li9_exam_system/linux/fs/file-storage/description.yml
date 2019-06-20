@@ -1,6 +1,6 @@
 title: File systems
 description : |
-  Constructing a new file system over existing file system.
+  Construct a new file system on top of existing file system.
 
   An application needs a separate block device and a file system on it to run successfully. Host machine should not have any unused block devices. Configure your system as follows:
 
