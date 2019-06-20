@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "Create indian test environment :)",
+  "Description" : "Li9 Exam System environment",
 
   "Parameters" : {
 
@@ -132,7 +132,7 @@
 
           "Properties": {
             "ImageId": { "Fn::FindInMap" : [ "RegionToAMI", { "Ref" : "AWS::Region" }, "centos"]},
-            "InstanceType"   : { "Ref" : "EC2InstanceType" }, 
+            "InstanceType"   : { "Ref" : "EC2InstanceType" },
             "SecurityGroupIds": [{"Ref" : "ServerSecGrp"}],
             "KeyName"        : { "Ref" : "KeyName" },
 
