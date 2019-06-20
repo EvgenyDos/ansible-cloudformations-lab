@@ -5,7 +5,7 @@
       yum:
         name: sshpass
         state: present
-        use_backend: yum3
+        use_backend: yum
       register: sshpass_install
 
 
@@ -30,7 +30,7 @@
       yum:
         name: sshpass
         state: absent
-        use_backend: yum3
+        use_backend: yum
       when: sshpass_install is changed
 
   delegate_to: localhost
