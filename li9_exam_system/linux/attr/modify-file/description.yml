@@ -1,8 +1,8 @@
 title: Modify a file
 description : |
-  There is an empty file `/data/message`.
+  A Previous engineer has protected a file from modifications. Nobody knows what he did.
 
-  Modify the file `/data/message` as follows:
+  Unlock and Modify the file `/data/message` as follows:
 
   * Owner should be set to *aria*.
   * It should be owned by group *stark*.
@@ -18,6 +18,6 @@ description : |
 
 explanation: |
   This file is protected as `chattr +i /data/message` and cannot be modified without clearing this flag.
-  Permissions should be changed to `chattr -i +a /data/message`. To update other attributes use `chmod`, and 
+  Permissions should be changed to `chattr -i +a /data/message`. To update other attributes use `chmod`, and
   create group *staff* if it does not exist.
 
