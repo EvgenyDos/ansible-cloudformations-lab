@@ -17,4 +17,5 @@ waittime: 11
 timetolivehyperlink: 604800
 examtime: 3600
 exam_length_seconds: "{{ examtime }}"
+developers_emails: [ "Dmitrii.Mostovshchikov@Li9.com", ]
 
