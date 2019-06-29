@@ -19,12 +19,26 @@
         success_msg: "VM credentials are there"
 
 
-    - name: Check a remote ssh password on a remote host
-      shell: |
-        sshpass -e ssh '{{ vmhostip }}' -l '{{ student_name }}' id
-      environment:
-        SSHPASS: '{{ student_pass }}'
-      delegate_to: localhost
+    - name: Get ssh password check result
+      block:
+
+      - name: Check a remote ssh password on a remote host
+        shell: |
+          sshpass -e ssh '{{ vmhostip }}' -o StrictHostKeyChecking=no -l '{{ student_name }}' id || false
+        environment:
+          SSHPASS: '{{ student_pass }}'
+        delegate_to: localhost
+
+      - name: Set ssh_check_result_flag
+        set_fact:
+          check_sshpass_passed: True
+
+      rescue:
+
+      - name: Set ssh_check_result_flag
+        set_fact:
+          check_sshpass_passed: False
+
 
     - name: Uninstall sshpass
       yum:

@@ -36,8 +36,37 @@
         with_dict: "{{ exam_tasks.topics }}"
 
 
-      # - name: Calling checking ssh credentials
-      #  include_tasks: "included_tasks/test_ssh_pass.yml"
+      - name: Calling checking ssh credentials
+        include_tasks: "included_tasks/test_ssh_pass.yml"
+
+
+      - name: Send email to the developer
+        include_tasks: "included_tasks/tower_client.yml"
+        vars:
+          send_to: "{{ developers_emails }}"
+          mail_subject: "Li9ExamSystem SSH password check did not pass"
+          mail_body: |
+            Dear Developer,
+
+            The deployed host did not pass "ssh password check".
+            Details:
+              participant_id: "{{ participant_id | default('') }}"
+              participant_details: "{{ participant_details | default('') }}"
+              participant_email: "{{ participant_email | default(useremailnotifications) }}"
+              initiator_email: "{{ initiator_email }}"
+              useremailnotifications: "{{ useremailnotifications }}"
+              testname: "{{ testname }}"
+              stack_name: "{{ stack_name }}"
+              student_name: "{{ student_name }}"
+              exam_length_seconds: "{{ exam_length_seconds }}"
+              vmhostip: "{{ vmhostip }}"
+
+            Sincerely,
+            Your system
+
+          body_content_format: "plain"
+        when:
+          - not check_sshpass_passed
 
 
       - name: Emailing tasks
