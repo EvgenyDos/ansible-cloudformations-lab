@@ -1,4 +1,7 @@
 ---
+#
+# These tasks are being executed after tasks in ../common_bootstrap.yml
+#
 - name: Add Docker GPG key.
   rpm_key:
     key: https://download.docker.com/linux/centos/gpg
