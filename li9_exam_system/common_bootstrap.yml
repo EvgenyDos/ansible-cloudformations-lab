@@ -70,6 +70,7 @@
   template:
     dest: "/etc/skel/.config/asciinema/config"
     src: "common_bootstrap.files/asciinema.config.j2"
+    mode: "0644"
 
 
 - name: "Make sure user {{ username }} exists"
@@ -84,6 +85,7 @@
 - name: Create a config directory
   file:
     path: "$HOME/.config/asciinema"
+    state: directory
   become_user: "{{ username }}"
 
 
