@@ -66,11 +66,6 @@
     state: directory
 
 
-- name: Populate config for asciinema
-  command: asciinema -h
-  become_user: "{{ username }}"
-
-
 - name: "Copy main config file to the /etc/skel directory"
   template:
     dest: "/etc/skel/.config/asciinema/config"
@@ -84,6 +79,11 @@
     create_home: true
     shell: "{{ shell }}"
   register: user_info
+
+
+- name: Populate config for asciinema
+  command: asciinema -h
+  become_user: "{{ username }}"
 
 
 - name: Get file stat for /etc/profile.d/zuser
@@ -108,10 +108,18 @@
     mode: "0666"
 
 
+- name: Allow passwordless sudo
+  lineinfile:
+    dest: "/etc/sudoers"
+    state: present
+    line: '{{ username }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+# This task should go last
 - name: Adding autostart Asciinema (with +i chattr)
   copy:
     content: |
-      # if [ "`id -un`" == "{{ username }}" ]; then
+      if [ "`id -un`" == "{{ username }}" ]; then
           if [[ -z $ASCIINEMA_REC ]]; then
               if [ -f $HOME/.bashrc ]; then
                   . $HOME/.bashrc
@@ -125,16 +133,7 @@
               curr_user=`id -un`
               LC_ALL=en_US.UTF-8 exec asciinema rec --quiet --yes --title "{{ asciinema_recid }}-${sess_id}-${curr_user}"
           fi
-      # fi
+      fi
     attributes: "+i"
     dest: /etc/profile.d/zuser.sh
-
-
-
-- name: Allow passwordless sudo
-  lineinfile:
-    dest: "/etc/sudoers"
-    state: present
-    line: '{{ username }} ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
 
