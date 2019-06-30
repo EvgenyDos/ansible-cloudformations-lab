@@ -1,12 +1,13 @@
 - name: Checking ssh credentials
   block:
 
-    - name: Install sshpass package
-      yum:
-        name: sshpass
-        state: present
-        use_backend: yum
-      register: sshpass_install
+# These tasks are executed on a localhosst where sshpass must be installed in advance
+#     - name: Install sshpass package
+#       yum:
+#         name: sshpass
+#         state: present
+#         use_backend: yum
+#       register: sshpass_install
 
 
     - name: Make sure that needed variables are there
@@ -27,7 +28,6 @@
           sshpass -e ssh '{{ vmhostip }}' -o StrictHostKeyChecking=no -l '{{ student_name }}' id || false
         environment:
           SSHPASS: '{{ student_pass }}'
-        delegate_to: localhost
 
       - name: Set ssh_check_result_flag
         set_fact:
@@ -40,12 +40,13 @@
           check_sshpass_passed: False
 
 
-    - name: Uninstall sshpass
-      yum:
-        name: sshpass
-        state: absent
-        use_backend: yum
-      when: sshpass_install is changed
+# These tasks are executed on a localhosst where sshpass must be installed in advance
+#     - name: Uninstall sshpass
+#       yum:
+#         name: sshpass
+#         state: absent
+#         use_backend: yum
+#       when: sshpass_install is changed
 
   delegate_to: localhost
 
