@@ -57,15 +57,15 @@
             region: "{{ region_name }}"
             all_facts: true
           register: my_stack
-  
+
         - name: it is output of cloudformations instalation
           debug:
             msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs }}"
-  
+
         - name: it is our VM ip
           debug:
             msg: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
-  
+
         - name: adding tower_host to our VM inventory
           tower_host:
             description: "From AWS stack {{ stack_name }}"
@@ -73,10 +73,10 @@
             inventory: "{{ playbookvminventoryname }}"
             tower_verify_ssl: no
             state: present
-  
+
         - debug:
             msg: "our inventnmame {{ playbookvminventoryname }}"
-  
+
         - name: Wait until SSH is available
           wait_for:
             host: "{{ my_stack.ansible_facts.cloudformation[stack_name].stack_outputs.TestServerIp }}"
@@ -115,4 +115,4 @@
             bad_situation: true
             mail_subject: "Deploy failed, check logs"
             mail_message: "The deploy playbook failed."
- 
+

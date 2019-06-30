@@ -79,6 +79,8 @@
         include_tasks: "{{ item }}"
         loop:
           - included_tasks/send_tasks.yml
+        vars:
+          examtime: "{{ exam_length_seconds }}"
 
 
       - name: Call wait Job
