@@ -97,6 +97,13 @@
     - zuser_stat.stat.isreg
 
 
+- name: Create empty asciinema-id file
+  file:
+    path: /var/tmp/asciinema-id
+    state: touch
+    mode: "0666"
+
+
 - name: Adding autostart Asciinema (with +i chattr)
   copy:
     content: |
