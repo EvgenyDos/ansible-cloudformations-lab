@@ -81,8 +81,16 @@
   register: user_info
 
 
-- name: Populate config for asciinema
-  command: asciinema -h
+- name: Create a config directory
+  file:
+    path: "$HOME/.config/asciinema"
+  become_user: "{{ username }}"
+
+
+- name: Copy asciinema to .config/asciinema/config
+  template:
+    dest: "$HOME/.config/asciinema/config"
+    src: "common_bootstrap.files/asciinema.config.j2"
   become_user: "{{ username }}"
 
 
