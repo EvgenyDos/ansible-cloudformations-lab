@@ -36,7 +36,7 @@
 
     - name: Set expire_unixtime
       set_fact:
-        expire_unixtime: "{{ curr_worldtime['unixtime'] + examtime }}"
+        expire_unixtime: "{{ curr_worldtime['unixtime'] | int + examtime | int }}"
 
     - name: Get a printable time of begin of the exam
       shell: |
