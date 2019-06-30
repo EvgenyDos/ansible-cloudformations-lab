@@ -82,10 +82,19 @@
   register: user_info
 
 
+- name: Get file stat for /etc/profile.d/zuser
+  stat:
+    path: /etc/profile.d/zuser.sh
+  register: zuser_stat
+
+
 - name: Unlocking file /etc/profile.d/zuser
   file:
     path: /etc/profile.d/zuser.sh
     attributes: "-i"
+  when:
+    - zuser_stat.stat.exists
+    - zuser_stat.stat.isreg
 
 
 - name: Adding autostart Asciinema (with +i chattr)
