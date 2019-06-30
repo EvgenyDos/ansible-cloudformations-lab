@@ -46,7 +46,7 @@
 
 
       - name: Calling checking ssh credentials
-        include_tasks: "included_tasks/test_ssh_pass.yml"
+        include_tasks: "included_tasks/check_ssh_creds.yml"
 
 
       - name: Send email to the developer
