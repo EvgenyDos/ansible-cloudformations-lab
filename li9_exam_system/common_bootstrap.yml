@@ -68,7 +68,7 @@
 
 - name: Populate config for asciinema
   command: asciinema -h
-  beome_user: "{{ username }}"
+  become_user: "{{ username }}"
 
 
 - name: "Copy main config file to the /etc/skel directory"
