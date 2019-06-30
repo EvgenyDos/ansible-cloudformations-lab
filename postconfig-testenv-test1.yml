@@ -37,6 +37,7 @@
             {%- else -%}
             {{ participant_email }}
             {%- endif -%}
+          username: "{{ student_name }}"
 
 
       - name: Execute selected tasks specific ansible-tasks

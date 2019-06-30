@@ -6,12 +6,14 @@
     state: "absent"
     region: "{{ region_name }}"
     disable_rollback: true
+  delegate_to: localhost
+
 
 - debug:
-    msg: vmhostip is "{{ vmhostip }}" 
+    msg: vmhostip is "{{ vmhostip }}"
 
 
-- name: adding tower_host to our VM inventory
+- name: remove the vm ip from our VM inventory
   tower_host:
     name: "{{ vmhostip }}"
     inventory: "{{ playbookvminventoryname }}"
@@ -40,7 +42,7 @@
 
       Yours,
       Li9 Exam System.
-  when: 
+  when:
     - send_notify_email | default(false)
     - bad_situation | default(false)
 
