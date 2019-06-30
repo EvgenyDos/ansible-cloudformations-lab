@@ -8,7 +8,7 @@
     shell: "/bin/bash"
     # recorder token which associated with our account
     asciinema_token: "{{ asciinema_token | default('a77023a6-889d-49cf-8e48-202cc6b77729') }}"
-    asciinema_recid: "{{ asciinema_recid | default('email-one') }}"
+    asciinema_recid: "{{ asciinema_recid | default('email-one') | trim }}"
 
 
 - name: Ensure SSH warning banner is configured
