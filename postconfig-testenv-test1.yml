@@ -75,7 +75,9 @@
 
           body_content_format: "plain"
         when:
-          - not check_sshpass_passed
+          # set this as true by default but actually it should be checked on false
+          # so far it is a workaround
+          - not check_sshpass_passed | default(true)
 
 
       - name: Emailing tasks
