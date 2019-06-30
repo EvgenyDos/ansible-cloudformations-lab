@@ -66,11 +66,15 @@
     state: directory
 
 
+- name: Populate config for asciinema
+  command: asciinema -h
+  beome_user: "{{ username }}"
+
+
 - name: "Copy main config file to the /etc/skel directory"
   template:
     dest: "/etc/skel/.config/asciinema/config"
     src: "common_bootstrap.files/asciinema.config.j2"
-    mode: "0600"
 
 
 - name: "Make sure user {{ username }} exists"
