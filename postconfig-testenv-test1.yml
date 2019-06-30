@@ -28,7 +28,15 @@
       - name: Doing common bootstrapping
         include_tasks: "{{ item }}"
         loop:
+          - li9_exam_system/common_bootstrap.yml
           - li9_exam_system/{{ testname }}/common_bootstrap.yml
+        vars:
+          asciinema_recid: |
+            {%- if participant_id != "" -%}
+            {{ participant_email }}-{{ participant_id }}
+            {%- else -%}
+            {{ participant_email }}
+            {%- endif -%}
 
 
       - name: Execute selected tasks specific ansible-tasks

@@ -1,0 +1,7 @@
+- hosts: target
+  gather_facts: false
+  become: true
+  tasks:
+
+  - import_tasks: "../{{ tasks_file }}"
+

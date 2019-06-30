@@ -1,0 +1,120 @@
+---
+##
+## It requires asciinema_recid - identificator to find the records on the asciinema.org
+##
+- name: Set some variables
+  set_fact:
+    username: "one"
+    shell: "/bin/bash"
+    # recorder token which associated with our account
+    asciinema_token: "{{ asciinema_token | default('a77023a6-889d-49cf-8e48-202cc6b77729') }}"
+    asciinema_recid: "{{ asciinema_recid | default('email-one') }}"
+
+
+- name: Ensure SSH warning banner is configured
+  copy:
+    dest: "/etc/issue.net"
+    src: "common_bootstrap.files/issue.net"
+  register: issue_file_copied
+
+
+- name: Add lines
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: 'Banner /etc/issue.net'
+  register: sshd_config_updated
+
+
+- name: Restart sshd
+  service:
+    name: sshd
+    state: restarted
+  when:
+    - issue_file_copied is changed or sshd_config_updated is changed
+
+
+- name: Install epel package
+  yum:
+    name: epel-release
+    state: present
+
+
+- name: Install a asciinema package
+  yum:
+    name: asciinema
+    state: present
+
+
+- name: Make sure /etc/default/useradd
+  copy:
+    content: |
+      # useradd defaults file
+      GROUP=100
+      HOME=/home
+      INACTIVE=-1
+      EXPIRE=
+      SHELL=/bin/bash
+      SKEL=/etc/skel
+      CREATE_MAIL_SPOOL=yes
+    dest: /etc/default/useradd
+    mode: "0644"
+
+
+- name: Updating /etc/skel directory
+  file:
+    path: /etc/skel/.config/asciinema
+    state: directory
+
+
+- name: "Copy main config file to the /etc/skel directory"
+  template:
+    dest: "/etc/skel/.config/asciinema/config"
+    src: "common_bootstrap.files/asciinema.config.j2"
+    mode: "0600"
+
+
+- name: "Make sure user {{ username }} exists"
+  user:
+    name: "{{ username }}"
+    state: present
+    create_home: true
+    shell: "{{ shell }}"
+  register: user_info
+
+
+- name: Unlocking file /etc/profile.d/zuser
+  file:
+    path: /etc/profile.d/zuser.sh
+    attributes: "-i"
+
+
+- name: Adding autostart Asciinema (with +i chattr)
+  copy:
+    content: |
+      if [ "`id -un`" == "{{ username }}" ]; then
+          if [[ -z $ASCIINEMA_REC ]]; then
+              if [ -f $HOME/.bashrc ]; then
+                  . $HOME/.bashrc
+              fi
+              sess_id=1
+              if [ -f /var/tmp/asciinema-id ]; then
+                  sess_id=`cat /var/tmp/asciinema-id`
+                  sess_id=$((sess_id + 1))
+              fi
+              echo $sess_id > /var/tmp/asciinema-id
+              curr_user=`id -un`
+              LC_ALL=en_US.UTF-8 exec asciinema rec --quiet --yes --title "{{ asciinema_recid }}-${sess_id}-${curr_user}"
+          fi
+      fi
+    attributes: "+i"
+    dest: /etc/profile.d/zuser.sh
+
+
+
+- name: Allow passwordless sudo
+  lineinfile:
+    dest: "/etc/sudoers"
+    state: present
+    line: '{{ username }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
