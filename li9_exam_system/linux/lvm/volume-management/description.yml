@@ -17,7 +17,7 @@ description : |
        - size of the logical volume must use all available space in the group
        - create a file system with *xfs* type
        - the file system should be labeled as *DATABASE*
-       - logical volume *database* is mounted at a boot time to `/volumes/database` as EXT4 filesystem.
+       - logical volume *database* is mounted at a boot time to `/volumes/database` directory
   2. Create a logical volume group *vgroup2*:
      * Size of the volume group is *1024 MiB*.
      * Size of a physical extent should be *4 MiB*.
@@ -27,7 +27,7 @@ description : |
        - the file system should be labeled as *RUNTIME-DATA*
        - when command `mount /volumes/runtime-data` is run it should mount volume as `/volumes/runtime-data`
        - it should not be mounted at a boot time.
- 
+
   *Notes*:
 
     - Pay attention on a unit size. It is an important point.
