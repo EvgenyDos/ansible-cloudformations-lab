@@ -8,11 +8,11 @@
 
 
 - name: Check what action provided
-  assert: 
+  assert:
     that: "{{ item.test }}"
     fail_msg: "{{ item.fail_msg }}"
   loop:
-    - test: tower_action is defined and tower_action in [ "job_launch", ]
+    - test: tower_action is defined and tower_action in [ "job_launch", "job_schedule" ]
       fail_msg: "Action is not defined or action is not supported. Current value {{ tower_action }}"
 
 
@@ -31,19 +31,5 @@
        force_basic_auth: true
        status_code: 201
 
-
-
-#     This fucking module does not work at all
-#     
-#     - name: Launch a Tower Job Template
-#       tower_job_launch:
-#         tower_host: "{{ tower_host }}"
-#         tower_username: "{{ tower_username }}"
-#         tower_password: "{{ tower_password }}"
-#         job_template: "{{ job_template_name }}"
-#         extra_vars: "{{ job_extra_vars | default({}) }}"
-#         tower_verify_ssl: false
-#       register: tower_job
-
-  when: tower_action == "job_launch"
+  when: tower_action in [ "job_launch", "job_schedule" ]
 
