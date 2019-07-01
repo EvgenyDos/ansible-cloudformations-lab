@@ -111,7 +111,7 @@
 
 
       - name: Calculate the scheduler time
-        command: "date -d @$(({{ this_time.epoch }} + {{ exam_length_seconds }})) +%Y%m%dT%H%M%S"
+        command: "date -d @$(({{ this_time.ansible_date_time.epoch }} + {{ exam_length_seconds }})) +%Y%m%dT%H%M%S"
         register: scheduler_time
 
 
